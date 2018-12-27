@@ -3,7 +3,25 @@
     <item
         android:id="@+id/bottombaritem_home"
         android:title="Home"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        />
+
+    <item
+        android:title="Setting"
+        android:icon="@drawable/ic_help_black"
+        />
+
+    <item
+        android:title="Setting"
+        android:icon="@drawable/ic_spellcheck_black_24dp"
+        />
+
+
+
+
+    <item
+        android:title="Logs"
+        android:icon="@drawable/ic_show_chart_black_24dp"
         />
 
     <item
@@ -11,15 +29,4 @@
         android:title="Profile"
         android:icon="@drawable/ic_profile"
         />
-
-    <item
-        android:title="Setting"
-        android:icon="@drawable/ic_home"
-        />
-
-    <item
-        android:title="Logs"
-        android:icon="@drawable/ic_home"
-        />
-
 </menu>
