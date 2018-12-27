@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "847255516026",
+    "firebase_url": "https://flowledge.firebaseio.com",
+    "project_id": "flowledge",
+    "storage_bucket": "flowledge.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847255516026:android:9238fdb2b6291973",
+        "android_client_info": {
+          "package_name": "mobile.una.com.flowledge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847255516026-34glpljtb728trf0ata8hngpim62v0d8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mobile.una.com.flowledge",
+            "certificate_hash": "ca950be1c49592008519bda91597b63d63b263e7"
+          }
+        },
+        {
+          "client_id": "847255516026-ja5nbrbeg31c50ppo4obrdc3e1rg41dk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2wkWUFYSDFz3wolPAB8rZfRszcwLkOkE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847255516026-ja5nbrbeg31c50ppo4obrdc3e1rg41dk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
