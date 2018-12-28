@@ -12,6 +12,7 @@
         />
 
     <item
+        android:id="@+id/bottombaritem_reply"
         android:title="Setting"
         android:icon="@drawable/ic_spellcheck_black_24dp"
         />
