@@ -26,6 +26,8 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.signin.SignIn;
 
+import static java.lang.Boolean.TRUE;
+
 public class LogActivity extends AppCompatActivity implements View.OnClickListener ,GoogleApiClient.OnConnectionFailedListener {
     private BottomNavigationView bottomNavigationView;
 
@@ -44,6 +46,8 @@ public class LogActivity extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
 
+
+
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.NavBot);
         info = findViewById(R.id.contenedor);
         out = findViewById(R.id.boton);
@@ -54,6 +58,8 @@ public class LogActivity extends AppCompatActivity implements View.OnClickListen
         in.setOnClickListener(this);
         out.setOnClickListener(this);
         info.setVisibility(View.GONE);
+        bottomNavigationView.setVisibility(View.GONE);
+        bottomNavigationView.getMenu().getItem(4).setChecked(TRUE);
         GoogleSignInOptions signInOptions=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         googleApiClient= new GoogleApiClient.Builder(this).enableAutoManage(this,this).addApi(Auth.GOOGLE_SIGN_IN_API,signInOptions).build();
 
@@ -141,6 +147,8 @@ public class LogActivity extends AppCompatActivity implements View.OnClickListen
         if(isLogin){
             info.setVisibility(View.VISIBLE);
             in.setVisibility(View.GONE);
+            bottomNavigationView.setVisibility(View.VISIBLE);
+            bottomNavigationView.getMenu().getItem(4).setChecked(TRUE);
         }
         else{
             info.setVisibility(View.GONE);
