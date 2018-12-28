@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import static java.lang.Boolean.TRUE;
+
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
 
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.NavBot);
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
