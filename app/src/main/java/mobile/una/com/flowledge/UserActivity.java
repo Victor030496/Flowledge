@@ -45,14 +45,17 @@ public class UserActivity extends AppCompatActivity {
         pnombre=findViewById(R.id.nombre);
         lista=findViewById(R.id.datos);
         guardar=findViewById(R.id.guardar);
-        final String nombre=pnombre.toString();
+
         inicializarFirebase();
 
         guardar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 p= new Persona();
-                p.setPid(UUID.randomUUID().toString());
+                String id=pid.getText().toString();
+                String nombre=pnombre.getText().toString();
+                //p.setPid(UUID.randomUUID().toString());
+                p.setPid(id);
                 p.setNombre(nombre);
                 databaseReference.child("Persona").child(p.getPid()).setValue(p);
                // databaseReference.child("Persona").setValue(p);
