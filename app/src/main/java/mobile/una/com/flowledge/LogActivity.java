@@ -134,10 +134,18 @@ public class LogActivity extends AppCompatActivity implements View.OnClickListen
             GoogleSignInAccount account = result.getSignInAccount();
             String names = account.getDisplayName();
             String emails = account.getEmail();
-            String img_url = account.getPhotoUrl().toString();
+            String img_url;
+           // String img_url = account.getPhotoUrl().toString();
+            if(account.getPhotoUrl() == null|| account.getPhotoUrl().toString().equals("")){
+               // imagen.setImageResource(R.drawable.ic_profile);
+                Glide.with(this).load(R.drawable.ic_profile).into(imagen);
+            }
+            else{
+                img_url = account.getPhotoUrl().toString();
+                Glide.with(this).load(img_url).into(imagen);}
             name.setText(names);
             email.setText(emails);
-            Glide.with(this).load(img_url).into(imagen);
+
             updateUI(true);
         }
         else{updateUI(false);}
