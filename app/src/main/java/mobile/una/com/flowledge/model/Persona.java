@@ -31,7 +31,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return nombre;
+        return pid + " " +nombre;
     }
 }
 
