@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.Auth;
@@ -134,9 +135,20 @@ public class LogActivity extends AppCompatActivity implements View.OnClickListen
             GoogleSignInAccount account = result.getSignInAccount();
             String names = account.getDisplayName();
             String emails = account.getEmail();
+            System.out.println("Correoooooooooooooooo" + emails);
             String img_url;
            // String img_url = account.getPhotoUrl().toString();
-            if(account.getPhotoUrl() == null|| account.getPhotoUrl().toString().equals("")){
+            String[] parts = emails.split("@");
+            String part1 = parts[0];
+            String part2 = parts[1];
+            System.out.println("PRUEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+part2);
+
+            if(!part2.equals("est.una.ac.cr")){
+                Toast.makeText(LogActivity.this,"SOLO CORREOS INSTITUCIONALES DE LA UNA", Toast.LENGTH_SHORT).show();
+                signOut();
+            }
+            else{
+                if(account.getPhotoUrl() == null|| account.getPhotoUrl().toString().equals("")){
                // imagen.setImageResource(R.drawable.ic_profile);
                 Glide.with(this).load(R.drawable.ic_profile).into(imagen);
             }
@@ -147,6 +159,7 @@ public class LogActivity extends AppCompatActivity implements View.OnClickListen
             email.setText(emails);
 
             updateUI(true);
+            }
         }
         else{updateUI(false);}
     }
