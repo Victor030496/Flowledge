@@ -68,7 +68,8 @@ public class UsuarioActivity extends AppCompatActivity implements GoogleApiClien
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    setUserData(user);
+                        setUserData(user);
+
                 } else {
                     goLogInScreen();
                 }

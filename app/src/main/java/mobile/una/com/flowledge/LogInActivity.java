@@ -16,6 +16,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -73,7 +75,18 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    goMainScreen();
+                    String[] parts = user.getEmail().split("@");
+                    String part1 = parts[0];
+                    String part2 = parts[1];
+                    if(!part2.equals("est.una.ac.cr")){
+                        Toast.makeText(LogInActivity.this,"SOLO CORREOS INSTITUCIONALES DE LA UNA", Toast.LENGTH_SHORT).show();
+                        firebaseAuth.signOut();
+                        // Google sign out
+                        Auth.GoogleSignInApi.signOut(googleApiClient);
+                        user.delete();
+
+                    }else {
+                    goMainScreen();}
                 }
             }
         };
@@ -145,4 +158,6 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
     }
+
+
 }
