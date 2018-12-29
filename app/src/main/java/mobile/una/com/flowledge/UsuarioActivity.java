@@ -112,7 +112,13 @@ public class UsuarioActivity extends AppCompatActivity implements GoogleApiClien
         nameTextView.setText(user.getDisplayName());
         emailTextView.setText(user.getEmail());
         idTextView.setText(user.getUid());
-        Glide.with(this).load(user.getPhotoUrl()).into(photoImageView);
+        if(user.getPhotoUrl() == null|| user.getPhotoUrl().toString().equals("")){
+            // imagen.setImageResource(R.drawable.ic_profile);
+            Glide.with(this).load(R.drawable.ic_profile).into(photoImageView);
+        }
+        else{
+            Glide.with(this).load(user.getPhotoUrl()).into(photoImageView);}
+
     }
 
     @Override

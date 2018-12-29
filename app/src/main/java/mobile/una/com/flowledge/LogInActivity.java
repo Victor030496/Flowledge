@@ -78,7 +78,7 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
                     String[] parts = user.getEmail().split("@");
                     String part1 = parts[0];
                     String part2 = parts[1];
-                    if(!part2.equals("est.una.ac.cr")){
+                    if(!part2.equals("est.una.ac.cr") || !part2.equals("una.cr")){
                         Toast.makeText(LogInActivity.this,"SOLO CORREOS INSTITUCIONALES DE LA UNA", Toast.LENGTH_SHORT).show();
                         firebaseAuth.signOut();
                         // Google sign out
@@ -86,6 +86,7 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
                         user.delete();
 
                     }else {
+
                     goMainScreen();}
                 }
             }
