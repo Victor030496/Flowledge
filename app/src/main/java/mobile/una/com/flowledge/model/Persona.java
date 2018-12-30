@@ -5,18 +5,17 @@ public class Persona {
     private   String nombre;
     private   String correo;
     private   String contra;
-    private   String cocontra;
+
 
 
     public Persona() {
     }
 
-    public Persona(String pid, String nombre, String correo, String contra, String cocontra) {
+    public Persona(String pid, String nombre, String correo, String contra) {
         this.pid = pid;
         this.nombre = nombre;
         this.correo = correo;
         this.contra = contra;
-        this.cocontra = cocontra;
     }
 
     public String getPid() {
@@ -51,13 +50,6 @@ public class Persona {
         this.contra = contra;
     }
 
-    public String getCocontra() {
-        return cocontra;
-    }
-
-    public void setCocontra(String cocontra) {
-        this.cocontra = cocontra;
-    }
 
     @Override
     public String toString() {

@@ -80,15 +80,17 @@ public void registrar(View view){
             if(listapersona.get(i).getPid().equals(pid.getText().toString())){
                 Toast.makeText(getApplicationContext(), "YA ESTA REGISTRADO", Toast.LENGTH_SHORT).show();
                 bandera=false;
+                break;
             }else{bandera=true;}
         }
-        if(bandera){
-        p= new Persona(pid.getText().toString(),pnombre.getText().toString(),correo.getText().toString(),pcocontra.getText().toString(),pcocontra.getText().toString());
+        if(bandera){bandera=validacion();
+            if(bandera){
+        p= new Persona(pid.getText().toString(),pnombre.getText().toString(),correo.getText().toString(),pcontra.getText().toString());
         databaseReference.child("Persona").child(p.getPid()).setValue(p);
         Toast.makeText(getApplicationContext(), "REGISTRADO CON EXITO", Toast.LENGTH_SHORT).show();
         limpiar();
         startActivity(new Intent(getBaseContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-        finish();}else{limpiar();}
+        finish();}}else{limpiar();}
 
     }
 
@@ -111,6 +113,8 @@ public void registrar(View view){
         correo.setText("");
         pcontra.setText("");
         pcocontra.setText("");
+        cedulain2.setText("");
+        passwordin.setText("");
     }
 
     private void inicializarFirebase(){
@@ -135,5 +139,19 @@ public void registrar(View view){
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    private boolean validacion(){
+        if(pid.getText().toString().equals("") || pnombre.getText().toString().equals("") ||correo.getText().toString().equals("") ||pcocontra.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(), "ESPACIOS VACIOS", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(!pcontra.getText().toString().equals(pcocontra.getText().toString())){
+            Toast.makeText(getApplicationContext(), "LAS CONTRASENAS SON DIFERENTES", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 }
