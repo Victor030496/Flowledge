@@ -22,6 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import mobile.una.com.flowledge.model.Persona;
 
@@ -83,7 +85,7 @@ public void registrar(View view){
                 break;
             }else{bandera=true;}
         }
-        if(bandera){bandera=validacion();
+        if(bandera){bandera=validacionregistro();
             if(bandera){
         p= new Persona(pid.getText().toString(),pnombre.getText().toString(),correo.getText().toString(),pcontra.getText().toString());
         databaseReference.child("Persona").child(p.getPid()).setValue(p);
@@ -150,10 +152,30 @@ public void registrar(View view){
         });
     }
 
-    private boolean validacion(){
+    private boolean validacionregistro(){
         if(pid.getText().toString().equals("") || pnombre.getText().toString().equals("") ||correo.getText().toString().equals("") ||pcocontra.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "ESPACIOS VACIOS", Toast.LENGTH_SHORT).show();
             return false;
+        }
+
+        // Patrón para validar el email
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
+        Matcher mather = pattern.matcher(correo.getText().toString());
+
+        if (mather.find() == true) {
+            String[] parts = correo.getText().toString().split("@");
+            String part1 = parts[0];
+            String part2 = parts[1];
+            if((!part2.equals("est.una.ac.cr")) && (!part2.equals("una.cr"))){
+                Toast.makeText(LogInActivity.this,"SOLO CORREOS INSTITUCIONALES DE LA UNA", Toast.LENGTH_SHORT).show();return false;
+            }else { System.out.println("El email ingresado es válido.");
+            }
+
+        } else {
+            Toast.makeText(LogInActivity.this,"EL CORREO ES INVALIDO", Toast.LENGTH_SHORT).show();return false;
         }
 
         if(!pcontra.getText().toString().equals(pcocontra.getText().toString())){
