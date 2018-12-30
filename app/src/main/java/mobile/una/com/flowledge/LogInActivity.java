@@ -102,8 +102,18 @@ public void registrar(View view){
     }
 
     public void ingresar(View view){
-
-       // System.out.println("Pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+listapersona.get(0).toString());
+        boolean bandera=false;
+        for(int i=0;i <= listapersona.size() - 1;i++){
+            if((listapersona.get(i).getPid().equals(cedulain2.getText().toString())) && (listapersona.get(i).getContra().equals(passwordin.getText().toString()))){
+                Toast.makeText(getApplicationContext(), "INGRESO EXITOSO", Toast.LENGTH_SHORT).show();
+                bandera=true;
+                break;
+            }else{Toast.makeText(getApplicationContext(), "ID O CONTRASENA INCORRECTOS", Toast.LENGTH_SHORT).show();}
+        }
+        if(bandera){
+                limpiar();
+                startActivity(new Intent(getBaseContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                finish();}else{limpiar();}
 
     }
 
@@ -127,7 +137,6 @@ public void registrar(View view){
         databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                System.out.println("PRUEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADE LISTA");
                 listapersona.clear();
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
                     Persona p = objSnapshot.getValue(Persona.class);
