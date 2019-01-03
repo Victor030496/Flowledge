@@ -9,7 +9,6 @@
         android:paddingRight="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/prueba"
         android:id="@+id/ivSplash"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
