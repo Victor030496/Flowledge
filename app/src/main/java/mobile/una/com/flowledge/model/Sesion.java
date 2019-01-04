@@ -1,6 +1,8 @@
 package mobile.una.com.flowledge.model;
 
-public class Persona{
+import com.orm.SugarRecord;
+
+public class Sesion extends SugarRecord<Sesion>{
     private   String pid;
     private   String nombre;
     private   String correo;
@@ -8,10 +10,10 @@ public class Persona{
 
 
 
-    public Persona() {
+    public Sesion() {
     }
 
-    public Persona(String pid, String nombre, String correo, String contra) {
+    public Sesion(String pid, String nombre, String correo, String contra) {
         this.pid = pid;
         this.nombre = nombre;
         this.correo = correo;

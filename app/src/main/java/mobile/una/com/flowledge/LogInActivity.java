@@ -26,6 +26,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import mobile.una.com.flowledge.model.Persona;
+import mobile.una.com.flowledge.model.Sesion;
 
 
 public class LogInActivity extends AppCompatActivity {
@@ -33,6 +34,7 @@ public class LogInActivity extends AppCompatActivity {
     LinearLayout principal , formularioin , formularioregistrar;
     EditText pid,pnombre,correo,pcontra,pcocontra,cedulain2,passwordin;
     Persona p=new Persona();
+    Sesion s=new Sesion();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     @Override
@@ -89,6 +91,8 @@ public void registrar(View view){
             if(bandera){
         p= new Persona(pid.getText().toString(),pnombre.getText().toString(),correo.getText().toString(),pcontra.getText().toString());
         databaseReference.child("Persona").child(p.getPid()).setValue(p);
+        s= new Sesion(pid.getText().toString(),pnombre.getText().toString(),correo.getText().toString(),pcontra.getText().toString());
+        s.save();
         Toast.makeText(getApplicationContext(), "REGISTRADO CON EXITO", Toast.LENGTH_SHORT).show();
         limpiar();
         startActivity(new Intent(getBaseContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
