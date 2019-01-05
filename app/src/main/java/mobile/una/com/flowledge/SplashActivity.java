@@ -85,6 +85,8 @@ public class SplashActivity extends Activity {
                                         bandera= true;
                                         s=listapersona2.get(j);
                                         break;
+                                    }else{
+                                        Toast.makeText(getApplicationContext(), "PROBLEMAS DE CONEXION", Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
