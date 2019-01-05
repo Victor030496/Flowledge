@@ -123,17 +123,21 @@ public void registrar(View view){
         for(int i=0;i <= listapersona.size() - 1;i++){
             if((listapersona.get(i).getPid().equals(cedulain2.getText().toString())) && (listapersona.get(i).getContra().equals(passwordin.getText().toString()))){
                 Toast.makeText(getApplicationContext(), "INGRESO EXITOSO", Toast.LENGTH_SHORT).show();
+                s.setPid(androidId);
+                s.setNombre(cedulain2.getText().toString());
+                s.setEstado("1");
+                databaseReference.child("Sesion").child(s.getPid()).setValue(s);
                 bandera=true;
                 break;
             }else{
                 Toast.makeText(getApplicationContext(), "ID O CONTRASENA INCORRECTOS", Toast.LENGTH_SHORT).show();}
         }
         if(bandera){
-           // s= new Sesion(cedulain2.getText().toString(),"","",passwordin.getText().toString());
-            //s.save();
             limpiar();
-            startActivity(new Intent(getBaseContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-            finish();
+            Intent intent2 = new Intent(LogInActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent2.putExtra("S", s);
+            startActivity(intent2);
+            LogInActivity.this.finish();
         }else{
             limpiar();
         }
