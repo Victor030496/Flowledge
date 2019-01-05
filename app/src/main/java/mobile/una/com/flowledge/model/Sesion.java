@@ -2,7 +2,7 @@ package mobile.una.com.flowledge.model;
 
 import com.orm.SugarRecord;
 
-public class Sesion extends SugarRecord<Sesion>{
+public class Sesion extends SugarRecord{
     private   String pid;
     private   String nombre;
     private   String correo;

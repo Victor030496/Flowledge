@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -25,51 +26,30 @@ import mobile.una.com.flowledge.model.Sesion;
 public class SplashActivity extends Activity {
     private final int DURACION_SPLASH = 1000;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference2;
-    private List<Persona> listapersona = new ArrayList<Persona>();
-    private List<Sesion> listapersona2 = new ArrayList<Sesion>();
+    DatabaseReference databaseReference;
+    List<Persona> listapersona = new ArrayList<Persona>();
+    Sesion s=new Sesion();
+    boolean bandera=false;
+    List<String> id;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_splash);
-        inicializarFirebase();
-        listaPersona();
-        listapersona2 = Sesion.listAll(Sesion.class);
-//        System.out.println("PRUEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+listapersona2.get(0).getPid());
 
+        //Guardar la informacion de la sesion activa
+        s=Sesion.findById(Sesion.class, 1);
 
-        if(sesion(listapersona2)){
-        new Handler().postDelayed(new Runnable(){
-            public void run(){
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            };
-        }, DURACION_SPLASH);
-        }else{
-            new Handler().postDelayed(new Runnable(){
-                public void run(){
-                    Intent intent = new Intent(SplashActivity.this, LogInActivity.class);
-                    startActivity(intent);
-                    finish();
-                };
-            }, DURACION_SPLASH);
-
-        }
-    }
-
-    private void inicializarFirebase(){
+        //Inicializar firebase
         FirebaseApp.initializeApp(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference2=firebaseDatabase.getReference();
-    }
+        databaseReference=firebaseDatabase.getReference();
 
-    private void listaPersona(){
-        databaseReference2.child("Persona").addValueEventListener(new ValueEventListener() {
+        //Obtener los datos de firebase
+        databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listapersona.clear();
@@ -78,6 +58,35 @@ public class SplashActivity extends Activity {
                     listapersona.add(p);
 
                 }
+
+            //Validar que este la sesion activa
+                for(int i=0;i <= listapersona.size() - 1;i++){
+                    if(listapersona.get(i).toString().equals(s.toString())){
+                        bandera= true;
+                        break;
+                    }
+                }
+
+                if(bandera){
+                    new Handler().postDelayed(new Runnable(){
+                        public void run(){
+                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        };
+                    }, DURACION_SPLASH);
+                }else{
+                    new Handler().postDelayed(new Runnable(){
+                        public void run(){
+                            Intent intent = new Intent(SplashActivity.this, LogInActivity.class);
+                            startActivity(intent);
+                            finish();
+                        };
+                    }, DURACION_SPLASH);
+
+                }
+
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -86,12 +95,4 @@ public class SplashActivity extends Activity {
 
     }
 
-    private boolean sesion(List<Sesion> listapersona2 ){
-        for(int i=0;i <= listapersona.size() - 1;i++){
-            if(listapersona.get(i).getPid().equals(listapersona2.get(0).getPid())){
-                return true;
-            }
-        }
-        return false;
-    }
 }
