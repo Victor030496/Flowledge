@@ -2,6 +2,7 @@ package mobile.una.com.flowledge;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -37,6 +38,8 @@ public class LogInActivity extends AppCompatActivity {
     Sesion s=new Sesion();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    String androidId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTitle("LOG IN");
@@ -52,7 +55,7 @@ public class LogInActivity extends AppCompatActivity {
         pcocontra=findViewById(R.id.concontrasena);
         cedulain2=findViewById(R.id.cedula2in);
         passwordin=findViewById(R.id.passwordin);
-
+        androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         inicializarFirebase();
         listaPersona();
     }
@@ -93,8 +96,7 @@ public void registrar(View view){
         if(bandera){
         p= new Persona(pid.getText().toString(),pnombre.getText().toString(),correo.getText().toString(),pcontra.getText().toString());
             databaseReference.child("Persona").child(p.getPid()).setValue(p);
-
-            s = (Sesion) intent.getSerializableExtra("S");
+            s.setPid(androidId);
             s.setNombre(pid.getText().toString());
             s.setEstado("1");
             databaseReference.child("Sesion").child(s.getPid()).setValue(s);
