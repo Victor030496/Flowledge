@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                                 overridePendingTransition(0, 0);
                                 return true;
                             case R.id.bottombaritem_profile:
-                                startActivity(new Intent(getBaseContext(), UsuarioActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                                startActivity(new Intent(getBaseContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
                                 finish();
 
                                 return true;

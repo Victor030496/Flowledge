@@ -61,10 +61,11 @@ public class SplashActivity extends Activity {
 
             //Validar que este la sesion activa
                 for(int i=0;i <= listapersona.size() - 1;i++){
+                    if(s!=null){
                     if(listapersona.get(i).toString().equals(s.toString())){
                         bandera= true;
                         break;
-                    }
+                    }}else{bandera=false;}
                 }
 
                 if(bandera){

@@ -114,12 +114,18 @@ public void registrar(View view){
                 Toast.makeText(getApplicationContext(), "INGRESO EXITOSO", Toast.LENGTH_SHORT).show();
                 bandera=true;
                 break;
-            }else{Toast.makeText(getApplicationContext(), "ID O CONTRASENA INCORRECTOS", Toast.LENGTH_SHORT).show();}
+            }else{
+                Toast.makeText(getApplicationContext(), "ID O CONTRASENA INCORRECTOS", Toast.LENGTH_SHORT).show();}
         }
         if(bandera){
-                limpiar();
-                startActivity(new Intent(getBaseContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                finish();}else{limpiar();}
+            s= new Sesion(cedulain2.getText().toString(),"","",passwordin.getText().toString());
+            s.save();
+            limpiar();
+            startActivity(new Intent(getBaseContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
+            finish();
+        }else{
+            limpiar();
+        }
 
     }
 

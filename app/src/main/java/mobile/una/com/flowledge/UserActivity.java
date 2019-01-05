@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.UUID;
 
 import mobile.una.com.flowledge.model.Persona;
+import mobile.una.com.flowledge.model.Sesion;
 
 import static java.lang.Boolean.TRUE;
 
@@ -32,6 +33,7 @@ public class UserActivity extends AppCompatActivity {
 
     private List<Persona> listapersona = new ArrayList<Persona>();
     ArrayAdapter<Persona> personaArrayAdapter;
+    Sesion s=new Sesion();
 
     private BottomNavigationView bottomNavigationView;
     EditText pid,pnombre;
@@ -61,7 +63,7 @@ public class UserActivity extends AppCompatActivity {
 
 
 
-        guardar.setOnClickListener(new View.OnClickListener() {
+      /*  guardar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 p= new Persona();
@@ -72,8 +74,10 @@ public class UserActivity extends AppCompatActivity {
                 p.setNombre(nombre);
                 databaseReference.child("Persona").child(p.getPid()).setValue(p);
                // databaseReference.child("Persona").setValue(p);
+
+
             }
-        });
+        });*/
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -134,6 +138,15 @@ public class UserActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference();
+    }
+
+
+    public void cerrar(View view){
+        s=Sesion.findById(Sesion.class, 1);
+        s.delete();
+        Intent intent = new Intent(UserActivity.this, LogInActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

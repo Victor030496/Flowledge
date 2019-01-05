@@ -34,8 +34,9 @@ tools:context=".UserActivity">
         android:layout_marginLeft="120dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="guardar"
-        android:id="@+id/guardar"/>
+        android:text="Cerrar Sesion"
+        android:id="@+id/cerrar"
+        android:onClick="cerrar"/>
 
 
 

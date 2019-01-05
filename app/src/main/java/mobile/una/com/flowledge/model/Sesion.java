@@ -20,6 +20,7 @@ public class Sesion extends SugarRecord{
         this.contra = contra;
     }
 
+
     public String getPid() {
         return pid;
     }
