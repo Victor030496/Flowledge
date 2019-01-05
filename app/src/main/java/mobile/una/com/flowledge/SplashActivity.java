@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
@@ -28,10 +29,11 @@ public class SplashActivity extends Activity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     List<Persona> listapersona = new ArrayList<Persona>();
+    List<Sesion> listapersona2 = new ArrayList<Sesion>();
     Sesion s=new Sesion();
     boolean bandera=false;
     List<String> id;
-
+    String androidId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,15 +42,13 @@ public class SplashActivity extends Activity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
-        //Guardar la informacion de la sesion activa
-        s=Sesion.findById(Sesion.class, 1);
-
+        androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         //Inicializar firebase
         FirebaseApp.initializeApp(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference();
 
-        //Obtener los datos de firebase
+        //Guardar los datos en las listas
         databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -58,36 +58,76 @@ public class SplashActivity extends Activity {
                     listapersona.add(p);
 
                 }
+                databaseReference.child("Sesion").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        listapersona2.clear();
+                        for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
+                            Sesion g = objSnapshot.getValue(Sesion.class);
+                            listapersona2.add(g);
 
-            //Validar que este la sesion activa
-                for(int i=0;i <= listapersona.size() - 1;i++){
-                    if(s!=null){
-                    if(listapersona.get(i).toString().equals(s.toString())){
-                        bandera= true;
-                        break;
-                    }}else{bandera=false;}
-                }
+                        }
 
-                if(bandera){
-                    new Handler().postDelayed(new Runnable(){
-                        public void run(){
-                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        };
-                    }, DURACION_SPLASH);
-                }else{
-                    new Handler().postDelayed(new Runnable(){
-                        public void run(){
-                            Intent intent = new Intent(SplashActivity.this, LogInActivity.class);
-                            startActivity(intent);
-                            finish();
-                        };
-                    }, DURACION_SPLASH);
-
-                }
+                        for(int i=0;i <= listapersona2.size() - 1;i++){
+                            if(listapersona2.get(i).toString().equals(androidId)){
+                                bandera= true;
+                            }
+                        }
 
 
+                        if(bandera){
+                            bandera=false;
+                            for(int i=0;i <= listapersona.size() - 1;i++){
+                                for(int j=0;i <= listapersona2.size() - 1;j++) {
+                                    if ((listapersona.get(i).toString().equals(listapersona2.get(j).getNombre())) && (listapersona2.get(j).getEstado().equals("1"))) {
+                                        bandera= true;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if (bandera) {
+
+                                new Handler().postDelayed(new Runnable() {
+                                    public void run() {
+                                        overridePendingTransition(0, 0);
+                                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                                        overridePendingTransition(0, 0);
+                                        startActivity(intent);
+                                        SplashActivity.this.finish();
+                                    }
+
+                                    ;
+                                }, DURACION_SPLASH);
+                            } else {
+                                new Handler().postDelayed(new Runnable() {
+                                    public void run() {
+                                        Intent intent = new Intent(SplashActivity.this, LogInActivity.class);
+                                        startActivity(intent);
+                                        SplashActivity.this.finish();
+                                    }
+                                }, DURACION_SPLASH);
+                            }
+                        }else{
+                            s.setPid(androidId);
+                            new Handler().postDelayed(new Runnable() {
+                                public void run() {
+                                    Intent intent = new Intent(SplashActivity.this, LogInActivity.class);
+                                    intent.putExtra("S", s);
+                                    startActivity(intent);
+                                    SplashActivity.this.finish();
+                                }
+
+                            }, DURACION_SPLASH);
+                        }
+
+
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -95,5 +135,6 @@ public class SplashActivity extends Activity {
         });
 
     }
+
 
 }

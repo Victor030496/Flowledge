@@ -1,23 +1,22 @@
 package mobile.una.com.flowledge.model;
 
-import com.orm.SugarRecord;
 
-public class Sesion extends SugarRecord{
+import java.io.Serializable;
+
+public class Sesion implements Serializable {
     private   String pid;
     private   String nombre;
-    private   String correo;
-    private   String contra;
+    private   String estado;
 
 
 
-    public Sesion() {
+    public Sesion(){
     }
 
-    public Sesion(String pid, String nombre, String correo, String contra) {
+    public Sesion(String pid, String nombre, String estado) {
         this.pid = pid;
         this.nombre = nombre;
-        this.correo = correo;
-        this.contra = contra;
+        this.estado = estado;
     }
 
 
@@ -37,22 +36,13 @@ public class Sesion extends SugarRecord{
         this.nombre = nombre;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
-
-    public String getContra() {
-        return contra;
-    }
-
-    public void setContra(String contra) {
-        this.contra = contra;
-    }
-
 
     @Override
     public String toString() {
