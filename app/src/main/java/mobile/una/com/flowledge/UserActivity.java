@@ -142,8 +142,7 @@ public class UserActivity extends AppCompatActivity {
 
 
     public void cerrar(View view){
-        s=Sesion.findById(Sesion.class, 1);
-        s.delete();
+        Sesion.deleteAll(Sesion.class);
         Intent intent = new Intent(UserActivity.this, LogInActivity.class);
         startActivity(intent);
         finish();
