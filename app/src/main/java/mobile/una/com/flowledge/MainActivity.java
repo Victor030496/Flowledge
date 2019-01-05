@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import mobile.una.com.flowledge.model.Sesion;
 
 import static java.lang.Boolean.TRUE;
 
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btn2;
     private Button btn3;
     private Button btn4;
+    Sesion s=new Sesion();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +73,12 @@ public class MainActivity extends AppCompatActivity {
                                 overridePendingTransition(0, 0);
                                 return true;
                             case R.id.bottombaritem_profile:
-                                startActivity(new Intent(getBaseContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                                finish();
+                                Intent intent = getIntent();
+                                s = (Sesion) intent.getSerializableExtra("S");
+                                Intent intent2 = new Intent(MainActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                intent2.putExtra("S", s);
+                                startActivity(intent2);
+                                MainActivity.this.finish();
 
                                 return true;
 

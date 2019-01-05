@@ -142,10 +142,12 @@ public class UserActivity extends AppCompatActivity {
 
 
     public void cerrar(View view){
-       // Sesion.deleteAll(Sesion.class);
-        Intent intent = new Intent(UserActivity.this, LogInActivity.class);
-        startActivity(intent);
-        finish();
+        Intent intent = getIntent();
+        s = (Sesion) intent.getSerializableExtra("S");
+        databaseReference.child("Sesion").child(s.getPid()).removeValue();
+        Intent intent2 = new Intent(UserActivity.this, SplashActivity.class);
+        startActivity(intent2);
+        UserActivity.this.finish();
     }
 
 }

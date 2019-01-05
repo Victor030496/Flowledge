@@ -94,14 +94,16 @@ public void registrar(View view){
         p= new Persona(pid.getText().toString(),pnombre.getText().toString(),correo.getText().toString(),pcontra.getText().toString());
             databaseReference.child("Persona").child(p.getPid()).setValue(p);
 
-        s = (Sesion) intent.getSerializableExtra("S");
+            s = (Sesion) intent.getSerializableExtra("S");
             s.setNombre(pid.getText().toString());
             s.setEstado("1");
             databaseReference.child("Sesion").child(s.getPid()).setValue(s);
 
         Toast.makeText(getApplicationContext(), "REGISTRADO CON EXITO", Toast.LENGTH_SHORT).show();
         limpiar();
-            startActivity(new Intent(getBaseContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
+            Intent intent2 = new Intent(LogInActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent2.putExtra("S", s);
+            startActivity(intent2);
             LogInActivity.this.finish();
         }}else{ limpiar();}
 

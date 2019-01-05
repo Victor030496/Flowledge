@@ -69,7 +69,7 @@ public class SplashActivity extends Activity {
                         }
 
                         for(int i=0;i <= listapersona2.size() - 1;i++){
-                            if(listapersona2.get(i).toString().equals(androidId)){
+                            if(listapersona2.get(i).getPid().equals(androidId)){
                                 bandera= true;
                             }
                         }
@@ -79,20 +79,23 @@ public class SplashActivity extends Activity {
                             bandera=false;
                             for(int i=0;i <= listapersona.size() - 1;i++){
                                 for(int j=0;i <= listapersona2.size() - 1;j++) {
-                                    if ((listapersona.get(i).toString().equals(listapersona2.get(j).getNombre())) && (listapersona2.get(j).getEstado().equals("1"))) {
+                                   // if((listapersona2.get(j).getNombre().equals(""))&&(listapersona2.get(j).getEstado().equals("0"))){ bandera= false;}
+
+                                    if((listapersona.get(i).toString().equals(listapersona2.get(j).getNombre())) && (listapersona2.get(j).getEstado().equals("1"))) {
                                         bandera= true;
+                                        s=listapersona2.get(j);
                                         break;
                                     }
                                 }
+
                             }
 
                             if (bandera) {
 
                                 new Handler().postDelayed(new Runnable() {
                                     public void run() {
-                                        overridePendingTransition(0, 0);
                                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                                        overridePendingTransition(0, 0);
+                                        intent.putExtra("S", s);
                                         startActivity(intent);
                                         SplashActivity.this.finish();
                                     }
