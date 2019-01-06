@@ -2,6 +2,7 @@ package mobile.una.com.flowledge;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +32,8 @@ import android.support.v7.app.AppCompatActivity;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.EditText;
-        import android.widget.ListView;
+import android.widget.ImageView;
+import android.widget.ListView;
         import android.widget.TextView;
 
         import com.google.firebase.FirebaseApp;
@@ -57,15 +59,30 @@ public class QuestionActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-
+     ImageView camera;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         setTitle("Preguntas");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
+
+        // recovering widgets
         bottomNavigationView = findViewById(R.id.NavBot);
+        camera = findViewById(R.id.camara);
         bottomNavigationView.getMenu().getItem(1).setChecked(TRUE);
+
+
+        // some Listeners
+
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                upLoadImage();
+
+            }
+        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -97,6 +114,15 @@ public class QuestionActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+
+
+    public void upLoadImage(){
+
+        Intent  intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/");
+        startActivityForResult(intent.createChooser(intent,"Seleccione una app"),10);
     }
 
 
