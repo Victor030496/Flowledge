@@ -58,6 +58,7 @@ import static java.lang.Boolean.TRUE;
 public class QuestionActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
+    private List<Persona> listapersona = new ArrayList<Persona>();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     ImageView camera;
@@ -87,7 +88,7 @@ public class QuestionActivity extends AppCompatActivity {
         bottomNavigationView.getMenu().getItem(1).setChecked(TRUE);
         question = new Question();
         inicializarFirebase();
-
+        listaPersona();
 
         // some Listeners
 
@@ -159,6 +160,24 @@ public class QuestionActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference();
+    }
+
+
+    private void listaPersona(){
+        databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listapersona.clear();
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
+                    Persona p = objSnapshot.getValue(Persona.class);
+                    listapersona.add(p);
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 
 }

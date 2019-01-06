@@ -56,6 +56,7 @@ public class LogInActivity extends AppCompatActivity {
         cedulain2=findViewById(R.id.cedula2in);
         passwordin=findViewById(R.id.passwordin);
         androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+
         inicializarFirebase();
         listaPersona();
     }
