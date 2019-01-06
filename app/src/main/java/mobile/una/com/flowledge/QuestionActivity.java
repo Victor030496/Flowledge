@@ -1,8 +1,22 @@
 package mobile.una.com.flowledge;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import static java.lang.Boolean.TRUE;
+
 /**
- * Created by Luis Bogantes on 28/12/2018.
+ * Created by Luis Bogantes on 06/01/2019.
  */
+
+
 
 import android.support.v7.app.AppCompatActivity;
 //package mobile.una.com.flowledge;
@@ -31,13 +45,14 @@ import android.support.v7.app.AppCompatActivity;
         import java.util.List;
         import java.util.UUID;
 
-import mobile.una.com.flowledge.MainActivity;
-import mobile.una.com.flowledge.R;
-import mobile.una.com.flowledge.UserActivity;
-import mobile.una.com.flowledge.model.Persona;
+        import mobile.una.com.flowledge.MainActivity;
+        import mobile.una.com.flowledge.R;
+        import mobile.una.com.flowledge.UserActivity;
+        import mobile.una.com.flowledge.model.Persona;
 
         import static java.lang.Boolean.TRUE;
-public class ReplyActivity extends AppCompatActivity {
+
+public class QuestionActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     FirebaseDatabase firebaseDatabase;
@@ -46,11 +61,11 @@ public class ReplyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
-        setTitle("Respuestas");
+        setTitle("Preguntas");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reply);
+        setContentView(R.layout.activity_question);
         bottomNavigationView = findViewById(R.id.NavBot);
-        bottomNavigationView.getMenu().getItem(2).setChecked(TRUE);
+        bottomNavigationView.getMenu().getItem(1).setChecked(TRUE);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -77,12 +92,6 @@ public class ReplyActivity extends AppCompatActivity {
                                 overridePendingTransition(0, 0);
                                 return true;
 
-                            case R.id.bottombaritem_question:
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(new Intent(getBaseContext(), QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                                overridePendingTransition(0, 0);
-                                return true;
                         }
                         return false;
                     }

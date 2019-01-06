@@ -102,6 +102,14 @@ public class UsuarioActivity extends AppCompatActivity implements GoogleApiClien
                                 overridePendingTransition(0, 0);
                                 return true;
 
+                            case R.id.bottombaritem_question:
+                                finish();
+                                overridePendingTransition(0, 0);
+                                startActivity(new Intent(getBaseContext(), QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                                overridePendingTransition(0, 0);
+                                return true;
+
+
                         }
                         return false;
                     }
