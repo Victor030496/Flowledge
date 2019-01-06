@@ -51,15 +51,24 @@ import android.widget.ListView;
         import mobile.una.com.flowledge.R;
         import mobile.una.com.flowledge.UserActivity;
         import mobile.una.com.flowledge.model.Persona;
+import mobile.una.com.flowledge.model.Question;
 
-        import static java.lang.Boolean.TRUE;
+import static java.lang.Boolean.TRUE;
 
 public class QuestionActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-     ImageView camera;
+    ImageView camera;
+    Question question;
+    EditText category;
+    EditText description;
+
+
+
+
+ //---------------------------------------------------------------------------------//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -70,7 +79,14 @@ public class QuestionActivity extends AppCompatActivity {
         // recovering widgets
         bottomNavigationView = findViewById(R.id.NavBot);
         camera = findViewById(R.id.camara);
+        category = findViewById(R.id.categoria2);
+        description = findViewById(R.id.descripcion2);
+
+
+        //-------------------------------------------------------------------------//
         bottomNavigationView.getMenu().getItem(1).setChecked(TRUE);
+        question = new Question();
+        inicializarFirebase();
 
 
         // some Listeners
@@ -118,6 +134,19 @@ public class QuestionActivity extends AppCompatActivity {
 
 
 
+
+    public void saveQuestion(){
+
+
+
+        // question.setUserNickname();
+
+
+
+    }
+
+
+
     public void upLoadImage(){
 
         Intent  intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -126,5 +155,10 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
 
+    private void inicializarFirebase(){
+        FirebaseApp.initializeApp(this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference();
+    }
 
 }
