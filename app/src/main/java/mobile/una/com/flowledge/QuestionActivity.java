@@ -203,6 +203,9 @@ public class QuestionActivity extends AppCompatActivity {
 
         databaseReference.child("Pregunta").child(question.getUserNickname()).setValue(question);
 
+
+        description.setText("");
+
         Toast.makeText(getApplicationContext(), "Haz enviado una pregunta al foro", Toast.LENGTH_SHORT).show();
 
     }
