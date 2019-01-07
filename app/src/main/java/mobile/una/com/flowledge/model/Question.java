@@ -10,17 +10,17 @@ public class Question {
     String userNickname;
     String category;
     String description;
-    List<Respuesta> respuesta;
+  //  List<Respuesta> respuesta;
 
 
     //------------------------------------------------------------------------
 
 
-    public Question(String userNickname, String category, String description, List<Respuesta> respuesta) {
+    public Question(String userNickname, String category, String description) {
         this.userNickname = userNickname;
         this.category = category;
         this.description = description;
-        this.respuesta = respuesta;
+       // this.respuesta = respuesta;
     }
 
     public Question() {
@@ -31,14 +31,6 @@ public class Question {
 
     }
 
-
-    public List<Respuesta> getRespuesta() {
-        return respuesta;
-    }
-
-    public void setRespuesta(List<Respuesta> respuesta) {
-        this.respuesta = respuesta;
-    }
 
     public String getUserNickname() {
         return userNickname;

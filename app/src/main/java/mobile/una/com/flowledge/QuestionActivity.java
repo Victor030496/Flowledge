@@ -62,14 +62,14 @@ import mobile.una.com.flowledge.model.Sesion;
 import static java.lang.Boolean.TRUE;
 
 public class QuestionActivity extends AppCompatActivity {
-    private List<Respuesta> respuesta = new ArrayList<Respuesta>();
+  //  private List<Respuesta> respuesta = new ArrayList<Respuesta>();
     private BottomNavigationView bottomNavigationView;
     private List<Persona> listapersona = new ArrayList<Persona>();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     ImageView camera;
     Question question;
-    Respuesta r;
+   // Respuesta r;
     EditText category;
     EditText description;
     Sesion s=new Sesion();
@@ -106,11 +106,6 @@ public class QuestionActivity extends AppCompatActivity {
         question = new Question();
         inicializarFirebase();
         listaPersona();
-        for(int i=0;i<10;i++){
-            r=new Respuesta();
-            r.setRespuesta("muchas cosas"+i);
-            respuesta.add(r);
-        }
 
 
         // some Listeners
@@ -209,7 +204,7 @@ public class QuestionActivity extends AppCompatActivity {
         question.setUserNickname(nickname);
         question.setCategory(prueSpinner);
         question.setDescription(description.getText().toString());
-        question.setRespuesta(respuesta);
+      //  question.setRespuesta(respuesta);
 
         databaseReference.child("Pregunta").child(question.getUserNickname()).setValue(question);
 
