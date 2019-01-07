@@ -48,7 +48,7 @@ public class ReplyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
-        setTitle("Respuestas");
+        setTitle("RESPUESTAS");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply);
         bottomNavigationView = findViewById(R.id.NavBot);

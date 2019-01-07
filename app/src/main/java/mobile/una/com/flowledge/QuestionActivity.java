@@ -75,7 +75,7 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
-        setTitle("Preguntas");
+        setTitle("PREGUNTAS");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
