@@ -28,8 +28,7 @@ public class SplashActivity extends Activity {
     private final int DURACION_SPLASH = 1000;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    List<Persona> listapersona = new ArrayList<Persona>();
-    List<Sesion> listapersona2 = new ArrayList<Sesion>();
+    List<Sesion> listasesion = new ArrayList<Sesion>();
     Sesion s=new Sesion();
     boolean bandera=false;
     List<String> id;
@@ -48,49 +47,24 @@ public class SplashActivity extends Activity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference();
 
-        //Guardar los datos en las listas
-        databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listapersona.clear();
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
-                    Persona p = objSnapshot.getValue(Persona.class);
-                    listapersona.add(p);
 
-                }
                 databaseReference.child("Sesion").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        listapersona2.clear();
+                        listasesion.clear();
                         for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
                             Sesion g = objSnapshot.getValue(Sesion.class);
-                            listapersona2.add(g);
+                            listasesion.add(g);
 
                         }
 
-                        for(int i=0;i <= listapersona2.size() - 1;i++){
-                            if(listapersona2.get(i).getPid().equals(androidId)){
+                        for(int i=0;i <= listasesion.size() - 1;i++){
+                            if(listasesion.get(i).getPid().equals(androidId)){
+                                s=listasesion.get(i);
                                 bandera= true;
+                                break;
                             }
                         }
-
-
-                        if(bandera){
-                            bandera=false;
-                            for(int i=0;i <= listapersona.size() - 1;i++){
-                                for(int j=0;i <= listapersona2.size() - 1;j++) {
-                                   // if((listapersona2.get(j).getNombre().equals(""))&&(listapersona2.get(j).getEstado().equals("0"))){ bandera= false;}
-
-                                    if((listapersona.get(i).toString().equals(listapersona2.get(j).getNombre())) && (listapersona2.get(j).getEstado().equals("1"))) {
-                                        bandera= true;
-                                        s=listapersona2.get(j);
-                                        break;
-                                    }else{
-                                        Toast.makeText(getApplicationContext(), "PROBLEMAS DE CONEXION", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-
-                            }
 
                             if (bandera) {
 
@@ -113,30 +87,15 @@ public class SplashActivity extends Activity {
                                     }
                                 }, DURACION_SPLASH);
                             }
-                        }else{
-                            s.setPid(androidId);
-                            new Handler().postDelayed(new Runnable() {
-                                public void run() {
-                                    Intent intent = new Intent(SplashActivity.this, LogInActivity.class);
-                                    startActivity(intent);
-                                    SplashActivity.this.finish();
-                                }
-
-                            }, DURACION_SPLASH);
-                        }
-
 
 
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
+                    //
                 });
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
+
 
     }
 
