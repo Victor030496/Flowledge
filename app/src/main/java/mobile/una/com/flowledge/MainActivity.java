@@ -9,12 +9,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import mobile.una.com.flowledge.model.Sesion;
-
-import static java.lang.Boolean.TRUE;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
@@ -89,6 +85,13 @@ public class MainActivity extends AppCompatActivity {
                                 overridePendingTransition(0, 0);
                                 return true;
 
+                            case R.id.bottombaritem_question:
+                                finish();
+                                overridePendingTransition(0, 0);
+                                startActivity(new Intent(getBaseContext(), QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                                overridePendingTransition(0, 0);
+                                return true;
+
                         }
                         return false;
                     }
@@ -96,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
 
 }
