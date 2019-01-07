@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btn3;
     private Button btn4;
     Sesion s=new Sesion();
+    Intent intent = getIntent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,33 +64,35 @@ public class MainActivity extends AppCompatActivity {
                         switch (item.getItemId()) {
 
                             case R.id.bottombaritem_home:
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(new Intent(getBaseContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                                overridePendingTransition(0, 0);
-                                return true;
-                            case R.id.bottombaritem_profile:
-                                Intent intent = getIntent();
                                 s = (Sesion) intent.getSerializableExtra("S");
-                                Intent intent2 = new Intent(MainActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                MainActivity.this.finish();
+                                Intent intent2 = new Intent(MainActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent2.putExtra("S", s);
                                 startActivity(intent2);
+                                return true;
+                            case R.id.bottombaritem_profile:
+                                s = (Sesion) intent.getSerializableExtra("S");
+                                Intent intent3 = new Intent(MainActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                intent3.putExtra("S", s);
+                                startActivity(intent3);
                                 MainActivity.this.finish();
 
                                 return true;
 
                             case R.id.bottombaritem_reply:
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(new Intent(getBaseContext(), ReplyActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                                overridePendingTransition(0, 0);
+                                s = (Sesion) intent.getSerializableExtra("S");
+                                Intent intent4 = new Intent(MainActivity.this, ReplyActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                intent4.putExtra("S", s);
+                                startActivity(intent4);
+                                MainActivity.this.finish();
                                 return true;
 
                             case R.id.bottombaritem_question:
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(new Intent(getBaseContext(), QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                                overridePendingTransition(0, 0);
+                                s = (Sesion) intent.getSerializableExtra("S");
+                                Intent intent5 = new Intent(MainActivity.this, QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                intent5.putExtra("S", s);
+                                startActivity(intent5);
+                                MainActivity.this.finish();
                                 return true;
 
                         }
