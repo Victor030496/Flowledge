@@ -68,6 +68,7 @@ public class QuestionActivity extends AppCompatActivity {
     EditText category;
     EditText description;
     Sesion s=new Sesion();
+    Spinner spinner;
 
 
 
@@ -85,7 +86,7 @@ public class QuestionActivity extends AppCompatActivity {
         camera = findViewById(R.id.camara);
         //category = findViewById(R.id.categoria2);
         description = findViewById(R.id.descripcion2);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner = (Spinner) findViewById(R.id.spinner);
         String[] letra = {"  ------","  Listas","  Bases de Datos","  Redes","  Otros"};
         spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
 
@@ -158,8 +159,8 @@ public class QuestionActivity extends AppCompatActivity {
     public void saveQuestion(){
 
 
+        databaseReference.child("Question").child(question.getPid()).setValue(question);
 
-        // question.setUserNickname();
 
 
 
