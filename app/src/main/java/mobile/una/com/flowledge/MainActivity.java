@@ -2,6 +2,7 @@ package mobile.una.com.flowledge;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -19,8 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btn3;
     private Button btn4;
     Sesion s=new Sesion();
-    Intent intent = getIntent();
-
+    String androidId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -33,13 +33,15 @@ public class MainActivity extends AppCompatActivity {
         btn2  = (Button) findViewById(R.id.listas);
         btn3= (Button) findViewById(R.id.bd);
         btn4= (Button) findViewById(R.id.redes);
+        Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
-
+        androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
         /*btn1.setTextColor(Color.parseColor("#9E9E9E"));
         btn2.setTextColor(Color.parseColor("#9E9E9E"));
         btn3.setTextColor(Color.parseColor("#9E9E9E"));
         btn4.setTextColor(Color.parseColor("#9E9E9E"));*/
+        btn1.setText(s.getNombre());
         btn1.setBackgroundColor(Color.parseColor("#8080ff"));
         btn2.setBackgroundColor(Color.parseColor("#8080ff"));
         btn3.setBackgroundColor(Color.parseColor("#8080ff"));
