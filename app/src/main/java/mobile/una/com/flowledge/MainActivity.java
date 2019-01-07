@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         btn2  = (Button) findViewById(R.id.listas);
         btn3= (Button) findViewById(R.id.bd);
         btn4= (Button) findViewById(R.id.redes);
-
+        s = (Sesion) intent.getSerializableExtra("S");
 
 
         /*btn1.setTextColor(Color.parseColor("#9E9E9E"));
@@ -64,14 +64,12 @@ public class MainActivity extends AppCompatActivity {
                         switch (item.getItemId()) {
 
                             case R.id.bottombaritem_home:
-                                s = (Sesion) intent.getSerializableExtra("S");
                                 MainActivity.this.finish();
                                 Intent intent2 = new Intent(MainActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent2.putExtra("S", s);
                                 startActivity(intent2);
                                 return true;
                             case R.id.bottombaritem_profile:
-                                s = (Sesion) intent.getSerializableExtra("S");
                                 Intent intent3 = new Intent(MainActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent3.putExtra("S", s);
                                 startActivity(intent3);
@@ -80,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
                                 return true;
 
                             case R.id.bottombaritem_reply:
-                                s = (Sesion) intent.getSerializableExtra("S");
                                 Intent intent4 = new Intent(MainActivity.this, ReplyActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent4.putExtra("S", s);
                                 startActivity(intent4);
@@ -88,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
                                 return true;
 
                             case R.id.bottombaritem_question:
-                                s = (Sesion) intent.getSerializableExtra("S");
                                 Intent intent5 = new Intent(MainActivity.this, QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent5.putExtra("S", s);
                                 startActivity(intent5);
