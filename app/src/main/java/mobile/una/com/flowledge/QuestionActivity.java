@@ -29,15 +29,17 @@ import android.support.v7.app.AppCompatActivity;
         import android.support.v7.app.AppCompatActivity;
         import android.view.MenuItem;
         import android.view.View;
-        import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-        import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseApp;
         import com.google.firebase.database.DataSnapshot;
         import com.google.firebase.database.DatabaseError;
         import com.google.firebase.database.DatabaseReference;
@@ -69,7 +71,8 @@ public class QuestionActivity extends AppCompatActivity {
     EditText description;
     Sesion s=new Sesion();
     Spinner spinner;
-
+    Button send;
+    String prueSpinner;
 
 
 
@@ -83,11 +86,12 @@ public class QuestionActivity extends AppCompatActivity {
 
         // recovering widgets
         bottomNavigationView = findViewById(R.id.NavBot);
-        camera = findViewById(R.id.camara);
+        camera = (ImageView) findViewById(R.id.camara);
         //category = findViewById(R.id.categoria2);
-        description = findViewById(R.id.descripcion2);
+        description = (EditText) findViewById(R.id.descripcion2);
         spinner = (Spinner) findViewById(R.id.spinner);
-        String[] letra = {"  ------","  Listas","  Bases de Datos","  Redes","  Otros"};
+        send = (Button) findViewById(R.id.btn_enviar);
+        String[] letra = {" ------","Listas","Bases de Datos","Redes","Otros"};
         spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
 
         Intent intent = getIntent();
@@ -110,6 +114,34 @@ public class QuestionActivity extends AppCompatActivity {
 
             }
         });
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
+            {
+                Toast.makeText(adapterView.getContext(),
+                        (String) adapterView.getItemAtPosition(pos), Toast.LENGTH_SHORT).show();
+               // saveQuestion( (String) adapterView.getItemAtPosition(pos));
+                prueSpinner = (String) adapterView.getItemAtPosition(pos);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {    }
+        });
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+             saveQuestion();
+            }
+        });
+
+
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -156,13 +188,22 @@ public class QuestionActivity extends AppCompatActivity {
 
 
 
+
+
     public void saveQuestion(){
+         String categoria ;
+         String nickname= getNicknameUser();
 
+       // p= new Persona(pid.getText().toString(),pnombre.getText().toString(),correo.getText().toString(),pcontra.getText().toString());
+        //databaseReference.child("Persona").child(p.getPid()).setValue(p);
 
-        databaseReference.child("Question").child(question.getPid()).setValue(question);
+        question.setUserNickname(nickname);
+        question.setCategory(prueSpinner);
+        question.setDescription(description.getText().toString());
 
+        databaseReference.child("Pregunta").child(question.getUserNickname()).setValue(question);
 
-
+        Toast.makeText(getApplicationContext(), "Haz enviado una pregunta al foro", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -198,6 +239,20 @@ public class QuestionActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    public String getNicknameUser(){
+        String nombre="";
+        for(int i=0;i < listapersona.size() ;i++){
+            if(listapersona.get(i).getPid().equals(s.getNombre())){
+                 nombre=listapersona.get(i).getNombre();
+
+
+                break;
+            }else{ }
+        }
+    return  nombre;
+
     }
 
 }
