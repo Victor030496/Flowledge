@@ -68,6 +68,7 @@ tools:context=".QuestionActivity">
                     </TextView>
 
                     <Spinner
+                        android:textAlignment="center"
                         android:background="@drawable/spinner_background"
                         android:layout_marginTop="20dp"
                         android:id="@+id/spinner"

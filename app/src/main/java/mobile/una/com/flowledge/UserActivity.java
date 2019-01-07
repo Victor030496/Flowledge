@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
@@ -32,13 +34,11 @@ import static java.lang.Boolean.TRUE;
 public class UserActivity extends AppCompatActivity {
 
     private List<Persona> listapersona = new ArrayList<Persona>();
-   // ArrayAdapter<Persona> personaArrayAdapter;
     Sesion s=new Sesion();
-
+    LinearLayout informacion,boton;
     private BottomNavigationView bottomNavigationView;
     TextView pid,pnombre,correo;
-    //ListView lista;
-   // Button guardar;
+    Button Mostrar;
     Persona p=new Persona();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -50,6 +50,8 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        informacion = (LinearLayout) findViewById(R.id.informacion);
+        boton = (LinearLayout) findViewById(R.id.Boton);
         bottomNavigationView = findViewById(R.id.NavBot);
         bottomNavigationView.getMenu().getItem(4).setChecked(TRUE);
         pid=findViewById(R.id.cedula2);
@@ -57,29 +59,11 @@ public class UserActivity extends AppCompatActivity {
         correo=findViewById(R.id.correo2);
 
        // pid=findViewById(R.id.id);
-      //  guardar=findViewById(R.id.guardar);
         Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
         inicializarFirebase();
         listarDatos();
 
-        pid.setText(s.getNombre());
-        pnombre.setText(s.getPid());
-      /*  guardar.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                p= new Persona();
-                String id=pid.getText().toString();
-                String nombre=pnombre.getText().toString();
-                //p.setPid(UUID.randomUUID().toString());
-                p.setPid(id);
-                p.setNombre(nombre);
-                databaseReference.child("Persona").child(p.getPid()).setValue(p);
-               // databaseReference.child("Persona").setValue(p);
-
-
-            }
-        });*/
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -96,11 +80,10 @@ public class UserActivity extends AppCompatActivity {
                                 UserActivity.this.finish();
                                 return true;
                             case R.id.bottombaritem_profile:
-                                Intent intent3 = new Intent(UserActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                               Intent intent3 = new Intent(UserActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent3.putExtra("S", s);
                                 startActivity(intent3);
                                 UserActivity.this.finish();
-
                                 return true;
 
                             case R.id.bottombaritem_reply:
@@ -162,4 +145,32 @@ public class UserActivity extends AppCompatActivity {
         UserActivity.this.finish();
     }
 
+    public Persona getUser(){
+        Persona p=new Persona();
+        for(int i=0;i < listapersona.size() ;i++){
+            if(listapersona.get(i).getPid().equals(s.getNombre())){
+                p=listapersona.get(i);
+                break;
+            }
+        }
+        return  p;
+    }
+
+    public void Mostrar(View view){
+        Persona pe= getUser();
+        informacion.setVisibility(View.VISIBLE);
+        boton.setVisibility(View.GONE);
+        pid.setText(pe.getPid());
+        pnombre.setText(pe.getNombre());
+        correo.setText(pe.getCorreo());
+    }
+
+    public void  Esconder(View view){
+        Persona pe= getUser();
+        informacion.setVisibility(View.GONE);
+        boton.setVisibility(View.VISIBLE);
+        pid.setText(pe.getPid());
+        pnombre.setText(pe.getNombre());
+        correo.setText(pe.getCorreo());
+    }
 }

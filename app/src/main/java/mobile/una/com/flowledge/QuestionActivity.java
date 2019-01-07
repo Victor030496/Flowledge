@@ -94,7 +94,7 @@ public class QuestionActivity extends AppCompatActivity {
         description = (EditText) findViewById(R.id.descripcion2);
         spinner = (Spinner) findViewById(R.id.spinner);
         send = (Button) findViewById(R.id.btn_enviar);
-        String[] letra = {" ------","Listas","Bases de Datos","Redes","Otros"};
+        String[] letra = {"","Arboles","Listas","Bases de Datos","Redes","Otros"};
         spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
 
         Intent intent = getIntent();

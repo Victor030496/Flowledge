@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         btn2.setTextColor(Color.parseColor("#9E9E9E"));
         btn3.setTextColor(Color.parseColor("#9E9E9E"));
         btn4.setTextColor(Color.parseColor("#9E9E9E"));*/
-        btn1.setText(s.getNombre());
+       // btn1.setText(s.getNombre());
         btn1.setBackgroundColor(Color.parseColor("#8080ff"));
         btn2.setBackgroundColor(Color.parseColor("#8080ff"));
         btn3.setBackgroundColor(Color.parseColor("#8080ff"));

@@ -118,7 +118,7 @@
                 <EditText
                     android:id="@+id/nombre2"
                     android:layout_height="wrap_content"
-                    android:hint="Digite el nombre"
+                    android:hint="Digite un Nickname"
                     android:inputType="textPersonName"
                     android:layout_width="fill_parent">
                 </EditText>
