@@ -21,7 +21,6 @@
 
         <activity android:name=".MainActivity"/>
         <activity android:name=".LogInActivity"/>
-        <activity android:name=".UsuarioActivity"/>
         <activity android:name=".UserActivity"/>
         <activity android:name=".ReplyActivity"/>
         <activity android:name=".QuestionActivity"/>

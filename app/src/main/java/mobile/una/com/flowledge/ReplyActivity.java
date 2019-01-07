@@ -35,13 +35,15 @@ import mobile.una.com.flowledge.MainActivity;
 import mobile.una.com.flowledge.R;
 import mobile.una.com.flowledge.UserActivity;
 import mobile.una.com.flowledge.model.Persona;
+import mobile.una.com.flowledge.model.Sesion;
 
-        import static java.lang.Boolean.TRUE;
+import static java.lang.Boolean.TRUE;
 public class ReplyActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    Sesion s=new Sesion();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,8 @@ public class ReplyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reply);
         bottomNavigationView = findViewById(R.id.NavBot);
         bottomNavigationView.getMenu().getItem(2).setChecked(TRUE);
+        Intent intent = getIntent();
+        s = (Sesion) intent.getSerializableExtra("S");
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -60,28 +64,31 @@ public class ReplyActivity extends AppCompatActivity {
                         switch (item.getItemId()) {
 
                             case R.id.bottombaritem_home:
-                                startActivity(new Intent(getBaseContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                                finish();
+                                Intent intent2 = new Intent(ReplyActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                intent2.putExtra("S", s);
+                                startActivity(intent2);
+                                ReplyActivity.this.finish();
                                 return true;
                             case R.id.bottombaritem_profile:
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(new Intent(getBaseContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                                overridePendingTransition(0, 0);
+                                Intent intent3 = new Intent(ReplyActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                intent3.putExtra("S", s);
+                                startActivity(intent3);
+                                ReplyActivity.this.finish();
+
                                 return true;
 
                             case R.id.bottombaritem_reply:
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(new Intent(getBaseContext(), ReplyActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                                overridePendingTransition(0, 0);
+                                Intent intent4 = new Intent(ReplyActivity.this, ReplyActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                intent4.putExtra("S", s);
+                                startActivity(intent4);
+                                ReplyActivity.this.finish();
                                 return true;
 
                             case R.id.bottombaritem_question:
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(new Intent(getBaseContext(), QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                                overridePendingTransition(0, 0);
+                                Intent intent5 = new Intent(ReplyActivity.this, QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                intent5.putExtra("S", s);
+                                startActivity(intent5);
+                                ReplyActivity.this.finish();
                                 return true;
                         }
                         return false;

@@ -57,7 +57,8 @@ public class UserActivity extends AppCompatActivity {
         pnombre=findViewById(R.id.nombre);
         lista=findViewById(R.id.datos);
         guardar=findViewById(R.id.guardar);
-
+        Intent intent = getIntent();
+        s = (Sesion) intent.getSerializableExtra("S");
         inicializarFirebase();
         listarDatos();
 
@@ -88,21 +89,31 @@ public class UserActivity extends AppCompatActivity {
                         switch (item.getItemId()) {
 
                             case R.id.bottombaritem_home:
-                                startActivity(new Intent(getBaseContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                                finish();
+                                Intent intent2 = new Intent(UserActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                intent2.putExtra("S", s);
+                                startActivity(intent2);
+                                UserActivity.this.finish();
                                 return true;
                             case R.id.bottombaritem_profile:
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(new Intent(getBaseContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                                overridePendingTransition(0, 0);
+                                Intent intent3 = new Intent(UserActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                intent3.putExtra("S", s);
+                                startActivity(intent3);
+                                UserActivity.this.finish();
+
                                 return true;
 
                             case R.id.bottombaritem_reply:
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(new Intent(getBaseContext(), ReplyActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                                overridePendingTransition(0, 0);
+                                Intent intent4 = new Intent(UserActivity.this, ReplyActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                intent4.putExtra("S", s);
+                                startActivity(intent4);
+                                UserActivity.this.finish();
+                                return true;
+
+                            case R.id.bottombaritem_question:
+                                Intent intent5 = new Intent(UserActivity.this, QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                intent5.putExtra("S", s);
+                                startActivity(intent5);
+                                UserActivity.this.finish();
                                 return true;
 
                         }
