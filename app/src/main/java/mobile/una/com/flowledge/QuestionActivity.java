@@ -2,6 +2,7 @@ package mobile.una.com.flowledge;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.RecoverySystem;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -55,18 +56,20 @@ import com.google.firebase.FirebaseApp;
         import mobile.una.com.flowledge.UserActivity;
         import mobile.una.com.flowledge.model.Persona;
 import mobile.una.com.flowledge.model.Question;
+import mobile.una.com.flowledge.model.Respuesta;
 import mobile.una.com.flowledge.model.Sesion;
 
 import static java.lang.Boolean.TRUE;
 
 public class QuestionActivity extends AppCompatActivity {
-
+    private List<Respuesta> respuesta = new ArrayList<Respuesta>();
     private BottomNavigationView bottomNavigationView;
     private List<Persona> listapersona = new ArrayList<Persona>();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     ImageView camera;
     Question question;
+    Respuesta r;
     EditText category;
     EditText description;
     Sesion s=new Sesion();
@@ -103,6 +106,12 @@ public class QuestionActivity extends AppCompatActivity {
         question = new Question();
         inicializarFirebase();
         listaPersona();
+        for(int i=0;i<10;i++){
+            r=new Respuesta();
+            r.setRespuesta("muchas cosas"+i);
+            respuesta.add(r);
+        }
+
 
         // some Listeners
 
@@ -200,6 +209,7 @@ public class QuestionActivity extends AppCompatActivity {
         question.setUserNickname(nickname);
         question.setCategory(prueSpinner);
         question.setDescription(description.getText().toString());
+        question.setRespuesta(respuesta);
 
         databaseReference.child("Pregunta").child(question.getUserNickname()).setValue(question);
 
