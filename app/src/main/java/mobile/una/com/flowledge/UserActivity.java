@@ -32,13 +32,13 @@ import static java.lang.Boolean.TRUE;
 public class UserActivity extends AppCompatActivity {
 
     private List<Persona> listapersona = new ArrayList<Persona>();
-    ArrayAdapter<Persona> personaArrayAdapter;
+   // ArrayAdapter<Persona> personaArrayAdapter;
     Sesion s=new Sesion();
 
     private BottomNavigationView bottomNavigationView;
-    EditText pid,pnombre;
-    ListView lista;
-    Button guardar;
+    TextView pid,pnombre,correo;
+    //ListView lista;
+   // Button guardar;
     Persona p=new Persona();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -52,6 +52,9 @@ public class UserActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.NavBot);
         bottomNavigationView.getMenu().getItem(4).setChecked(TRUE);
+        pid=findViewById(R.id.cedula2);
+        pnombre=findViewById(R.id.nombre2);
+        correo=findViewById(R.id.correo2);
 
        // pid=findViewById(R.id.id);
       //  guardar=findViewById(R.id.guardar);
@@ -60,8 +63,8 @@ public class UserActivity extends AppCompatActivity {
         inicializarFirebase();
         listarDatos();
 
-
-
+        pid.setText(s.getNombre());
+        pnombre.setText(s.getPid());
       /*  guardar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 

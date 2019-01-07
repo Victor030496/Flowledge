@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setTitle("HOME");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.NavBot);
         btn1 = (Button) findViewById(R.id.arboles);
         btn2  = (Button) findViewById(R.id.listas);

@@ -100,12 +100,11 @@ public void registrar(View view){
             s.setNombre(pid.getText().toString());
             s.setEstado("1");
             databaseReference.child("Sesion").child(s.getPid()).setValue(s);
-
         Toast.makeText(getApplicationContext(), "REGISTRADO CON EXITO", Toast.LENGTH_SHORT).show();
         limpiar();
-            Intent intent2 = new Intent(LogInActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            intent2.putExtra("S", s);
-            startActivity(intent2);
+            Intent intent = new Intent(LogInActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent.putExtra("S", s);
+            startActivity(intent);
             LogInActivity.this.finish();
         }}else{ limpiar();}
 
