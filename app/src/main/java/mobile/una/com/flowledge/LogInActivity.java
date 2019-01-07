@@ -84,7 +84,6 @@ public void registrar(View view){
 
     public void guardar(View view){
         boolean bandera=true;
-        Intent intent = getIntent();
         for(int i=0;i <= listapersona.size() - 1;i++){
             if(listapersona.get(i).getPid().equals(pid.getText().toString())){
                 Toast.makeText(getApplicationContext(), "YA ESTA REGISTRADO", Toast.LENGTH_SHORT).show();

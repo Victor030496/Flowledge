@@ -53,10 +53,8 @@ public class UserActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.NavBot);
         bottomNavigationView.getMenu().getItem(4).setChecked(TRUE);
 
-        pid=findViewById(R.id.id);
-        pnombre=findViewById(R.id.nombre);
-        lista=findViewById(R.id.datos);
-        guardar=findViewById(R.id.guardar);
+       // pid=findViewById(R.id.id);
+      //  guardar=findViewById(R.id.guardar);
         Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
         inicializarFirebase();
@@ -132,8 +130,8 @@ public class UserActivity extends AppCompatActivity {
                     Persona p = objSnapshot.getValue(Persona.class);
                     listapersona.add(p);
 
-                    personaArrayAdapter= new ArrayAdapter<Persona>(UserActivity.this,android.R.layout.simple_list_item_1,listapersona);
-                    lista.setAdapter(personaArrayAdapter);
+                   // personaArrayAdapter= new ArrayAdapter<Persona>(UserActivity.this,android.R.layout.simple_list_item_1,listapersona);
+                  //  lista.setAdapter(personaArrayAdapter);
                 }
             }
 
