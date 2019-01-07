@@ -67,20 +67,16 @@ tools:context=".QuestionActivity">
                         android:textSize="10pt">
                     </TextView>
 
-                    <EditText
-                        android:id="@+id/categoria2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="match_parent"
+                    <Spinner
+                        android:background="@drawable/spinner_background"
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/spinner"
                         android:hint="eje: Arboles, Listas, BD...."
-                        android:inputType="text"></EditText>
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="            "
-                        android:textSize="22sp" />
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent" />
 
                     <TextView
+                        android:layout_marginTop="20dp"
                         android:id="@+id/descripcion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

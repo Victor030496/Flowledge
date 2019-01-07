@@ -34,7 +34,8 @@ import android.support.v7.app.AppCompatActivity;
         import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-        import android.widget.TextView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
         import com.google.firebase.FirebaseApp;
         import com.google.firebase.database.DataSnapshot;
@@ -82,8 +83,11 @@ public class QuestionActivity extends AppCompatActivity {
         // recovering widgets
         bottomNavigationView = findViewById(R.id.NavBot);
         camera = findViewById(R.id.camara);
-        category = findViewById(R.id.categoria2);
+        //category = findViewById(R.id.categoria2);
         description = findViewById(R.id.descripcion2);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        String[] letra = {"  ------","  Listas","  Bases de Datos","  Redes","  Otros"};
+        spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
 
         Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
