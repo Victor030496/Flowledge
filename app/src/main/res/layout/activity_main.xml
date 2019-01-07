@@ -7,66 +7,73 @@ android:layout_height="match_parent"
 xmlns:design="http://schemas.android.com/apk/res-auto"
 tools:context=".MainActivity">
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingBottom="55dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <Button
+            android:layout_marginTop="10dp"
             android:id="@+id/arboles"
-            android:layout_margin="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:text="Árboles"
-            android:layout_width="135dp"
-            android:layout_height="125dp" />
+            android:layout_width="match_parent"
+            android:layout_height="70dp" />
 
         <Button
+            android:layout_marginTop="10dp"
             android:id="@+id/listas"
-            android:layout_margin="30dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:text="Listas"
-            android:layout_width="135dp"
-            android:layout_height="125dp" />
-
-    </LinearLayout>
-
-
-        <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="70dp"  />
+
 
             <Button
+                android:layout_marginTop="10dp"
                 android:id="@+id/bd"
-                android:layout_margin="28dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:text="Bases de datos"
-                android:layout_width="135dp"
-                android:layout_height="125dp" />
+                android:layout_width="match_parent"
+                android:layout_height="70dp" />
 
             <Button
+                android:layout_marginTop="10dp"
                 android:id="@+id/redes"
-                android:layout_margin="30dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:text="Redes"
-                android:layout_width="135dp"
-                android:layout_height="125dp" />
+                android:layout_width="match_parent"
+                android:layout_height="70dp"  />
+
+
 
         </LinearLayout>
+    </ScrollView>
 
 
-    </LinearLayout>
+
+
+
 
 <android.support.design.widget.BottomNavigationView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/NavBot"
     android:layout_gravity="bottom"
-    design:menu="@menu/menu_nav"
-    />
+    design:menu="@menu/menu_nav" />
 
 
 </android.support.design.widget.CoordinatorLayout>

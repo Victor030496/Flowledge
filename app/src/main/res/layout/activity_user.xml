@@ -26,8 +26,23 @@ tools:context=".UserActivity">
                 android:layout_width="fill_parent"
                 android:orientation="vertical"
                 android:layout_height="fill_parent">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <ImageView
+                    android:id="@+id/imagen"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/prueba2"
+                    android:background="@color/colorPrimaryDark" />
+            </LinearLayout>
 
                 <TextView
+                    android:layout_marginTop="20dp"
                     android:id="@+id/cedula"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
