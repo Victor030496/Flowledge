@@ -35,6 +35,7 @@ import mobile.una.com.flowledge.MainActivity;
 import mobile.una.com.flowledge.R;
 import mobile.una.com.flowledge.UserActivity;
 import mobile.una.com.flowledge.model.Persona;
+import mobile.una.com.flowledge.model.Question;
 import mobile.una.com.flowledge.model.Sesion;
 
 import static java.lang.Boolean.TRUE;
@@ -44,6 +45,10 @@ public class ReplyActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     Sesion s=new Sesion();
+    private List<Question> listquestion = new ArrayList<Question>();
+   Question question;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,29 @@ public class ReplyActivity extends AppCompatActivity {
         bottomNavigationView.getMenu().getItem(2).setChecked(TRUE);
         Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
+       question = new Question();
 
+//--------------------------------------------------------------
+        inicializarFirebase();
+        listaPreguntas();
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // some listeners
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -96,6 +123,43 @@ public class ReplyActivity extends AppCompatActivity {
                 });
 
     }
+
+
+
+    private void inicializarFirebase() {
+        FirebaseApp.initializeApp(this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+    }
+
+
+
+
+    private void listaPreguntas() {
+        databaseReference.child("Pregunta").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listquestion.clear();
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    question = objSnapshot.getValue(Question.class);
+                    listquestion.add(question);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+
+
+
+
+
+
+
 
 
 
