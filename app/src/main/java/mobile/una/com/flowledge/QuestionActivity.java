@@ -6,7 +6,12 @@ import android.os.RecoverySystem;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.google.firebase.database.DatabaseReference;
@@ -61,7 +66,7 @@ import mobile.una.com.flowledge.model.Sesion;
 
 import static java.lang.Boolean.TRUE;
 
-public class QuestionActivity extends AppCompatActivity {
+public class QuestionActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
   //  private List<Respuesta> respuesta = new ArrayList<Respuesta>();
     private BottomNavigationView bottomNavigationView;
     private List<Persona> listapersona = new ArrayList<Persona>();
@@ -76,6 +81,8 @@ public class QuestionActivity extends AppCompatActivity {
     Spinner spinner;
     Button send;
     String prueSpinner;
+    View headerView;
+    TextView nickname,correobarra;
 
 
 
@@ -87,8 +94,26 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
-        // recovering widgets
-        bottomNavigationView = findViewById(R.id.NavBot);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.NavBot);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        headerView = navigationView.getHeaderView(0);
+
+        nickname = headerView.findViewById(R.id.nickname);
+        correobarra= headerView.findViewById(R.id.correobarra);
+        nickname.setText(s.getNombre());
+        correobarra.setText(s.getPid());
+
+
+
         camera = (ImageView) findViewById(R.id.camara);
         //category = findViewById(R.id.categoria2);
         description = (EditText) findViewById(R.id.descripcion2);
@@ -106,7 +131,8 @@ public class QuestionActivity extends AppCompatActivity {
         question = new Question();
         inicializarFirebase();
         listaPersona();
-
+        nickname.setText(s.getNombre());
+        correobarra.setText(s.getPid());
 
         // some Listeners
 
@@ -263,4 +289,43 @@ public class QuestionActivity extends AppCompatActivity {
 
     }
 
+    //MENU------------------------------------------------------
+
+    @Override
+    public void onBackPressed() {
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }
