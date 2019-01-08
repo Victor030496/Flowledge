@@ -2,7 +2,7 @@
     <string name="app_name">Flowledge</string>
     <string name="not_log_in">No se pudo iniciar sesión</string>
     <string name="log_out">Log Out</string>
-    <string name="in">Log In</string>
+    <string name="in">Iniciar sesión</string>
     <string name="registrar">Registrarse</string>
     <string name="not_close_session">No se pudo cerrar sesión</string>
     <string name="not_revoke">No se pudo revocar el acceso</string>
@@ -14,4 +14,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="shr_hint_username">Cédula</string>
+    <string name="shr_hint_password">Contraseña</string>
+    <string name="shr_button_signIn">Iniciar sesión</string>
+    <string name="shr_button_cancel">Cancel</string>
+    <string name="shr_error_password">Incorrect username or password.</string>
 </resources>
