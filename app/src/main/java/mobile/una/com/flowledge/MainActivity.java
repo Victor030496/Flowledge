@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         setTitle("HOME");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.NavBot);
+
         btn1 = (Button) findViewById(R.id.arboles);
         btn2  = (Button) findViewById(R.id.listas);
         btn3= (Button) findViewById(R.id.bd);
@@ -46,6 +45,8 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.NavBot);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
