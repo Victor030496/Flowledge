@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mobile.una.com.flowledge">
 
-<uses-permission android:name="android.permission.INTERNET"></uses-permission>
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name="com.orm.SugarApp"
@@ -13,29 +13,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="DATABASE"
+            android:value="flowledge.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="mobile.una.com.flowledge.model" />
 
-        <meta-data android:name="DATABASE" android:value="flowledge.db" />
-        <meta-data android:name="VERSION" android:value="1" />
-        <meta-data android:name="QUERY_LOG" android:value="true" />
-        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="mobile.una.com.flowledge.model" />
-
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".LogInActivity"/>
-        <activity android:name=".UserActivity"/>
-        <activity android:name=".ReplyActivity"/>
-        <activity android:name=".QuestionActivity"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".LogInActivity" />
+        <activity android:name=".UserActivity" />
+        <activity android:name=".ReplyActivity" />
+        <activity android:name=".QuestionActivity" />
+        <activity android:name=".MenuActivity" />
         <activity android:name=".SplashActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
     </application>
-
 
 </manifest>

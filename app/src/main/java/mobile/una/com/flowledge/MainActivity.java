@@ -5,15 +5,23 @@ import android.graphics.Color;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import mobile.una.com.flowledge.model.Sesion;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
     private BottomNavigationView bottomNavigationView;
     private Button btn1;
     private Button btn2;
@@ -27,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setTitle("HOME");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.NavBot);
         btn1 = (Button) findViewById(R.id.arboles);
         btn2  = (Button) findViewById(R.id.listas);
@@ -36,11 +45,20 @@ public class MainActivity extends AppCompatActivity {
         s = (Sesion) intent.getSerializableExtra("S");
         androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        /*btn1.setTextColor(Color.parseColor("#9E9E9E"));
-        btn2.setTextColor(Color.parseColor("#9E9E9E"));
-        btn3.setTextColor(Color.parseColor("#9E9E9E"));
-        btn4.setTextColor(Color.parseColor("#9E9E9E"));*/
-       // btn1.setText(s.getNombre());
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
+
         btn1.setBackgroundColor(Color.parseColor("#8080ff"));
         btn2.setBackgroundColor(Color.parseColor("#8080ff"));
         btn3.setBackgroundColor(Color.parseColor("#8080ff"));
@@ -104,6 +122,42 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+//MENU------------------------------------------------------
 
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
 }
