@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import mobile.una.com.flowledge.model.Sesion;
 
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private Button btn4;
     Sesion s=new Sesion();
     String androidId;
+    View headerView;
+    TextView nickname,correobarra;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -55,9 +59,11 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
+        headerView = navigationView.getHeaderView(0);
+        nickname = headerView.findViewById(R.id.nickname);
+        correobarra= headerView.findViewById(R.id.correobarra);
+        nickname.setText(s.getNombre());
+        correobarra.setText(s.getPid());
 
 
         btn1.setBackgroundColor(Color.parseColor("#8080ff"));
