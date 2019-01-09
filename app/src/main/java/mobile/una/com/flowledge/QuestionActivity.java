@@ -238,6 +238,9 @@ public class QuestionActivity extends AppCompatActivity implements NavigationVie
         description.setText("");
 
         Toast.makeText(getApplicationContext(), "Haz enviado una pregunta al foro", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), ReplyActivity.class);
+        //intent.putExtra("wea", weather);
+        startActivity(intent);
 
     }
 

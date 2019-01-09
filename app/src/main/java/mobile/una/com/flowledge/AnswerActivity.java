@@ -30,7 +30,7 @@ public class AnswerActivity extends AppCompatActivity {
 
 
         pruebas = new ArrayList<Question>();
-        Question q1 = new Question("samir05","Yo no se porque respiro");
+        Question q1 = new Question("samir05","TCP: protocolo de control de transmision, IP: Protocolo de internet");
         Question q2 = new Question("barco03","Me parece que esos protocolos tratan sobre transferencia ");
        // Question q3 = new Question(listquestion.get(0).getUserNickname().toString(), listquestion.get(0).getDescription().toString());
 
