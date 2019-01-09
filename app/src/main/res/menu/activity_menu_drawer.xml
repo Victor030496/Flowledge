@@ -11,7 +11,7 @@
 
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="SESION">
         <menu>
             <item
                 android:id="@+id/out"

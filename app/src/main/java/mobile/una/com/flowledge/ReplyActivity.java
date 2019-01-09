@@ -71,8 +71,8 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-     //   bottomNavigationView = findViewById(R.id.NavBot);
-       // bottomNavigationView.getMenu().getItem(2).setChecked(TRUE);
+        bottomNavigationView = findViewById(R.id.NavBot);
+        bottomNavigationView.getMenu().getItem(2).setChecked(TRUE);
         Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
        question = new Question();
@@ -136,7 +136,7 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
 
 
         // some listeners
-    /*    bottomNavigationView.setOnNavigationItemSelectedListener(
+        bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -173,7 +173,7 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
                         }
                         return false;
                     }
-                });*/
+                });
 
     }
 
