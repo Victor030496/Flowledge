@@ -13,6 +13,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -21,18 +23,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import mobile.una.com.flowledge.model.AreaData;
 import mobile.una.com.flowledge.model.Sesion;
 
 public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
     private BottomNavigationView bottomNavigationView;
-    private Button btn1;
-    private Button btn2;
-    private Button btn3;
-    private Button btn4;
     Sesion s=new Sesion();
     String androidId;
     View headerView;
     TextView nickname,correobarra;
+
+    RecyclerView mRecyclerView;
+    List<AreaData> mFlowerList;
+    AreaData mFlowerData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +47,6 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn1 = (Button) findViewById(R.id.arboles);
-        btn2  = (Button) findViewById(R.id.listas);
-        btn3= (Button) findViewById(R.id.bd);
-        btn4= (Button) findViewById(R.id.redes);
         Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
         androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -67,22 +69,13 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         nickname.setText(s.getNombre());
         correobarra.setText(s.getPid());
 
+        mRecyclerView = findViewById(R.id.recyclerview);
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(MainActivity.this, 2);
+        mRecyclerView.setLayoutManager(mGridLayoutManager);
+        llenarAreas();
+        MyAdapter myAdapter = new MyAdapter(MainActivity.this, mFlowerList);
+        mRecyclerView.setAdapter(myAdapter);
 
-        btn1.setBackgroundColor(Color.parseColor("#8080ff"));
-        btn2.setBackgroundColor(Color.parseColor("#8080ff"));
-        btn3.setBackgroundColor(Color.parseColor("#8080ff"));
-        btn4.setBackgroundColor(Color.parseColor("#8080ff"));
-
-
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ReplyActivity.class);
-                // intent.putExtra("paymentObject", contacts.get(i));
-                startActivity(intent);
-
-            }
-        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -167,6 +160,20 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    public void llenarAreas(){
+        mFlowerList = new ArrayList<>();
+        mFlowerData = new AreaData("Bases de datos",R.drawable.bases);
+        mFlowerList.add(mFlowerData);
+        mFlowerData = new AreaData("Estructura de datos",R.drawable.estructuras);
+        mFlowerList.add(mFlowerData);
+        mFlowerData = new AreaData("POO",R.drawable.poo);
+        mFlowerList.add(mFlowerData);
+        mFlowerData = new AreaData("Redes",R.drawable.redes);
+        mFlowerList.add(mFlowerData);
+
     }
 
 }
