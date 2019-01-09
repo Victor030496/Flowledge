@@ -60,20 +60,5 @@ public class Adapter extends BaseAdapter {
         return vista;
     }
 
-    public View setImagen(int position, View convertView, ViewGroup parent) {
-        View vista = convertView;
-        LayoutInflater inflat= LayoutInflater.from(contexto);
-        vista =inflat.inflate(R.layout.activity_reply,null);
 
-        ImageView imagen =(ImageView) vista.findViewById(R.id.imgItem);
-        TextView txt1 =(TextView) vista.findViewById(R.id.txtTitle);
-        TextView txt2 =(TextView) vista.findViewById(R.id.txtDescription);
-
-
-        txt1.setText(preguntas.get(position).getUserNickname().toString());
-        txt2.setText(preguntas.get(position).getDescription().toString());
-        imagen.setImageResource(R.drawable.cora2);
-
-        return vista;
-    }
 }

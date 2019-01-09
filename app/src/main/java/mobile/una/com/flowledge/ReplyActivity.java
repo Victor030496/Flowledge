@@ -14,7 +14,8 @@ import android.support.v7.app.AppCompatActivity;
         import android.support.v7.app.AppCompatActivity;
         import android.view.MenuItem;
         import android.view.View;
-        import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.EditText;
 import android.widget.ImageView;
@@ -211,7 +212,20 @@ public class ReplyActivity extends AppCompatActivity {
 
 
                 Adapter adapter = new Adapter(getApplicationContext(),listquestion);
+
+
                 listaItems.setAdapter(adapter);
+
+
+
+                listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ImageView imagen =(ImageView) view.findViewById(R.id.imglike);
+                        Toast.makeText(getApplicationContext(), "vamoo bien", Toast.LENGTH_SHORT).show();
+                        imagen.setImageResource(R.drawable.cora2);
+                    }
+                });
             }
 
             @Override
