@@ -223,17 +223,23 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        }else if (id == R.id.out) {
+            Intent intent = getIntent();
+            s = (Sesion) intent.getSerializableExtra("S");
+            databaseReference.child("Sesion").child(s.getPid()).removeValue();
+            Intent intent2 = new Intent(UserActivity.this, SplashActivity.class);
+            startActivity(intent2);
+            UserActivity.this.finish();
+
+        } /*else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
+        }  else if (id == R.id.nav_send) {
 
-        } else if (id == R.id.nav_send) {
-
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

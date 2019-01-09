@@ -23,6 +23,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,12 +44,17 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     List<AreaData> mFlowerList;
     AreaData mFlowerData;
 
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         setTitle("HOME");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        inicializarFirebase();
 
         Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
@@ -123,7 +132,11 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
 
     }
-
+    private void inicializarFirebase(){
+        FirebaseApp.initializeApp(this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference();
+    }
 //MENU------------------------------------------------------
 
     @Override
@@ -145,17 +158,23 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        }else if (id == R.id.out) {
+            Intent intent = getIntent();
+            s = (Sesion) intent.getSerializableExtra("S");
+            databaseReference.child("Sesion").child(s.getPid()).removeValue();
+            Intent intent2 = new Intent(MainActivity.this, SplashActivity.class);
+            startActivity(intent2);
+            MainActivity.this.finish();
+
+        } /*else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
+        }  else if (id == R.id.nav_send) {
 
-        } else if (id == R.id.nav_send) {
-
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
