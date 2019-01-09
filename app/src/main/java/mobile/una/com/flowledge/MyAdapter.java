@@ -41,10 +41,10 @@ public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder> {
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mIntent = new Intent(mContext, ReplyActivity.class);
+               /* Intent mIntent = new Intent(mContext, ReplyActivity.class);
                 mIntent.putExtra("Title", mDataList.get(holder.getAdapterPosition()).getAreaName());
                 mIntent.putExtra("Image", mDataList.get(holder.getAdapterPosition()).getAreaImage());
-                mContext.startActivity(mIntent);
+                mContext.startActivity(mIntent);*/
             }
         });
     }
