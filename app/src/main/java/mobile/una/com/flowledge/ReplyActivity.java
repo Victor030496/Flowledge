@@ -47,17 +47,20 @@ public class ReplyActivity extends AppCompatActivity {
     Sesion s=new Sesion();
     private List<Question> listquestion = new ArrayList<Question>();
    Question question;
+    // Variables de la clase
+    private ArrayList<TitularItems> Items;
+    private Adaptador Adaptador;
+    private ListView listaItems;
 
-
+    private ArrayList<Question> pruebas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
-        setTitle("RESPUESTAS");
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reply);
-        bottomNavigationView = findViewById(R.id.NavBot);
-        bottomNavigationView.getMenu().getItem(2).setChecked(TRUE);
+        setContentView(R.layout.activity_list);
+     //   bottomNavigationView = findViewById(R.id.NavBot);
+       // bottomNavigationView.getMenu().getItem(2).setChecked(TRUE);
         Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
        question = new Question();
@@ -65,8 +68,23 @@ public class ReplyActivity extends AppCompatActivity {
 //--------------------------------------------------------------
         inicializarFirebase();
         listaPreguntas();
-        
 
+        // Vinculamos el objeto ListView con el objeto del archivo XML
+        listaItems = (ListView)findViewById(R.id.listItems);
+// Llamamos al método loadItems()
+     //  loadItems();
+
+
+
+        /*pruebas = new ArrayList<Question>();
+        Question q1 = new Question("samir05","que es un bst?");
+        Question q2 = new Question("barco03","como se recorre un arbol?");
+
+      pruebas.add(q1);
+        pruebas.add(q2);*/
+
+        Adapter adapter = new Adapter(getApplicationContext(),listquestion);
+        listaItems.setAdapter(adapter);
 
 
 
@@ -83,7 +101,7 @@ public class ReplyActivity extends AppCompatActivity {
 
 
         // some listeners
-        bottomNavigationView.setOnNavigationItemSelectedListener(
+    /*    bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -120,7 +138,7 @@ public class ReplyActivity extends AppCompatActivity {
                         }
                         return false;
                     }
-                });
+                });*/
 
     }
 
@@ -154,6 +172,23 @@ public class ReplyActivity extends AppCompatActivity {
     }
 
 
+    // Método cargar Items
+    private void loadItems(){
+        Items = new ArrayList<>(); // Creamos un objeto ArrayList de tipo TitularItems
+
+// Agregamos elementos al ArrayList
+
+
+        TitularItems ito = new TitularItems("usuario", "vcvcxvcxc");
+        Items.add(ito);
+     //   Items.add(new TitularItems("Desempeño", "Descripción de Desempeño", this.getResources().getIdentifier("camara", "drawable", this.getPackageName())));
+       // Items.add(new TitularItems("Google Plus", "Descripción de Google Plus", this.getResources().getIdentifier("camara", "drawable", this.getPackageName())));
+
+// Creamos un nuevo Adaptador y le pasamos el ArrayList
+       Adaptador = new Adaptador(this, Items);
+// Desplegamos los elementos en el ListView
+        listaItems.setAdapter(Adaptador);
+    }
 
 
 

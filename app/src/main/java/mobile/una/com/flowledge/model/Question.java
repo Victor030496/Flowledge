@@ -23,6 +23,11 @@ public class Question {
        // this.respuesta = respuesta;
     }
 
+    public Question(String userNickname, String description) {
+        this.userNickname = userNickname;
+        this.description = description;
+    }
+
     public Question() {
         //this.Pid= "";
         this.userNickname = "";
