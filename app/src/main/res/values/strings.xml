@@ -14,9 +14,19 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
     <string name="shr_hint_username">Cédula</string>
     <string name="shr_hint_password">Contraseña</string>
     <string name="shr_button_signIn">Iniciar sesión</string>
-    <string name="shr_button_cancel">Cancel</string>
+    <string name="shr_button_cancel">Volver</string>
     <string name="shr_error_password">Incorrect username or password.</string>
+
+    <string name="formRegDigCedula">Cédula de identidad</string>
+    <string name="formRegNickname">Alias</string>
+    <string name="formRegCorreo">Correo electrónico</string>
+    <string name="formRegContrasena">Contraseña</string>
+    <string name="formRegConContrasena">Confirmar contraseña</string>
+    <string name="formRegTitle">Formulario de Registro</string>
+    <string name="formRegSaveButton">Hecho</string>
+
 </resources>

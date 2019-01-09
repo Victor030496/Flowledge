@@ -48,6 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:paddingBottom="10dp"
                     android:text="@string/app_name"
                     android:textAllCaps="true"
                     android:textSize="24sp" />
@@ -58,6 +59,7 @@
                     style="@style/Widget.Shrine.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/cedulaText"
                     android:hint="@string/shr_hint_username">
 
                     <android.support.design.widget.TextInputEditText
@@ -95,11 +97,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
-                        android:onClick="ingresar"
                         android:text="@string/shr_button_signIn" />
 
                     <android.support.design.button.MaterialButton
-                        android:id="@+id/registro"
+                        android:id="@+id/registro_button"
                         style="@style/Widget.Shrine.Button.TextButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -107,7 +108,6 @@
                         android:layout_marginRight="12dp"
                         android:layout_toStartOf="@id/next_button"
                         android:layout_toLeftOf="@id/next_button"
-                        android:onClick="registrar"
                         android:text="@string/registrar" />
 
                 </RelativeLayout>
@@ -141,89 +141,118 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/cedula"
+                    android:id="@+id/registroFormTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cedula"
-                    android:textSize="10pt"></TextView>
-
-                <EditText
-                    android:id="@+id/cedula2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Digite el cedula"
-                    android:inputType="number"></EditText>
-
-                <TextView
-                    android:id="@+id/nombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nickname"
-                    android:textSize="10pt"></TextView>
-
-                <EditText
-                    android:id="@+id/nombre2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Digite un Nickname"
-                    android:inputType="textPersonName"></EditText>
-
-                <TextView
-                    android:id="@+id/correo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Correo"
-                    android:textSize="10pt"></TextView>
-
-                <EditText
-                    android:id="@+id/correo2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Digite Correo"
-                    android:inputType="textEmailAddress"></EditText>
-
-                <TextView
-                    android:id="@+id/password1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contrasena"
-                    android:textSize="10pt"></TextView>
-
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/edittext_username_la"
-                    android:hint="Ingrese Contrasena"
-                    android:inputType="textPassword" />
-
-                <TextView
-                    android:id="@+id/contrasena2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Confirmar contrasena"
-                    android:textSize="10pt"></TextView>
-
-                <EditText
-                    android:id="@+id/concontrasena"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Digite de nuevo contrasena"
-                    android:inputType="textPassword" />
-
-                <Button
-                    android:id="@+id/cancelar"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/formRegTitle"
+                    android:paddingBottom="10dp"
+                    android:textAllCaps="true"
+                    android:textSize="24sp" />
+                <!-- Snippet from "Add text fields" section goes here. -->
+                <android.support.design.widget.TextInputLayout
+                    style="@style/Widget.Shrine.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="cancelar"
-                    android:text="CANCELAR" />
+                    android:id="@+id/cedulaFormText"
+                    android:hint="@string/formRegDigCedula">
 
-                <Button
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/cedula2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+
+                <!-- Snippet from "Add text fields" section goes here. -->
+                <android.support.design.widget.TextInputLayout
+                    style="@style/Widget.Shrine.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nombreFormText"
+                    android:hint="@string/formRegNickname">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/nombre2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+
+                <!-- Snippet from "Add text fields" section goes here. -->
+                <android.support.design.widget.TextInputLayout
+                    style="@style/Widget.Shrine.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/correoFormText"
+                    android:hint="@string/formRegCorreo">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/correo2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+
+                <!-- Snippet from "Add text fields" section goes here. -->
+                <android.support.design.widget.TextInputLayout
+                    style="@style/Widget.Shrine.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contrasenaFormText"
+                    android:hint="@string/formRegContrasena">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+
+                <!-- Snippet from "Add text fields" section goes here. -->
+                <android.support.design.widget.TextInputLayout
+                    style="@style/Widget.Shrine.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/concontrasenaFormText"
+                    android:hint="@string/formRegConContrasena">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/concontrasena"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <android.support.design.button.MaterialButton
                     android:id="@+id/guardar"
-                    android:layout_width="match_parent"
+                    style="@style/Widget.Shrine.Button.Ok"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="guardar"
-                    android:text="GUARDAR" />
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/formRegSaveButton" />
+
+                <android.support.design.button.MaterialButton
+                    android:id="@+id/button_cancelar"
+                    style="@style/Widget.Shrine.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_toStartOf="@id/guardar"
+                    android:layout_toLeftOf="@id/guardar"
+                    android:text="@string/shr_button_cancel" />
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -283,78 +312,5 @@
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
-    <!--
-        <LinearLayout
-            android:id="@+id/formularioi"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin">
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:orientation="vertical"
-                    android:layout_height="fill_parent">
-
-                    <TextView
-                        android:id="@+id/cedulain"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cedula"
-                        android:textSize="10pt">
-                    </TextView>
-                    <EditText
-                        android:id="@+id/cedula2in"
-                        android:layout_height="wrap_content"
-                        android:hint="Digite el cedula"
-                        android:inputType="number"
-                        android:layout_width="fill_parent">
-                    </EditText>
-
-
-                    <TextView
-                        android:id="@+id/passwordlog"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Contrasena"
-                        android:textSize="10pt">
-                    </TextView>
-                    <EditText
-                        android:id="@+id/passwordin"
-                        android:layout_below="@+id/edittext_username_la"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:hint="Ingrese Contrasena" />
-
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="CANCELAR"
-                        android:onClick="cancelarin"
-                        android:id="@+id/cancelarin" />
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="INGRESAR"
-                        android:onClick="ingresar"
-                        android:id="@+id/ingresar" />
-
-                </LinearLayout>
-
-            </ScrollView>
-
-        </LinearLayout> -->
 
 </RelativeLayout>
