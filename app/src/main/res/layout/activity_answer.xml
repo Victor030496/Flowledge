@@ -74,12 +74,12 @@
         android:layout_below="@+id/txtDescription"
         >
 
-        <ImageView
-            android:id="@+id/imgcomenta"
-            android:layout_width="60dip"
-            android:paddingLeft="16dp"
-            android:layout_height="60dip"
-            android:src="@drawable/comen"/>
+        <EditText
+            android:id="@+id/cedula2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite "
+            android:inputType="number"></EditText>
 
         <ImageView
             android:id="@+id/imglike"
