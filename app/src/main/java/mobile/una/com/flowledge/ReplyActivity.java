@@ -19,8 +19,9 @@ import android.support.v7.app.AppCompatActivity;
         import android.widget.EditText;
         import android.widget.ListView;
         import android.widget.TextView;
+import android.widget.Toast;
 
-        import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseApp;
         import com.google.firebase.database.DataSnapshot;
         import com.google.firebase.database.DatabaseError;
         import com.google.firebase.database.DatabaseReference;
@@ -71,20 +72,22 @@ public class ReplyActivity extends AppCompatActivity {
 
         // Vinculamos el objeto ListView con el objeto del archivo XML
         listaItems = (ListView)findViewById(R.id.listItems);
-// Llamamos al método loadItems()
-     //  loadItems();
 
 
 
-        /*pruebas = new ArrayList<Question>();
+     /*   pruebas = new ArrayList<Question>();
         Question q1 = new Question("samir05","que es un bst?");
         Question q2 = new Question("barco03","como se recorre un arbol?");
+       // Question q3 = new Question(listquestion.get(0).getUserNickname().toString(), listquestion.get(0).getDescription().toString());
 
-      pruebas.add(q1);
-        pruebas.add(q2);*/
 
-        Adapter adapter = new Adapter(getApplicationContext(),listquestion);
-        listaItems.setAdapter(adapter);
+        pruebas.add(q1);
+        pruebas.add(q2);
+        //pruebas.add(q3);
+
+        //fromateaPreguntas();
+        Adapter adapter = new Adapter(getApplicationContext(),pruebas);
+        listaItems.setAdapter(adapter);*/
 
 
 
@@ -144,11 +147,47 @@ public class ReplyActivity extends AppCompatActivity {
 
 
 
+
+    @Override
+    protected void onStart() {
+
+       super.onStart();
+     /*   pruebas = new ArrayList<Question>();
+        Question q1 = new Question(listquestion.get(0).getUserNickname(), listquestion.get(0).getDescription());
+        Question q2 = new Question("barco03","como se recorre un arbol?");
+
+
+        pruebas.add(q1);
+        pruebas.add(q2);
+
+        //fromateaPreguntas();
+        Adapter adapter = new Adapter(getApplicationContext(),pruebas);
+        listaItems.setAdapter(adapter);*/
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
     }
+
+
 
 
 
@@ -161,8 +200,13 @@ public class ReplyActivity extends AppCompatActivity {
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     question = objSnapshot.getValue(Question.class);
                     listquestion.add(question);
+                    Toast.makeText(getApplicationContext(), listquestion.get(0).getDescription(), Toast.LENGTH_SHORT).show();
 
                 }
+
+
+                Adapter adapter = new Adapter(getApplicationContext(),listquestion);
+                listaItems.setAdapter(adapter);
             }
 
             @Override
@@ -170,6 +214,20 @@ public class ReplyActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    public void fromateaPreguntas(){
+
+        for(int i =0; i < listquestion.size();i++) {
+
+            question = new Question(listquestion.get(i).getUserNickname(), listquestion.get(i).getDescription());
+            pruebas.add(question);
+
+
+        }
+
+    }
+
 
 
     // Método cargar Items

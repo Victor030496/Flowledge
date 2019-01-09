@@ -27,7 +27,7 @@
             android:layout_width="60dip"
             android:paddingLeft="16dp"
             android:layout_height="60dip"
-            android:src="@drawable/pregunta"/>
+            android:src="@drawable/usuarion"/>
     </LinearLayout>
 
 
