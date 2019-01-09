@@ -17,7 +17,8 @@ import android.support.v7.app.AppCompatActivity;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.EditText;
-        import android.widget.ListView;
+import android.widget.ImageView;
+import android.widget.ListView;
         import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +55,7 @@ public class ReplyActivity extends AppCompatActivity {
     private ListView listaItems;
 
     private ArrayList<Question> pruebas;
+    ImageView cora;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,8 @@ public class ReplyActivity extends AppCompatActivity {
 
         // Vinculamos el objeto ListView con el objeto del archivo XML
         listaItems = (ListView)findViewById(R.id.listItems);
+        cora =(ImageView)findViewById(R.id.imglike);
+
 
 
 
@@ -144,6 +148,7 @@ public class ReplyActivity extends AppCompatActivity {
                 });*/
 
     }
+
 
 
 
