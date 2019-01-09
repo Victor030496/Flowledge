@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="5dip"
-    tools:context=".ReplyActivity"
+    tools:context=".AnswerActivity"
     >
 
 
@@ -38,7 +38,7 @@
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
         android:textColor="#009688"
-        android:text="bvbvbfvfdbfd"
+        android:text="Reinaldo"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="5dp"
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/txtTitle"
         android:textColor="#546e7a"
-        android:text="bnmbmb,mb,mb,mbnm"
+        android:text="Cuales son las capas del protocolo TCP/IP"
         android:textSize="17dip"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
@@ -76,10 +76,11 @@
 
         <EditText
             android:id="@+id/cedula2"
-            android:layout_width="fill_parent"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:hint="Digite "
-            android:inputType="number"></EditText>
+            android:hint="Digite su respuesta">
+
+        </EditText>
 
         <ImageView
             android:id="@+id/imglike"
@@ -89,5 +90,38 @@
             android:src="@drawable/cora"/>
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linear"
+        >
+
+        <TextView
+            android:id="@+id/txtRes"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#009688"
+            android:text="Respuestas"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="5dp"
+            android:textSize="22dip"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="normal"/>
+
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/txtRes"
+            android:id="@+id/listItems2" />
+
+
+    </LinearLayout>
+
 
 </RelativeLayout>

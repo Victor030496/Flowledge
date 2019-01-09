@@ -236,6 +236,11 @@ public class ReplyActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 Toast.makeText(getApplicationContext(), "vamoo bien", Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(getApplicationContext(), AnswerActivity.class);
+                                //intent.putExtra("wea", weather);
+                                startActivity(intent);
+
                             }
                         });
 
