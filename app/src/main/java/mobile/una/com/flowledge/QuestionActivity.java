@@ -128,7 +128,7 @@ public class QuestionActivity extends AppCompatActivity implements NavigationVie
 
         //-------------------------------------------------------------------------//
         bottomNavigationView.getMenu().getItem(1).setChecked(TRUE);
-        question = new Question();
+        question = new Question("gfdgfd","gfgd","gfdgd");
         inicializarFirebase();
         listaPersona();
         nickname.setText(s.getNombre());
@@ -150,8 +150,8 @@ public class QuestionActivity extends AppCompatActivity implements NavigationVie
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
             {
-                Toast.makeText(adapterView.getContext(),
-                        (String) adapterView.getItemAtPosition(pos), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(adapterView.getContext(),
+                //        (String) adapterView.getItemAtPosition(pos), Toast.LENGTH_SHORT).show();
                // saveQuestion( (String) adapterView.getItemAtPosition(pos));
                 prueSpinner = (String) adapterView.getItemAtPosition(pos);
 
@@ -167,6 +167,9 @@ public class QuestionActivity extends AppCompatActivity implements NavigationVie
             public void onClick(View view) {
 
              saveQuestion();
+               //  Intent intent2 = new Intent(getApplicationContext(), ReplyActivity.class);
+                //intent.putExtra("wea", weather);
+              //   startActivity(intent2);
             }
         });
 
@@ -221,16 +224,16 @@ public class QuestionActivity extends AppCompatActivity implements NavigationVie
 
 
     public void saveQuestion(){
-         String categoria ;
-         String nickname= getNicknameUser();
+        // String categoria ;
+        String nickname= getNicknameUser();
 
-       // p= new Persona(pid.getText().toString(),pnombre.getText().toString(),correo.getText().toString(),pcontra.getText().toString());
+        // p= new Persona(pid.getText().toString(),pnombre.getText().toString(),correo.getText().toString(),pcontra.getText().toString());
         //databaseReference.child("Persona").child(p.getPid()).setValue(p);
 
-        question.setUserNickname(nickname);
-        question.setCategory(prueSpinner);
-        question.setDescription(description.getText().toString());
-      //  question.setRespuesta(respuesta);
+          question.setUserNickname(nickname);
+          question.setCategory(prueSpinner);
+           question.setDescription(description.getText().toString());
+          // question.setRespuesta(respuesta);
 
         databaseReference.child("Pregunta").child(question.getUserNickname()).setValue(question);
 
@@ -238,9 +241,9 @@ public class QuestionActivity extends AppCompatActivity implements NavigationVie
         description.setText("");
 
         Toast.makeText(getApplicationContext(), "Haz enviado una pregunta al foro", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getApplicationContext(), ReplyActivity.class);
+      //  Intent intent2 = new Intent(getApplicationContext(), ReplyActivity.class);
         //intent.putExtra("wea", weather);
-        startActivity(intent);
+        // startActivity(intent2);
 
     }
 
