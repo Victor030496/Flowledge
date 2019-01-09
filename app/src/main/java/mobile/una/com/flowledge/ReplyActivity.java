@@ -221,9 +221,15 @@ public class ReplyActivity extends AppCompatActivity {
                 listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ImageView imagen =(ImageView) view.findViewById(R.id.imglike);
+                       final ImageView imagen =(ImageView) view.findViewById(R.id.imglike);
                         Toast.makeText(getApplicationContext(), "vamoo bien", Toast.LENGTH_SHORT).show();
-                        imagen.setImageResource(R.drawable.cora2);
+                        imagen.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                imagen.setImageResource(R.drawable.cora2);
+                            }
+                        });
+
                     }
                 });
             }
