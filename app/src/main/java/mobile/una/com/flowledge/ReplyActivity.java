@@ -11,33 +11,33 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 //package mobile.una.com.flowledge;
 
-        import android.content.Intent;
-        import android.os.Bundle;
-        import android.support.annotation.NonNull;
-        import android.support.design.widget.BottomNavigationView;
-        import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-        import android.view.View;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-        import android.widget.Button;
-        import android.widget.EditText;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-        import android.widget.TextView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
-        import com.google.firebase.database.DataSnapshot;
-        import com.google.firebase.database.DatabaseError;
-        import com.google.firebase.database.DatabaseReference;
-        import com.google.firebase.database.FirebaseDatabase;
-        import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-        import java.util.ArrayList;
-        import java.util.List;
-        import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import mobile.una.com.flowledge.MainActivity;
 import mobile.una.com.flowledge.R;
@@ -47,14 +47,15 @@ import mobile.una.com.flowledge.model.Question;
 import mobile.una.com.flowledge.model.Sesion;
 
 import static java.lang.Boolean.TRUE;
-public class ReplyActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+public class ReplyActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private BottomNavigationView bottomNavigationView;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    Sesion s=new Sesion();
+    Sesion s = new Sesion();
     private List<Question> listquestion = new ArrayList<Question>();
-   Question question;
+    Question question;
     // Variables de la clase
     private ArrayList<TitularItems> Items;
     private Adaptador Adaptador;
@@ -64,18 +65,17 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
     ImageView cora;
 
     View headerView;
-    TextView nickname,correobarra;
+    TextView nickname, correobarra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         bottomNavigationView = findViewById(R.id.NavBot);
         bottomNavigationView.getMenu().getItem(2).setChecked(TRUE);
         Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
-       question = new Question();
+        question = new Question();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.NavBot);
@@ -90,7 +90,7 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
         headerView = navigationView.getHeaderView(0);
 
         nickname = headerView.findViewById(R.id.nickname);
-        correobarra= headerView.findViewById(R.id.correobarra);
+        correobarra = headerView.findViewById(R.id.correobarra);
         nickname.setText(s.getNombre());
         correobarra.setText(s.getPid());
         nickname.setText(s.getNombre());
@@ -101,11 +101,8 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
         listaPreguntas();
 
         // Vinculamos el objeto ListView con el objeto del archivo XML
-        listaItems = (ListView)findViewById(R.id.listItems);
-        cora =(ImageView)findViewById(R.id.imglike);
-
-
-
+        listaItems = (ListView) findViewById(R.id.listItems);
+        cora = (ImageView) findViewById(R.id.imglike);
 
      /*   pruebas = new ArrayList<Question>();
         Question q1 = new Question("samir05","que es un bst?");
@@ -122,19 +119,6 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
         listaItems.setAdapter(adapter);*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         // some listeners
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -144,13 +128,13 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
                         switch (item.getItemId()) {
 
                             case R.id.bottombaritem_home:
-                                Intent intent2 = new Intent(ReplyActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                Intent intent2 = new Intent(ReplyActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent2.putExtra("S", s);
                                 startActivity(intent2);
                                 ReplyActivity.this.finish();
                                 return true;
                             case R.id.bottombaritem_profile:
-                                Intent intent3 = new Intent(ReplyActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                Intent intent3 = new Intent(ReplyActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent3.putExtra("S", s);
                                 startActivity(intent3);
                                 ReplyActivity.this.finish();
@@ -158,14 +142,14 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
                                 return true;
 
                             case R.id.bottombaritem_reply:
-                                Intent intent4 = new Intent(ReplyActivity.this, ReplyActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                Intent intent4 = new Intent(ReplyActivity.this, ReplyActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent4.putExtra("S", s);
                                 startActivity(intent4);
                                 ReplyActivity.this.finish();
                                 return true;
 
                             case R.id.bottombaritem_question:
-                                Intent intent5 = new Intent(ReplyActivity.this, QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                Intent intent5 = new Intent(ReplyActivity.this, QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent5.putExtra("S", s);
                                 startActivity(intent5);
                                 ReplyActivity.this.finish();
@@ -178,13 +162,10 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
     }
 
 
-
-
-
     @Override
     protected void onStart() {
 
-       super.onStart();
+        super.onStart();
      /*   pruebas = new ArrayList<Question>();
         Question q1 = new Question(listquestion.get(0).getUserNickname(), listquestion.get(0).getDescription());
         Question q2 = new Question("barco03","como se recorre un arbol?");
@@ -198,20 +179,7 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
         listaItems.setAdapter(adapter);*/
 
 
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     private void inicializarFirebase() {
@@ -219,10 +187,6 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
     }
-
-
-
-
 
 
     private void listaPreguntas() {
@@ -234,23 +198,18 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
                     question = objSnapshot.getValue(Question.class);
                     listquestion.add(question);
                     Toast.makeText(getApplicationContext(), listquestion.get(0).getDescription(), Toast.LENGTH_SHORT).show();
-
                 }
 
-
-                Adapter adapter = new Adapter(getApplicationContext(),listquestion);
-
+                Adapter adapter = new Adapter(getApplicationContext(), listquestion);
 
                 listaItems.setAdapter(adapter);
-
-
 
                 listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                       final ImageView imagen =(ImageView) view.findViewById(R.id.imglike);
-                        final ImageView imagen2 =(ImageView) view.findViewById(R.id.imgcomenta);
-                       // Toast.makeText(getApplicationContext(), "vamoo bien", Toast.LENGTH_SHORT).show();
+                        final ImageView imagen = (ImageView) view.findViewById(R.id.imglike);
+                        final ImageView imagen2 = (ImageView) view.findViewById(R.id.imgcomenta);
+                        // Toast.makeText(getApplicationContext(), "vamoo bien", Toast.LENGTH_SHORT).show();
                         imagen.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -282,9 +241,9 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
     }
 
 
-    public void fromateaPreguntas(){
+    public void fromateaPreguntas() {
 
-        for(int i =0; i < listquestion.size();i++) {
+        for (int i = 0; i < listquestion.size(); i++) {
 
             question = new Question(listquestion.get(i).getUserNickname(), listquestion.get(i).getDescription());
             pruebas.add(question);
@@ -295,9 +254,8 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
     }
 
 
-
     // Método cargar Items
-    private void loadItems(){
+    private void loadItems() {
         Items = new ArrayList<>(); // Creamos un objeto ArrayList de tipo TitularItems
 
 // Agregamos elementos al ArrayList
@@ -305,11 +263,11 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
 
         TitularItems ito = new TitularItems("usuario", "vcvcxvcxc");
         Items.add(ito);
-     //   Items.add(new TitularItems("Desempeño", "Descripción de Desempeño", this.getResources().getIdentifier("camara", "drawable", this.getPackageName())));
-       // Items.add(new TitularItems("Google Plus", "Descripción de Google Plus", this.getResources().getIdentifier("camara", "drawable", this.getPackageName())));
+        //   Items.add(new TitularItems("Desempeño", "Descripción de Desempeño", this.getResources().getIdentifier("camara", "drawable", this.getPackageName())));
+        // Items.add(new TitularItems("Google Plus", "Descripción de Google Plus", this.getResources().getIdentifier("camara", "drawable", this.getPackageName())));
 
 // Creamos un nuevo Adaptador y le pasamos el ArrayList
-       Adaptador = new Adaptador(this, Items);
+        Adaptador = new Adaptador(this, Items);
 // Desplegamos los elementos en el ListView
         listaItems.setAdapter(Adaptador);
     }
@@ -338,7 +296,7 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        }else if (id == R.id.out) {
+        } else if (id == R.id.out) {
             Intent intent = getIntent();
             s = (Sesion) intent.getSerializableExtra("S");
             databaseReference.child("Sesion").child(s.getPid()).removeValue();
@@ -360,10 +318,6 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-
-
 
 
 }

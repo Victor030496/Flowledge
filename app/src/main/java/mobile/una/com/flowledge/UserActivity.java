@@ -36,15 +36,15 @@ import mobile.una.com.flowledge.model.Sesion;
 
 import static java.lang.Boolean.TRUE;
 
-public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private List<Persona> listapersona = new ArrayList<Persona>();
-    Sesion s=new Sesion();
-    LinearLayout informacion,boton;
+    Sesion s = new Sesion();
+    LinearLayout informacion, boton;
     private BottomNavigationView bottomNavigationView;
-    TextView pid,pnombre,correo,nickname,correobarra;
+    TextView pid, pnombre, correo, nickname, correobarra;
     Button Mostrar;
-    Persona p=new Persona();
+    Persona p = new Persona();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     View headerView;
@@ -74,14 +74,14 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         boton = (LinearLayout) findViewById(R.id.Boton);
         bottomNavigationView = findViewById(R.id.NavBot);
         bottomNavigationView.getMenu().getItem(4).setChecked(TRUE);
-        pid=findViewById(R.id.cedula2);
-        pnombre=findViewById(R.id.nombre2);
-        correo=findViewById(R.id.correo2);
+        pid = findViewById(R.id.cedula2);
+        pnombre = findViewById(R.id.nombre2);
+        correo = findViewById(R.id.correo2);
 
         nickname = headerView.findViewById(R.id.nickname);
-        correobarra= headerView.findViewById(R.id.correobarra);
+        correobarra = headerView.findViewById(R.id.correobarra);
 
-       // pid=findViewById(R.id.id);
+        // pid=findViewById(R.id.id);
         Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
         inicializarFirebase();
@@ -98,27 +98,27 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                         switch (item.getItemId()) {
 
                             case R.id.bottombaritem_home:
-                                Intent intent2 = new Intent(UserActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                Intent intent2 = new Intent(UserActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent2.putExtra("S", s);
                                 startActivity(intent2);
                                 UserActivity.this.finish();
                                 return true;
                             case R.id.bottombaritem_profile:
-                               Intent intent3 = new Intent(UserActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                Intent intent3 = new Intent(UserActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent3.putExtra("S", s);
                                 startActivity(intent3);
                                 UserActivity.this.finish();
                                 return true;
 
                             case R.id.bottombaritem_reply:
-                                Intent intent4 = new Intent(UserActivity.this, ReplyActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                Intent intent4 = new Intent(UserActivity.this, ReplyActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent4.putExtra("S", s);
                                 startActivity(intent4);
                                 UserActivity.this.finish();
                                 return true;
 
                             case R.id.bottombaritem_question:
-                                Intent intent5 = new Intent(UserActivity.this, QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                Intent intent5 = new Intent(UserActivity.this, QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent5.putExtra("S", s);
                                 startActivity(intent5);
                                 UserActivity.this.finish();
@@ -136,7 +136,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listapersona.clear();
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     Persona p = objSnapshot.getValue(Persona.class);
                     listapersona.add(p);
 
@@ -151,14 +151,14 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    private void inicializarFirebase(){
+    private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference();
+        databaseReference = firebaseDatabase.getReference();
     }
 
 
-    public void cerrar(View view){
+    public void cerrar(View view) {
         Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
         databaseReference.child("Sesion").child(s.getPid()).removeValue();
@@ -167,20 +167,20 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         UserActivity.this.finish();
     }
 
-    public Persona getUser(){
-        Persona p=new Persona();
-        for(int i=0;i < listapersona.size() ;i++){
-            if(listapersona.get(i).getPid().equals(s.getNombre())){
-                p=listapersona.get(i);
+    public Persona getUser() {
+        Persona p = new Persona();
+        for (int i = 0; i < listapersona.size(); i++) {
+            if (listapersona.get(i).getPid().equals(s.getNombre())) {
+                p = listapersona.get(i);
                 break;
             }
         }
 
-        return  p;
+        return p;
     }
 
-    public void Mostrar(View view){
-        Persona pe= getUser();
+    public void Mostrar(View view) {
+        Persona pe = getUser();
         informacion.setVisibility(View.VISIBLE);
         boton.setVisibility(View.GONE);
         pid.setText(pe.getPid());
@@ -189,8 +189,8 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public void  Esconder(View view){
-        Persona pe= getUser();
+    public void Esconder(View view) {
+        Persona pe = getUser();
         informacion.setVisibility(View.GONE);
         boton.setVisibility(View.VISIBLE);
         pid.setText(pe.getPid());
@@ -223,7 +223,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        }else if (id == R.id.out) {
+        } else if (id == R.id.out) {
             Intent intent = getIntent();
             s = (Sesion) intent.getSerializableExtra("S");
             databaseReference.child("Sesion").child(s.getPid()).removeValue();

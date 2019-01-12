@@ -6,30 +6,23 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="5dip"
-    tools:context=".AnswerActivity"
-    >
+    tools:context=".AnswerActivity">
 
-
-
-
-
-    <LinearLayout android:id="@+id/thumbnail"
+    <LinearLayout
+        android:id="@+id/thumbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="3dip"
         android:layout_alignParentLeft="true"
-        android:layout_marginRight="5dip">
-
-
+        android:layout_marginRight="5dip"
+        android:padding="3dip">
 
         <ImageView
             android:id="@+id/imgItem"
             android:layout_width="60dip"
-            android:paddingLeft="16dp"
             android:layout_height="60dip"
-            android:src="@drawable/usuarion"/>
+            android:paddingLeft="16dp"
+            android:src="@drawable/usuarion" />
     </LinearLayout>
-
 
     <TextView
         android:id="@+id/txtTitle"
@@ -37,102 +30,83 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
-        android:textColor="#009688"
-        android:text="Reinaldo"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="5dp"
-        android:textSize="22dip"
         android:fontFamily="sans-serif-condensed"
-        android:textStyle="normal"/>
-
-
-
-
+        android:paddingLeft="16dp"
+        android:paddingTop="5dp"
+        android:paddingRight="16dp"
+        android:text="Reinaldo"
+        android:textColor="#009688"
+        android:textSize="22dip"
+        android:textStyle="normal" />
 
     <TextView
         android:id="@+id/txtDescription"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtTitle"
-        android:textColor="#546e7a"
-        android:text="Cuales son las capas del protocolo TCP/IP"
-        android:textSize="17dip"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:fontFamily="sans-serif-thin"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:fontFamily="sans-serif-thin"
-        android:textStyle="normal"
-        android:layout_marginTop="1dip"
-        android:layout_toRightOf="@+id/thumbnail" />
-
+        android:text="Cuales son las capas del protocolo TCP/IP"
+        android:textColor="#546e7a"
+        android:textSize="17dip"
+        android:textStyle="normal" />
 
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_below="@+id/txtDescription"
-        >
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/cedula2"
             android:layout_width="265dp"
             android:layout_height="75dp"
-            android:hint="Digite su respuesta">
-
-        </EditText>
+            android:hint="Digite su respuesta"></EditText>
 
         <Button
+            android:id="@+id/btn_enviar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enviar"
-            android:id="@+id/btn_enviar" />
-
-
-
+            android:text="Enviar" />
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/linear2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_below="@+id/linear"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/txtRes"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="#009688"
-            android:text="Respuestas"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="5dp"
-            android:textSize="22dip"
             android:fontFamily="sans-serif-condensed"
-            android:textStyle="normal"/>
-
-
-
+            android:paddingLeft="16dp"
+            android:paddingTop="5dp"
+            android:paddingRight="16dp"
+            android:text="Respuestas"
+            android:textColor="#009688"
+            android:textSize="22dip"
+            android:textStyle="normal" />
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/linear2">
+        android:layout_below="@+id/linear2"
+        android:orientation="vertical">
 
         <ListView
+            android:id="@+id/listItems2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/txtRes"
-            android:id="@+id/listItems2" />
+            android:layout_below="@+id/txtRes" />
     </LinearLayout>
-
-
 
 </RelativeLayout>

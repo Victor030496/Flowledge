@@ -21,7 +21,6 @@ public class Adapter extends BaseAdapter {
     Context contexto;
     List<Question> preguntas;
 
-
     public Adapter(Context contexto, List<Question> preguntas) {
         this.contexto = contexto;
         this.preguntas = preguntas;
@@ -44,13 +43,13 @@ public class Adapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-       View vista = convertView;
-        LayoutInflater inflat= LayoutInflater.from(contexto);
-        vista =inflat.inflate(R.layout.activity_reply,null);
+        View vista = convertView;
+        LayoutInflater inflat = LayoutInflater.from(contexto);
+        vista = inflat.inflate(R.layout.activity_reply, null);
 
-        ImageView imagen =(ImageView) vista.findViewById(R.id.imgItem);
-        TextView txt1 =(TextView) vista.findViewById(R.id.txtTitle);
-        TextView txt2 =(TextView) vista.findViewById(R.id.txtDescription);
+        ImageView imagen = (ImageView) vista.findViewById(R.id.imgItem);
+        TextView txt1 = (TextView) vista.findViewById(R.id.txtTitle);
+        TextView txt2 = (TextView) vista.findViewById(R.id.txtDescription);
 
 
         txt1.setText(preguntas.get(position).getUserNickname().toString());

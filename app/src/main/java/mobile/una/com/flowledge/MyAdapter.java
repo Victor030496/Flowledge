@@ -19,7 +19,6 @@ import mobile.una.com.flowledge.model.AreaData;
  */
 
 public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder> {
-
     private Context mContext;
     private List<AreaData> mDataList;
 

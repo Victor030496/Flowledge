@@ -33,12 +33,12 @@ import java.util.List;
 import mobile.una.com.flowledge.model.AreaData;
 import mobile.una.com.flowledge.model.Sesion;
 
-public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private BottomNavigationView bottomNavigationView;
-    Sesion s=new Sesion();
+    Sesion s = new Sesion();
     String androidId;
     View headerView;
-    TextView nickname,correobarra;
+    TextView nickname, correobarra;
 
     RecyclerView mRecyclerView;
     List<AreaData> mFlowerList;
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         headerView = navigationView.getHeaderView(0);
 
         nickname = headerView.findViewById(R.id.nickname);
-        correobarra= headerView.findViewById(R.id.correobarra);
+        correobarra = headerView.findViewById(R.id.correobarra);
         nickname.setText(s.getNombre());
         correobarra.setText(s.getPid());
 
@@ -96,13 +96,13 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
                             case R.id.bottombaritem_home:
                                 MainActivity.this.finish();
                                 finishAffinity();
-                                Intent intent2 = new Intent(MainActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                Intent intent2 = new Intent(MainActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent2.putExtra("S", s);
                                 startActivity(intent2);
                                 return true;
                             case R.id.bottombaritem_profile:
                                 finishAffinity();
-                                Intent intent3 = new Intent(MainActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                Intent intent3 = new Intent(MainActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent3.putExtra("S", s);
                                 startActivity(intent3);
                                 MainActivity.this.finish();
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
                             case R.id.bottombaritem_reply:
                                 finishAffinity();
-                                Intent intent4 = new Intent(MainActivity.this, ReplyActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                Intent intent4 = new Intent(MainActivity.this, ReplyActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent4.putExtra("S", s);
                                 startActivity(intent4);
                                 MainActivity.this.finish();
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
                             case R.id.bottombaritem_question:
                                 finishAffinity();
-                                Intent intent5 = new Intent(MainActivity.this, QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                Intent intent5 = new Intent(MainActivity.this, QuestionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent5.putExtra("S", s);
                                 startActivity(intent5);
                                 MainActivity.this.finish();
@@ -132,10 +132,11 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
 
     }
-    private void inicializarFirebase(){
+
+    private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference();
+        databaseReference = firebaseDatabase.getReference();
     }
 //MENU------------------------------------------------------
 
@@ -158,7 +159,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        }else if (id == R.id.out) {
+        } else if (id == R.id.out) {
             Intent intent = getIntent();
             s = (Sesion) intent.getSerializableExtra("S");
             databaseReference.child("Sesion").child(s.getPid()).removeValue();
@@ -182,15 +183,15 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     }
 
 
-    public void llenarAreas(){
+    public void llenarAreas() {
         mFlowerList = new ArrayList<>();
-        mFlowerData = new AreaData("Bases de datos",R.drawable.bases);
+        mFlowerData = new AreaData("Bases de datos", R.drawable.bases);
         mFlowerList.add(mFlowerData);
-        mFlowerData = new AreaData("Estructura de datos",R.drawable.estructuras);
+        mFlowerData = new AreaData("Estructura de datos", R.drawable.estructuras);
         mFlowerList.add(mFlowerData);
-        mFlowerData = new AreaData("POO",R.drawable.poo);
+        mFlowerData = new AreaData("POO", R.drawable.poo);
         mFlowerList.add(mFlowerData);
-        mFlowerData = new AreaData("Redes",R.drawable.redes);
+        mFlowerData = new AreaData("Redes", R.drawable.redes);
         mFlowerList.add(mFlowerData);
 
     }

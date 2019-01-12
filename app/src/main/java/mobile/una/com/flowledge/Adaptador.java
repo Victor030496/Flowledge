@@ -9,18 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
 import android.view.*;
 
 /**
  * Created by Luis Bogantes on 08/01/2019.
  */
 
-public class Adaptador extends BaseAdapter{
+public class Adaptador extends BaseAdapter {
     private Activity activity; //Activity desde el cual se hace referencia al llenado de la lista
     private ArrayList<TitularItems> arrayItems; // Lista de items
 
     // Constructor con parámetros que recibe la Acvity y los datos de los items.
-    public Adaptador(Activity activity, ArrayList<TitularItems> listaItems){
+    public Adaptador(Activity activity, ArrayList<TitularItems> listaItems) {
         super();
         this.activity = activity;
         this.arrayItems = new ArrayList<TitularItems>(listaItems);
@@ -31,11 +32,13 @@ public class Adaptador extends BaseAdapter{
     public int getCount() {
         return arrayItems.size();
     }
+
     // Retorna el objeto TitularItems de la lista
     @Override
     public Object getItem(int position) {
         return arrayItems.get(position);
     }
+
     // Retorna la posición del item en la lista
     @Override
     public long getItemId(int position) {
@@ -46,12 +49,12 @@ public class Adaptador extends BaseAdapter{
     /*
     Clase estática que contiene los elementos de la lista
      */
-    public static class Fila
-    {
+    public static class Fila {
         TextView txtTitle;
         TextView txtDescription;
         ImageView img;
     }
+
     // Método que retorna la vista formateada
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -61,17 +64,14 @@ public class Adaptador extends BaseAdapter{
         /*
         Condicional para recrear la vista y no distorcionar el número de elementos
          */
-        if(convertView==null)
-        {
+        if (convertView == null) {
             convertView = inflator.inflate(R.layout.activity_list, parent, false);
             view.txtTitle = (TextView) convertView.findViewById(R.id.txtTitle);
             view.txtDescription = (TextView) convertView.findViewById(R.id.txtDescription);
-            view.img = (ImageView)convertView.findViewById(R.id.imgItem);
+            view.img = (ImageView) convertView.findViewById(R.id.imgItem);
             convertView.setTag(view);
-        }
-        else
-        {
-            view = (Fila)convertView.getTag();
+        } else {
+            view = (Fila) convertView.getTag();
         }
 
         // Se asigna el dato proveniente del objeto TitularItems
