@@ -29,9 +29,6 @@
 
         <activity android:name=".MainActivity" />
         <activity android:name=".LogInActivity" />
-        <activity android:name=".UserActivity" />
-        <activity android:name=".ReplyActivity" />
-        <activity android:name=".QuestionActivity" />
         <activity android:name=".AnswerActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>

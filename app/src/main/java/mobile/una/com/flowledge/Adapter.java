@@ -45,7 +45,7 @@ public class Adapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View vista = convertView;
         LayoutInflater inflat = LayoutInflater.from(contexto);
-        vista = inflat.inflate(R.layout.activity_reply, null);
+        vista = inflat.inflate(R.layout.fragment_reply, null);
 
         ImageView imagen = (ImageView) vista.findViewById(R.id.imgItem);
         TextView txt1 = (TextView) vista.findViewById(R.id.txtTitle);

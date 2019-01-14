@@ -5,8 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dip"
-    tools:context=".ReplyActivity">
+    android:padding="5dip">
 
     <LinearLayout
         android:id="@+id/thumbnail"
