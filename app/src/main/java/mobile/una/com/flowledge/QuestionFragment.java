@@ -179,7 +179,7 @@ public class QuestionFragment extends Fragment  {
         question.setCategory(prueSpinner);
         question.setDescription(description.getText().toString());
         // question.setRespuesta(respuesta);
-        databaseReference.child("Pregunta").child(question.getUserNickname()).setValue(question);
+        databaseReference.child("Pregunta2").child(question.getDescription()).setValue(question);
 
         description.setText("");
 

@@ -77,17 +77,7 @@ public class ReplyFragment extends Fragment {
         super.onStart();
         inicializarFirebase();
         listaPreguntas();
-        /*   pruebas = new ArrayList<Question>();
-        Question q1 = new Question(listquestion.get(0).getUserNickname(), listquestion.get(0).getDescription());
-        Question q2 = new Question("barco03","como se recorre un arbol?");
 
-
-        pruebas.add(q1);
-        pruebas.add(q2);
-
-        //fromateaPreguntas();
-        Adapter adapter = new Adapter(getApplicationContext(),pruebas);
-        listaItems.setAdapter(adapter);*/
     }
 
     private void init() {
@@ -107,7 +97,7 @@ public class ReplyFragment extends Fragment {
     }
 
     private void listaPreguntas() {
-        databaseReference.child("Pregunta").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Pregunta2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listquestion.clear();
