@@ -192,12 +192,13 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/cerrar_sesion"
         android:textColor="#fff"
         android:background="@drawable/buttonstyle"
         android:layout_marginTop="35dp"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Follow Me"/>
+        android:text="Cerrar sesión"/>
 
 </LinearLayout>

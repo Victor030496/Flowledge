@@ -61,27 +61,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navBottomListener);
         //viewPager = findViewById(R.id.viewpager);
-        inicializarFirebase();
+        iniciarFirebase();
 
         Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
         androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        headerView = navigationView.getHeaderView(0);
-        nickname = headerView.findViewById(R.id.nickname);
-        correobarra = headerView.findViewById(R.id.correobarra);
-        nickname.setText(s.getNombre());
-        correobarra.setText(s.getPid());
+        new Thread(new Runnable() {
+            public void run() {
+                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+                setSupportActionBar(toolbar);
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                        MainActivity.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                drawer.addDrawerListener(toggle);
+                toggle.syncState();
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            public void run() {
+                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                navigationView.setNavigationItemSelectedListener(MainActivity.this);
+                headerView = navigationView.getHeaderView(0);
+                nickname = headerView.findViewById(R.id.nickname);
+                correobarra = headerView.findViewById(R.id.correobarra);
+                nickname.setText(s.getNombre());
+                correobarra.setText(s.getPid());
+            }
+        }).start();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new HomeFragment()).commit();
@@ -166,13 +175,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.out) {
-            Intent intent = getIntent();
-            s = (Sesion) intent.getSerializableExtra("S");
-            databaseReference.child("Sesion").child(s.getPid()).removeValue();
-            Intent intent2 = new Intent(MainActivity.this, LogInActivity.class);
-            startActivity(intent2);
-            MainActivity.this.finish();
-
+            cerrarSesion();
         } /*else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -217,4 +220,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.setAdapter(viewPagerAdapter);
     }
 */
+
+    private void cerrarSesion() {
+        runOnUiThread(new Runnable(){
+            public void run() {
+                try {
+                    databaseReference.child("Sesion").child(s.getPid()).removeValue();
+                    Intent intent2 = new Intent(MainActivity.this, SplashActivity.class);
+                    startActivity(intent2);
+                    MainActivity.this.finish();
+                } catch (final Exception ex) {
+                    Log.i("---","Exception in thread");
+                }
+            }
+        });
+    }
+
+    private void iniciarFirebase() {
+        runOnUiThread(new Runnable(){
+            public void run() {
+                try {
+                    FirebaseApp.initializeApp(getApplicationContext());
+                    firebaseDatabase = FirebaseDatabase.getInstance();
+                    databaseReference = firebaseDatabase.getReference();
+                } catch (final Exception ex) {
+                    Log.i("---","Exception in thread");
+                }
+            }
+        });
+    }
 }

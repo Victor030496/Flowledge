@@ -43,6 +43,7 @@ public class UserProfileFragment extends Fragment {
     Persona p = new Persona();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    Button cerrarButton;
 
     public UserProfileFragment() {
         // Required empty public constructor
@@ -77,6 +78,16 @@ public class UserProfileFragment extends Fragment {
         pnombre = v.findViewById(R.id.profile_name);
         Persona p = getUser();
         pnombre.setText(p.getNombre());
+        cerrarButton = v.findViewById(R.id.cerrar_sesion);
+        cerrarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseReference.child("Sesion").child(s.getPid()).removeValue();
+                Intent intent2 = new Intent(getContext(), SplashActivity.class);
+                startActivity(intent2);
+                getActivity().finish();
+            }
+        });
     }
 
     private void inicializarFirebase() {

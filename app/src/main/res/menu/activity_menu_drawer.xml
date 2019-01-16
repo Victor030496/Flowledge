@@ -15,7 +15,7 @@
         <menu>
             <item
                 android:id="@+id/out"
-                android:icon="@drawable/out"
+                android:icon="@drawable/ic_close_black_24dp"
                 android:title="Cerrar Sesion" />
         </menu>
     </item>
