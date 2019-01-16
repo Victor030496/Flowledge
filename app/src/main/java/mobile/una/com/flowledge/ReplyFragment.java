@@ -112,7 +112,7 @@ public class ReplyFragment extends Fragment {
                 listaItems.setAdapter(adapter);
                 listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                         final ImageView imagen = (ImageView) view.findViewById(R.id.imglike);
                         final ImageView imagen2 = (ImageView) view.findViewById(R.id.imgcomenta);
                         // Toast.makeText(getApplicationContext(), "vamoo bien", Toast.LENGTH_SHORT).show();
@@ -127,9 +127,8 @@ public class ReplyFragment extends Fragment {
                         imagen2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Toast.makeText(getContext(), "vamoo bien", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getContext(), AnswerActivity.class);
-                                //intent.putExtra("wea", weather);
+                                intent.putExtra("question", listquestion.get(position));
                                 startActivity(intent);
                             }
                         });

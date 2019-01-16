@@ -2,6 +2,8 @@ package mobile.una.com.flowledge;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.List;
 
 import mobile.una.com.flowledge.model.AreaData;
@@ -40,10 +43,14 @@ public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder> {
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Intent mIntent = new Intent(mContext, ReplyActivity.class);
-                mIntent.putExtra("Title", mDataList.get(holder.getAdapterPosition()).getAreaName());
-                mIntent.putExtra("Image", mDataList.get(holder.getAdapterPosition()).getAreaImage());
-                mContext.startActivity(mIntent);*/
+               // Intent mIntent = new Intent(mContext, ReplyFragment.class);
+              //  mIntent.putExtra("question", holder.mTitle.toString());
+              //  mIntent.putExtra("Title", mDataList.get(holder.getAdapterPosition()).getAreaName());
+               // mIntent.putExtra("Image", mDataList.get(holder.getAdapterPosition()).getAreaImage());
+             ///  mContext.startActivity(mIntent);
+
+
+
             }
         });
     }
