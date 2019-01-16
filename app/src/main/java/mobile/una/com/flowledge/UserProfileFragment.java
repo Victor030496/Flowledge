@@ -39,12 +39,7 @@ public class UserProfileFragment extends Fragment {
     View v;
     private List<Persona> listapersona = new ArrayList<Persona>();
     Sesion s = new Sesion();
-    LinearLayout informacion, boton;
-    private BottomNavigationView bottomNavigationView;
     TextView pid, pnombre, correo;
-    Button mostrarButton;
-    Button cerrarButton;
-    Button esconderButton;
     Persona p = new Persona();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -69,7 +64,6 @@ public class UserProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.v = view;
-        init();
     }
 
     @Override
@@ -80,45 +74,9 @@ public class UserProfileFragment extends Fragment {
     }
 
     private void init() {
-        informacion = (LinearLayout) v.findViewById(R.id.informacion);
-        boton = (LinearLayout) v.findViewById(R.id.Boton);
-        pid = v.findViewById(R.id.cedula2);
-        pnombre = v.findViewById(R.id.nombre2);
-        correo = v.findViewById(R.id.correo2);
-        cerrarButton = v.findViewById(R.id.cerrar_button);
-        mostrarButton = v.findViewById(R.id.mostrar_button);
-        esconderButton = v.findViewById(R.id.esconder_button);
-        cerrarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                databaseReference.child("Sesion").child(s.getPid()).removeValue();
-                Intent intent2 = new Intent(getContext(), SplashActivity.class);
-                startActivity(intent2);
-                getActivity().finish();
-            }
-        });
-        mostrarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Persona pe = getUser();
-                informacion.setVisibility(View.VISIBLE);
-                boton.setVisibility(View.GONE);
-                pid.setText(pe.getPid());
-                pnombre.setText(pe.getNombre());
-                correo.setText(pe.getCorreo());
-            }
-        });
-        esconderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Persona pe = getUser();
-                informacion.setVisibility(View.GONE);
-                boton.setVisibility(View.VISIBLE);
-                pid.setText(pe.getPid());
-                pnombre.setText(pe.getNombre());
-                correo.setText(pe.getCorreo());
-            }
-        });
+        pnombre = v.findViewById(R.id.profile_name);
+        Persona p = getUser();
+        pnombre.setText(p.getNombre());
     }
 
     private void inicializarFirebase() {
@@ -135,6 +93,7 @@ public class UserProfileFragment extends Fragment {
                     Persona p = objSnapshot.getValue(Persona.class);
                     listapersona.add(p);
                 }
+                init();
             }
 
             @Override
@@ -146,9 +105,9 @@ public class UserProfileFragment extends Fragment {
 
     public Persona getUser() {
         Persona p = new Persona();
-        for (int i = 0; i < listapersona.size(); i++) {
-            if (listapersona.get(i).getPid().equals(s.getNombre())) {
-                p = listapersona.get(i);
+        for (Persona persona : listapersona) {
+            if (persona.getPid().equals(s.getNombre())) {
+                p = persona;
                 break;
             }
         }
