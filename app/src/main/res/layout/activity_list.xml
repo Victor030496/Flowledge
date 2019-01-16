@@ -23,6 +23,20 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingBottom="55dp">
 
+            <TextView
+                android:id="@+id/txtTitulo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:paddingLeft="16dp"
+                android:paddingTop="5dp"
+                android:paddingRight="16dp"
+                android:text="Preguntas relacionadas con  Bases de datos: "
+                android:textColor="#005999"
+                android:textSize="27dip"
+                android:textStyle="normal" />
+
+
             <ListView
                 android:id="@+id/listItems"
                 android:layout_width="match_parent"

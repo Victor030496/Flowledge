@@ -37,6 +37,7 @@ public class ReplyFragment extends Fragment {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     Sesion s = new Sesion();
+    Question q = new Question();
     private List<Question> listquestion = new ArrayList<Question>();
     Question question;
     // Variables de la clase
@@ -46,6 +47,7 @@ public class ReplyFragment extends Fragment {
 
     private ArrayList<Question> pruebas;
     ImageView cora;
+     TextView titleforo;
 
     public ReplyFragment() {
         // Required empty public constructor
@@ -58,7 +60,7 @@ public class ReplyFragment extends Fragment {
         v = inflater.inflate(R.layout.activity_list, container, false);
         Bundle bundle = getArguments();
         if(bundle != null){
-            s = (Sesion) bundle.getSerializable("sesion");
+            q = (Question) bundle.getSerializable("question");
         }
         return v;
     }
@@ -92,20 +94,11 @@ public class ReplyFragment extends Fragment {
         question = new Question();
         listaItems = (ListView) v.findViewById(R.id.listItems);
         cora = (ImageView) v.findViewById(R.id.imglike);
+        titleforo = (TextView) v.findViewById(R.id.txtTitulo);
 
-     /*   pruebas = new ArrayList<Question>();
-        Question q1 = new Question("samir05","que es un bst?");
-        Question q2 = new Question("barco03","como se recorre un arbol?");
-       // Question q3 = new Question(listquestion.get(0).getUserNickname().toString(), listquestion.get(0).getDescription().toString());
+       titleforo.setText("Preguntas relacionadas con "+q.getCategory());
 
 
-        pruebas.add(q1);
-        pruebas.add(q2);
-        //pruebas.add(q3);
-
-        //fromateaPreguntas();
-        Adapter adapter = new Adapter(getApplicationContext(),pruebas);
-        listaItems.setAdapter(adapter);*/
     }
 
     private void inicializarFirebase() {
@@ -120,8 +113,10 @@ public class ReplyFragment extends Fragment {
                 listquestion.clear();
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     question = objSnapshot.getValue(Question.class);
-                    listquestion.add(question);
-                    //Toast.makeText(getContext(), listquestion.get(0).getDescription(), Toast.LENGTH_SHORT).show();
+                    if(question.getCategory().equals(q.getCategory())) {
+                        listquestion.add(question);
+                        //Toast.makeText(getContext(), listquestion.get(0).getDescription(), Toast.LENGTH_SHORT).show();
+                    }
                 }
                 Adapter adapter = new Adapter(getContext(), listquestion);
                 listaItems.setAdapter(adapter);

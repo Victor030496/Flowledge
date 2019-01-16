@@ -1,12 +1,13 @@
 package mobile.una.com.flowledge.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Luis Bogantes on 06/01/2019.
  */
 
-public class Question {
+public class Question implements Serializable {
     String userNickname;
     String category;
     String description;
