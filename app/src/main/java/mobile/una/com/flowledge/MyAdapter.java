@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,14 +17,17 @@ import java.io.Serializable;
 import java.util.List;
 
 import mobile.una.com.flowledge.model.AreaData;
+import mobile.una.com.flowledge.model.Question;
 
 /**
  * Created by abdalla on 1/12/18.
  */
 
-public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder> {
+public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder>{
     private Context mContext;
     private List<AreaData> mDataList;
+    Question q = new Question("Barco03","Bases de Datos");
+    String area="";
 
     MyAdapter(Context mContext, List<AreaData> mAreaList) {
         this.mContext = mContext;
@@ -40,14 +44,35 @@ public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder> {
     public void onBindViewHolder(final AreaViewHolder holder, int position) {
         holder.mImage.setImageResource(mDataList.get(position).getAreaImage());
         holder.mTitle.setText(mDataList.get(position).getAreaName());
+        area=mDataList.get(position).getAreaName();
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Intent mIntent = new Intent(mContext, ReplyFragment.class);
+
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                Fragment myFragment = new ReplyFragment();
+                Bundle bundle = new Bundle();
+                q.setCategory(area);
+                bundle.putSerializable("question", (Serializable) q);
+                myFragment.setArguments(bundle);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
+
+                // Intent mIntent = new Intent(mContext, ReplyFragment.class);
               //  mIntent.putExtra("question", holder.mTitle.toString());
               //  mIntent.putExtra("Title", mDataList.get(holder.getAdapterPosition()).getAreaName());
                // mIntent.putExtra("Image", mDataList.get(holder.getAdapterPosition()).getAreaImage());
              ///  mContext.startActivity(mIntent);
+
+                // Probando putadas
+
+             //   Fragment selectFragment = null;
+               // Bundle bundle = new Bundle();
+               // bundle.putSerializable("question", (Serializable) question);
+              //  selectFragment = new ReplyFragment();
+               // selectFragment.setArguments(bundle);
+
+
+             //   getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectFragment).commit();
 
 
 

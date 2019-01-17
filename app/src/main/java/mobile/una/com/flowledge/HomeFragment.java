@@ -63,17 +63,6 @@ public class HomeFragment extends Fragment {
         mRecyclerView.setAdapter(myAdapter);
 
 
-
-       /* mRecyclerView.setOnClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-
-
-
-
-        }
-        });*/
-
     }
 
     public void llenarAreas() {
