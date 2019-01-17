@@ -191,6 +191,7 @@ public class QuestionFragment extends Fragment  {
         Fragment selectFragment = null;
         Bundle bundle = new Bundle();
         bundle.putSerializable("question", (Serializable) question);
+      //  bundle.putSerializable("sesion", (Serializable) s);
         selectFragment = new ReplyFragment();
         selectFragment.setArguments(bundle);
        getFragmentManager().beginTransaction().replace(R.id.fragment_container,selectFragment).commit();
