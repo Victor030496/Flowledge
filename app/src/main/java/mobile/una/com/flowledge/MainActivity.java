@@ -36,7 +36,7 @@ import java.util.List;
 import mobile.una.com.flowledge.model.AreaData;
 import mobile.una.com.flowledge.model.Sesion;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
     private BottomNavigationView bottomNavigationView;
     ViewPager viewPager;
     MenuItem prevMenuItem;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
 
-        new Thread(new Runnable() {
+       new Thread(new Runnable() {
             public void run() {
                 Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
                 setSupportActionBar(toolbar);
@@ -249,4 +249,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
+
 }

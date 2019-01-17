@@ -8,10 +8,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,12 +27,13 @@ import mobile.una.com.flowledge.model.Sesion;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SearchView.OnQueryTextListener{
     View v;
     RecyclerView mRecyclerView;
     List<AreaData> mFlowerList;
     AreaData mFlowerData;
     Sesion s = new Sesion();
+    private MyAdapter adapter;
     ImageView bd;
 
     public HomeFragment() {
@@ -76,5 +81,33 @@ public class HomeFragment extends Fragment {
         mFlowerData = new AreaData("Redes", R.drawable.redes);
         mFlowerList.add(mFlowerData);
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_filtro_busqueda,menu);
+       MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        super.onCreateOptionsMenu(menu, inflater);
+   }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String userInput = newText.toLowerCase();
+        List<AreaData> newList = new ArrayList<>();
+        for(AreaData name: mFlowerList  ){
+            if(name.getAreaName().contains(userInput))
+            {
+                newList.add(name);
+            }
+        }
+        adapter.updateList(newList);
+        return true;
     }
 }

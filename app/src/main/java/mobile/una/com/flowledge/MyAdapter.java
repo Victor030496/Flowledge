@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import mobile.una.com.flowledge.model.AreaData;
@@ -84,7 +85,15 @@ public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder>{
     public int getItemCount() {
         return mDataList.size();
     }
+
+    public void updateList(List<AreaData> lista)
+    {
+        mDataList = new ArrayList<>();
+        mDataList.addAll(lista);
+        notifyDataSetChanged();
+    }
 }
+
 
 class AreaViewHolder extends RecyclerView.ViewHolder {
 
