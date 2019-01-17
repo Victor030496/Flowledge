@@ -62,13 +62,13 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/cedula2"
+            android:id="@+id/respuuuu"
             android:layout_width="265dp"
             android:layout_height="75dp"
             android:hint="Digite su respuesta"></EditText>
 
         <Button
-            android:id="@+id/btn_enviar"
+            android:id="@+id/btn_enviarRes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Enviar" />

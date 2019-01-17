@@ -1,26 +1,58 @@
 package mobile.una.com.flowledge.model;
 
-public class Respuesta {
+import java.io.Serializable;
+
+public class Respuesta implements Serializable {
     String respuesta;
+    String nickRespuesta;
+    String pregunta;
+    int likes;
+    String imagen;
 
-
-    public Respuesta(String respuesta) {
+    public Respuesta(String respuesta, String nickRespuesta, String pregunta, int likes) {
         this.respuesta = respuesta;
-    }
-
-    public Respuesta() {
+        this.nickRespuesta = nickRespuesta;
+        this.pregunta = pregunta;
+        this.likes = likes;
     }
 
     public String getRespuesta() {
         return respuesta;
     }
 
+    public String getNickRespuesta() {
+        return nickRespuesta;
+    }
+
+    public String getPregunta() {
+        return pregunta;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
     }
 
-    @Override
-    public String toString() {
-        return  respuesta;
+    public void setNickRespuesta(String nickRespuesta) {
+        this.nickRespuesta = nickRespuesta;
+    }
+
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }
