@@ -27,7 +27,7 @@ public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder>{
     private Context mContext;
     private List<AreaData> mDataList;
     Question q = new Question("Barco03","Bases de Datos");
-    String area="";
+  //  String area="";
 
     MyAdapter(Context mContext, List<AreaData> mAreaList) {
         this.mContext = mContext;
@@ -44,7 +44,7 @@ public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder>{
     public void onBindViewHolder(final AreaViewHolder holder, int position) {
         holder.mImage.setImageResource(mDataList.get(position).getAreaImage());
         holder.mTitle.setText(mDataList.get(position).getAreaName());
-        area=mDataList.get(position).getAreaName();
+      //  area=mDataList.get(position).getAreaName();
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +52,7 @@ public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder>{
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 Fragment myFragment = new ReplyFragment();
                 Bundle bundle = new Bundle();
-                q.setCategory(area);
+                q.setCategory(mDataList.get(holder.getAdapterPosition()).getAreaName());
                 bundle.putSerializable("question", (Serializable) q);
                 myFragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();

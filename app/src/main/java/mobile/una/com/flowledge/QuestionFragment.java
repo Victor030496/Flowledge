@@ -96,7 +96,7 @@ public class QuestionFragment extends Fragment  {
         description = (EditText) v.findViewById(R.id.descripcion2);
         spinner = (Spinner) v.findViewById(R.id.spinner);
         send = (Button) v.findViewById(R.id.btn_enviar);
-        String[] letra = {"", "Arboles", "Listas", "Bases de Datos", "Redes", "Otros"};
+        String[] letra = {"", "Estructura de datos", "POO", "Bases de Datos", "Redes", "Otros"};
         spinner.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, letra));
         question = new Question("gfdgfd", "gfgd", "gfdgd");
         // some Listeners
