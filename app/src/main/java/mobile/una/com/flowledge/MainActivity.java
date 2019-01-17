@@ -18,10 +18,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +38,8 @@ import java.util.List;
 import mobile.una.com.flowledge.model.AreaData;
 import mobile.una.com.flowledge.model.Sesion;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,SearchView.OnQueryTextListener {
+    private Toolbar  toolbar;
     private BottomNavigationView bottomNavigationView;
     ViewPager viewPager;
     MenuItem prevMenuItem;
@@ -58,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setTitle("HOME");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+       toolbar = (Toolbar) findViewById(R.id.toolbar);
+       setSupportActionBar(toolbar);
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navBottomListener);
         //viewPager = findViewById(R.id.viewpager);
@@ -70,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
        new Thread(new Runnable() {
             public void run() {
-                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-                setSupportActionBar(toolbar);
+               // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+               // setSupportActionBar(toolbar);
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                         MainActivity.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -249,6 +256,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_filtro_busqueda, menu);
+        return true;
+    }
+/*
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_search) {
+            Toast.makeText(MainActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }*/
+
 
 
 }

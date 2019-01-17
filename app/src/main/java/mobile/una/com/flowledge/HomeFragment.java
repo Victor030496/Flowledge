@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,6 +29,7 @@ import mobile.una.com.flowledge.model.Sesion;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment implements SearchView.OnQueryTextListener{
+   // private Toolbar toolbar;
     View v;
     RecyclerView mRecyclerView;
     List<AreaData> mFlowerList;
@@ -43,6 +45,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_home, container, false);
         Bundle bundle = getArguments();
@@ -83,10 +86,10 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
 
     }
 
-    @Override
+   @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_filtro_busqueda,menu);
-       MenuItem menuItem = menu.findItem(R.id.action_search);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setOnQueryTextListener(this);
         super.onCreateOptionsMenu(menu, inflater);
@@ -110,4 +113,5 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         adapter.updateList(newList);
         return true;
     }
+
 }
