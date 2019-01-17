@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     android:background="@color/graylight"
     android:orientation="vertical">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="405dp">
@@ -200,5 +208,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cerrar sesión"/>
-
+</LinearLayout>
+</ScrollView>
 </LinearLayout>
