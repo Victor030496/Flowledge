@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
@@ -31,12 +32,12 @@ import mobile.una.com.flowledge.model.Sesion;
 
 public class LogInActivity extends AppCompatActivity {
     private List<Persona> listapersona = new ArrayList<Persona>();
-    LinearLayout principal, formularioregistrar;
-    Persona p = new Persona();
-    Sesion s = new Sesion();
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
-    String androidId;
+    private LinearLayout principal, formularioregistrar;
+    private Persona p = new Persona();
+    private Sesion s = new Sesion();
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+    private String androidId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
