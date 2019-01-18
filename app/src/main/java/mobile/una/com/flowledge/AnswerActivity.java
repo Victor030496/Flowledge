@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,9 +42,11 @@ public class AnswerActivity extends AppCompatActivity {
     EditText respuEdit;
     Button enviarRes;
     private List<Persona> listapersona = new ArrayList<Persona>();
+    private List<Respuesta> listanswers = new ArrayList<Respuesta>();
     Sesion s ;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    int likesAux =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,7 @@ public class AnswerActivity extends AppCompatActivity {
         // Recuperando datos
         inicializarFirebase();
         listaPersona();
+        listaRespuestas();
         Intent intent = getIntent();
         q = (Question) intent.getSerializableExtra("question");
 
@@ -68,7 +73,7 @@ public class AnswerActivity extends AppCompatActivity {
         nick.setText(q.getUserNickname());
         pregu.setText(q.getDescription());
 
-        pruebas = new ArrayList<Question>();
+       /* pruebas = new ArrayList<Question>();
         Question q1 = new Question("samir05", "TCP: protocolo de control de transmision, IP: Protocolo de internet");
         Question q2 = new Question("barco03", "Me parece que esos protocolos tratan sobre transferencia ");
         // Question q3 = new Question(listquestion.get(0).getUserNickname().toString(), listquestion.get(0).getDescription().toString());
@@ -79,7 +84,7 @@ public class AnswerActivity extends AppCompatActivity {
 
         //fromateaPreguntas();
         Adapter2 adapter = new Adapter2(getApplicationContext(), pruebas);
-        listaItems.setAdapter(adapter);
+        listaItems.setAdapter(adapter);*/
 
 
         enviarRes.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +120,72 @@ public class AnswerActivity extends AppCompatActivity {
 
 
     }
+
+
+    // Recuperando respuestas
+
+
+    private void listaRespuestas() {
+        databaseReference.child("Respuestas").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listanswers.clear();
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    res = objSnapshot.getValue(Respuesta.class);
+                    if(res.getPregunta().equals(q.getDescription())) {
+                        listanswers.add(res);
+                        //Toast.makeText(getContext(), listquestion.get(0).getDescription(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+                Adapter2 adapter = new Adapter2(AnswerActivity.this, listanswers);
+                listaItems.setAdapter(adapter);
+               listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                        final ImageView imagen = (ImageView) view.findViewById(R.id.imglike2);
+                        final TextView txtLikes =(TextView) view.findViewById(R.id.txtlikes);
+                        // Toast.makeText(getApplicationContext(), "vamoo bien", Toast.LENGTH_SHORT).show();
+                        imagen.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                imagen.setImageResource(R.drawable.cora2);
+                                int aux = listanswers.get(position).getLikes()+1;
+                                String aux2 = String.valueOf(aux);
+                                txtLikes.setText(aux2);
+                                Respuesta resAux = new Respuesta(listanswers.get(position).getRespuesta(),listanswers.get(position).getNickRespuesta(),listanswers.get(position).getPregunta(),aux);
+                                databaseReference.child("Respuestas").child(listanswers.get(position).getRespuesta()).setValue(resAux);
+
+                            }
+                        });
+                        //-----------------------------------------------------------------------
+
+
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void listaPersona() {
         databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {

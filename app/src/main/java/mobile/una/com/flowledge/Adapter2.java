@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import mobile.una.com.flowledge.model.Question;
+import mobile.una.com.flowledge.model.Respuesta;
 
 /**
  * Created by Luis Bogantes on 08/01/2019.
@@ -23,22 +24,22 @@ import mobile.una.com.flowledge.model.Question;
 public class Adapter2 extends BaseAdapter {
 
     Context contexto;
-    List<Question> preguntas;
+    List<Respuesta> respuestas;
 
 
-    public Adapter2(Context contexto, List<Question> preguntas) {
+    public Adapter2(Context contexto, List<Respuesta> preguntas) {
         this.contexto = contexto;
-        this.preguntas = preguntas;
+        this.respuestas = preguntas;
     }
 
     @Override
     public int getCount() {
-        return preguntas.size();
+        return respuestas.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return preguntas.get(position);
+        return respuestas.get(position);
     }
 
     @Override
@@ -57,8 +58,8 @@ public class Adapter2 extends BaseAdapter {
         TextView txt2 = (TextView) vista.findViewById(R.id.txtDescription);
 
 
-        txt1.setText(preguntas.get(position).getUserNickname().toString());
-        txt2.setText(preguntas.get(position).getDescription().toString());
+        txt1.setText(respuestas.get(position).getNickRespuesta().toString());
+        txt2.setText(respuestas.get(position).getRespuesta().toString());
         //imagen.setImageResource();
 
         return vista;

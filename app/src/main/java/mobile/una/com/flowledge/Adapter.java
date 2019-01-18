@@ -21,6 +21,8 @@ public class Adapter extends BaseAdapter {
     Context contexto;
     List<Question> preguntas;
 
+
+
     public Adapter(Context contexto, List<Question> preguntas) {
         this.contexto = contexto;
         this.preguntas = preguntas;

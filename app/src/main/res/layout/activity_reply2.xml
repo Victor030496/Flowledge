@@ -62,11 +62,23 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imglike"
-            android:layout_width="60dip"
-            android:layout_height="60dip"
+            android:id="@+id/imglike2"
+            android:layout_width="45dip"
+            android:layout_height="45dip"
             android:paddingLeft="16dp"
             android:src="@drawable/cora" />
+        <TextView
+            android:id="@+id/txtlikes"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:paddingLeft="16dp"
+            android:paddingTop="5dp"
+            android:paddingRight="16dp"
+            android:text="0"
+            android:textColor="#009688"
+            android:textSize="25dip"
+            android:textStyle="normal" />
 
     </LinearLayout>
 
