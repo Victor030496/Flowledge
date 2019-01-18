@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         llenarAreas();
-        MyAdapter myAdapter = new MyAdapter(getContext(), mFlowerList);
+        MyAdapter myAdapter = new MyAdapter(getContext(), mFlowerList,s);
         mRecyclerView.setAdapter(myAdapter);
 
 

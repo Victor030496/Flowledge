@@ -56,10 +56,14 @@ public class Adapter2 extends BaseAdapter {
         ImageView imagen = (ImageView) vista.findViewById(R.id.imgItem);
         TextView txt1 = (TextView) vista.findViewById(R.id.txtTitle);
         TextView txt2 = (TextView) vista.findViewById(R.id.txtDescription);
-
+        TextView txt3 = (TextView) vista.findViewById(R.id.txtlikes);
 
         txt1.setText(respuestas.get(position).getNickRespuesta().toString());
         txt2.setText(respuestas.get(position).getRespuesta().toString());
+        int aux = respuestas.get(position).getLikes();
+        String  aux2 = String.valueOf(aux);
+        txt3.setText(aux2);
+
         //imagen.setImageResource();
 
         return vista;

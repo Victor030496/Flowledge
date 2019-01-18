@@ -47,6 +47,8 @@ public class AnswerActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     int likesAux =0;
+    int aux;
+    String aux2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,19 +147,33 @@ public class AnswerActivity extends AppCompatActivity {
                         final ImageView imagen = (ImageView) view.findViewById(R.id.imglike2);
                         final TextView txtLikes =(TextView) view.findViewById(R.id.txtlikes);
                         // Toast.makeText(getApplicationContext(), "vamoo bien", Toast.LENGTH_SHORT).show();
+
+                        aux = listanswers.get(position).getLikes()+1;
+                        aux2 = String.valueOf(aux);
+
+                       Respuesta resAux = new Respuesta(listanswers.get(position).getRespuesta(),listanswers.get(position).getNickRespuesta(),listanswers.get(position).getPregunta(),aux);
+                        databaseReference.child("Respuestas").child(listanswers.get(position).getRespuesta()).setValue(resAux);
+                        imagen.setImageResource(R.drawable.cora2);
+
+
                         imagen.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                              //  aux = listanswers.get(position).getLikes()+1;
+                               //aux2 = String.valueOf(aux);
+
+                               //Respuesta resAux = new Respuesta(listanswers.get(position).getRespuesta(),listanswers.get(position).getNickRespuesta(),listanswers.get(position).getPregunta(),aux);
+                                //databaseReference.child("Respuestas").child(listanswers.get(position).getRespuesta()).setValue(resAux);
+
+
+                               // txtLikes.setText(aux2);
                                 imagen.setImageResource(R.drawable.cora2);
-                                int aux = listanswers.get(position).getLikes()+1;
-                                String aux2 = String.valueOf(aux);
                                 txtLikes.setText(aux2);
-                                Respuesta resAux = new Respuesta(listanswers.get(position).getRespuesta(),listanswers.get(position).getNickRespuesta(),listanswers.get(position).getPregunta(),aux);
-                                databaseReference.child("Respuestas").child(listanswers.get(position).getRespuesta()).setValue(resAux);
 
                             }
                         });
                         //-----------------------------------------------------------------------
+                        //imagen.setImageResource(R.drawable.cora2);
 
 
 
