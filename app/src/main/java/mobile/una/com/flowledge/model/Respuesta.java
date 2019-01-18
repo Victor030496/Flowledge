@@ -16,6 +16,13 @@ public class Respuesta implements Serializable {
         this.likes = likes;
     }
 
+    public Respuesta() {
+        this.respuesta = "";
+        this.nickRespuesta = "";
+        this.pregunta = "";
+        this.likes = 0;
+    }
+
     public String getRespuesta() {
         return respuesta;
     }

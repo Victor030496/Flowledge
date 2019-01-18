@@ -170,6 +170,7 @@ public class QuestionFragment extends Fragment  {
 
     public void saveQuestion() {
         // String categoria ;
+ //       Toast.makeText(v.getContext(), s.getNombre(), Toast.LENGTH_SHORT).show();
         String nickname = getNicknameUser();
 
         // p= new Persona(pid.getText().toString(),pnombre.getText().toString(),correo.getText().toString(),pcontra.getText().toString());
@@ -188,10 +189,16 @@ public class QuestionFragment extends Fragment  {
         //intent.putExtra("wea", weather);
        // startActivity(intent2);
         // PROBANDO CAMBIAR DE FRAGMENTS
+
+
+
+
+
+
         Fragment selectFragment = null;
         Bundle bundle = new Bundle();
-        bundle.putSerializable("question", (Serializable) question);
-      //  bundle.putSerializable("sesion", (Serializable) s);
+       bundle.putSerializable("question", (Serializable) question);
+        bundle.putSerializable("sesion", (Serializable) s);
         selectFragment = new ReplyFragment();
         selectFragment.setArguments(bundle);
        getFragmentManager().beginTransaction().replace(R.id.fragment_container,selectFragment).commit();

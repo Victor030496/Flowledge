@@ -62,6 +62,7 @@ public class ReplyFragment extends Fragment {
         if(bundle != null){
             q = (Question) bundle.getSerializable("question");
             s = (Sesion) bundle.getSerializable("sesion");
+
         }
         return v;
     }
@@ -128,9 +129,10 @@ public class ReplyFragment extends Fragment {
                         imagen2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                               // Toast.makeText(v.getContext(), s.getNombre(), Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getContext(), AnswerActivity.class);
                                 intent.putExtra("question", listquestion.get(position));
-                             //   intent.putExtra("sesion",(Sesion) s);
+                                intent.putExtra("sesion",(Sesion) s);
                                 startActivity(intent);
                             }
                         });

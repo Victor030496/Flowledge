@@ -54,7 +54,9 @@ public class AnswerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         q = (Question) intent.getSerializableExtra("question");
 
-      //  s =  (Sesion) intent.getSerializableExtra("sesion");
+         s =  (Sesion) intent.getSerializableExtra("sesion");
+
+         res = new Respuesta();
 
         listaItems = (ListView) findViewById(R.id.listItems2);
         nick = (TextView) findViewById(R.id.txtNickkk);
@@ -102,8 +104,13 @@ public class AnswerActivity extends AppCompatActivity {
       String pregunt = pregu.getText().toString();
       int likes = 0;
 
-        Toast.makeText(AnswerActivity.this,s.getNombre(), Toast.LENGTH_LONG).show();
+        res.setRespuesta(respuesta);
+        res.setNickRespuesta(nicknameResp);
+        res.setPregunta(pregunt);
+        res.setLikes(likes);
+      databaseReference.child("Respuestas").child(res.getRespuesta()).setValue(res);
 
+      respuEdit.setText("");
 
 
 

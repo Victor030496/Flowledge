@@ -19,6 +19,7 @@ import java.util.List;
 
 import mobile.una.com.flowledge.model.AreaData;
 import mobile.una.com.flowledge.model.Question;
+import mobile.una.com.flowledge.model.Sesion;
 
 /**
  * Created by abdalla on 1/12/18.
@@ -28,6 +29,7 @@ public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder>{
     private Context mContext;
     private List<AreaData> mDataList;
     Question q = new Question("Barco03","Bases de Datos");
+    Sesion s = new Sesion("6365657","116400917","1");
   //  String area="";
 
     MyAdapter(Context mContext, List<AreaData> mAreaList) {
@@ -55,6 +57,7 @@ public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder>{
                 Bundle bundle = new Bundle();
                 q.setCategory(mDataList.get(holder.getAdapterPosition()).getAreaName());
                 bundle.putSerializable("question", (Serializable) q);
+                bundle.putSerializable("sesion", (Serializable) s);
                 myFragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
 
