@@ -121,7 +121,7 @@ public class ReplyFragment extends Fragment {
                         imagen.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                imagen.setImageResource(R.drawable.cora2);
+                                imagen.setImageResource(R.drawable.pluscir2);
                             }
                         });
                         //-----------------------------------------------------------------------

@@ -46,12 +46,12 @@
         android:layout_below="@id/txtNickkk"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnail"
-        android:fontFamily="sans-serif-thin"
+        android:fontFamily="sans-serif-condensed"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:text="Cuales son las capas del protocolo TCP/IP"
         android:textColor="#546e7a"
-        android:textSize="17dip"
+        android:textSize="21dip"
         android:textStyle="normal" />
 
     <LinearLayout
