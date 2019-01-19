@@ -67,6 +67,13 @@
             android:layout_height="45dip"
             android:paddingLeft="16dp"
             android:src="@drawable/cora" />
+        <ImageView
+            android:id="@+id/imgTrash2"
+            android:visibility="invisible"
+            android:layout_width="42dip"
+            android:layout_height="47dip"
+            android:paddingLeft="16dp"
+            android:src="@drawable/trash" />
         <TextView
             android:id="@+id/txtlikes"
             android:layout_width="fill_parent"
@@ -79,6 +86,7 @@
             android:textColor="#009688"
             android:textSize="25dip"
             android:textStyle="normal" />
+
 
     </LinearLayout>
 

@@ -51,6 +51,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         Bundle bundle = getArguments();
         if(bundle != null){
             s = (Sesion) bundle.getSerializable("sesion");
+           // Toast.makeText(v.getContext(), s.getNombre(), Toast.LENGTH_SHORT).show();
         }
         return v;
     }

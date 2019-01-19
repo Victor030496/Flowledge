@@ -63,6 +63,8 @@ public class AnswerActivity extends AppCompatActivity {
 
          s =  (Sesion) intent.getSerializableExtra("sesion");
 
+
+
          res = new Respuesta();
 
         listaItems = (ListView) findViewById(R.id.listItems2);
@@ -139,31 +141,33 @@ public class AnswerActivity extends AppCompatActivity {
                         //Toast.makeText(getContext(), listquestion.get(0).getDescription(), Toast.LENGTH_SHORT).show();
                     }
                 }
-                Adapter2 adapter = new Adapter2(AnswerActivity.this, listanswers);
+                Toast.makeText(getApplicationContext(), getNicknameUser(), Toast.LENGTH_SHORT).show();
+                Adapter2 adapter = new Adapter2(AnswerActivity.this, listanswers,getNicknameUser());
                 listaItems.setAdapter(adapter);
                listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                         final ImageView imagen = (ImageView) view.findViewById(R.id.imglike2);
                         final TextView txtLikes =(TextView) view.findViewById(R.id.txtlikes);
+                        final ImageView imagen3 = (ImageView) view.findViewById(R.id.imgTrash2);
                         // Toast.makeText(getApplicationContext(), "vamoo bien", Toast.LENGTH_SHORT).show();
 
-                        aux = listanswers.get(position).getLikes()+1;
-                        aux2 = String.valueOf(aux);
+                       // aux = listanswers.get(position).getLikes()+1;
+                        //aux2 = String.valueOf(aux);
 
-                       Respuesta resAux = new Respuesta(listanswers.get(position).getRespuesta(),listanswers.get(position).getNickRespuesta(),listanswers.get(position).getPregunta(),aux);
-                        databaseReference.child("Respuestas").child(listanswers.get(position).getRespuesta()).setValue(resAux);
-                        imagen.setImageResource(R.drawable.cora2);
+                       //Respuesta resAux = new Respuesta(listanswers.get(position).getRespuesta(),listanswers.get(position).getNickRespuesta(),listanswers.get(position).getPregunta(),aux);
+                        //databaseReference.child("Respuestas").child(listanswers.get(position).getRespuesta()).setValue(resAux);
+                        //imagen.setImageResource(R.drawable.cora2);
 
 
                         imagen.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                              //  aux = listanswers.get(position).getLikes()+1;
-                               //aux2 = String.valueOf(aux);
+                                aux = listanswers.get(position).getLikes()+1;
+                               aux2 = String.valueOf(aux);
 
-                               //Respuesta resAux = new Respuesta(listanswers.get(position).getRespuesta(),listanswers.get(position).getNickRespuesta(),listanswers.get(position).getPregunta(),aux);
-                                //databaseReference.child("Respuestas").child(listanswers.get(position).getRespuesta()).setValue(resAux);
+                               Respuesta resAux = new Respuesta(listanswers.get(position).getRespuesta(),listanswers.get(position).getNickRespuesta(),listanswers.get(position).getPregunta(),aux);
+                                databaseReference.child("Respuestas").child(listanswers.get(position).getRespuesta()).setValue(resAux);
 
 
                                // txtLikes.setText(aux2);
@@ -173,6 +177,22 @@ public class AnswerActivity extends AppCompatActivity {
                             }
                         });
                         //-----------------------------------------------------------------------
+
+
+                        imagen3.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                //String aux =listanswers.get(position).getDescription();
+                                databaseReference.child("Respuestas").child(listanswers.get(position).getRespuesta()).removeValue();
+                                Toast.makeText(AnswerActivity.this, "Su respuesta ha sido eliminada", Toast.LENGTH_LONG).show();
+
+                            }
+                        });
+
+
+
+
                         //imagen.setImageResource(R.drawable.cora2);
 
 

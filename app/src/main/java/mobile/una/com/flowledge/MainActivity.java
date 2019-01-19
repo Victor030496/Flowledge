@@ -74,6 +74,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         s = (Sesion) intent.getSerializableExtra("S");
         androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
+
+
+        //-----------------------------------------------------------------------
+
+
+        Fragment selectFragment = null;
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("sesion", (Serializable) s);
+        selectFragment = new HomeFragment();
+        selectFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                selectFragment).commit();
+
+        //-----------------------------------------------------------------------
+
+
+
         userProfileFragment = new UserProfileFragment();
        new Thread(new Runnable() {
             public void run() {
@@ -84,6 +101,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         MainActivity.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
                 drawer.addDrawerListener(toggle);
                 toggle.syncState();
+
+
+                //-----------------------------------------------------------------------
+
+
+                Fragment selectFragment = null;
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("sesion", (Serializable) s);
+                selectFragment = new HomeFragment();
+                selectFragment.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        selectFragment).commit();
+
+                //-----------------------------------------------------------------------
+
             }
         }).start();
 

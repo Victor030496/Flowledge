@@ -25,11 +25,13 @@ public class Adapter2 extends BaseAdapter {
 
     Context contexto;
     List<Respuesta> respuestas;
+    String nickUser;
 
 
-    public Adapter2(Context contexto, List<Respuesta> preguntas) {
+    public Adapter2(Context contexto, List<Respuesta> preguntas,String nickUser) {
         this.contexto = contexto;
         this.respuestas = preguntas;
+        this.nickUser = nickUser;
     }
 
     @Override
@@ -58,6 +60,7 @@ public class Adapter2 extends BaseAdapter {
         TextView txt2 = (TextView) vista.findViewById(R.id.txtDescription);
         TextView txt3 = (TextView) vista.findViewById(R.id.txtlikes);
 
+
         txt1.setText(respuestas.get(position).getNickRespuesta().toString());
         txt2.setText(respuestas.get(position).getRespuesta().toString());
         int aux = respuestas.get(position).getLikes();
@@ -65,6 +68,12 @@ public class Adapter2 extends BaseAdapter {
         txt3.setText(aux2);
 
         //imagen.setImageResource();
+
+        if(respuestas.get(position).getNickRespuesta().equals(nickUser)){
+
+            ImageView trash = (ImageView) vista.findViewById(R.id.imgTrash2);
+            trash.setVisibility(View.VISIBLE);
+        }
 
         return vista;
     }
