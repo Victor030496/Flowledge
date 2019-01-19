@@ -236,6 +236,15 @@
                 android:background="@drawable/buttonstyle"
                 android:text="Cerrar sesión"
                 android:textColor="#fff" />
+            <Button
+                android:id="@+id/guardar_cambios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/buttonstyle"
+                android:text="Guardar cambios"
+                android:textColor="#fff" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

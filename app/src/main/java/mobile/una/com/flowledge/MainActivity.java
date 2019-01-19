@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MenuItem prevMenuItem;
     /*HomeFragment homeFragment;
     QuestionFragment questionFragment;
-    ReplyFragment replyFragment;
+    ReplyFragment replyFragment;*/
     UserProfileFragment userProfileFragment;
-    */
+
     Sesion s = new Sesion();
     String androidId;
     View headerView;
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         s = (Sesion) intent.getSerializableExtra("S");
         androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
-
+        userProfileFragment = new UserProfileFragment();
        new Thread(new Runnable() {
             public void run() {
                // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             break;
                         case R.id.bottombaritem_profile:
                             //viewPager.setCurrentItem(3);
-                            selectFragment = new UserProfileFragment();
+                            selectFragment = userProfileFragment;
                             break;
                     }
                     selectFragment.setArguments(bundle);
@@ -290,6 +290,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }*/
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment fragment = userProfileFragment;
+        if (fragment != null) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 }
