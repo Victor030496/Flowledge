@@ -50,8 +50,8 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:text="Cuales son las capas del protocolo TCP/IP"
-        android:textColor="#546e7a"
-        android:textSize="21dip"
+        android:textColor="#0f0f0a"
+        android:textSize="23dip"
         android:textStyle="normal" />
 
     <LinearLayout

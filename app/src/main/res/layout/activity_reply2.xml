@@ -46,12 +46,12 @@
         android:layout_below="@id/txtTitle"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnail"
-        android:fontFamily="sans-serif-thin"
+        android:fontFamily="sans-serif-condensed"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:text="bnmbmb,mb,mb,mbnm"
-        android:textColor="#546e7a"
-        android:textSize="17dip"
+        android:textColor="#0f0f0a"
+        android:textSize="21dip"
         android:textStyle="normal" />
 
     <LinearLayout
