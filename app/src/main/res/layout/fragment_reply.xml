@@ -74,6 +74,14 @@
             android:paddingLeft="16dp"
             android:src="@drawable/comen" />
 
+        <ImageView
+            android:id="@+id/imgTrash"
+            android:visibility="invisible"
+            android:layout_width="42dip"
+            android:layout_height="45dip"
+            android:paddingLeft="16dp"
+            android:src="@drawable/trash" />
+
 
     </LinearLayout>
 

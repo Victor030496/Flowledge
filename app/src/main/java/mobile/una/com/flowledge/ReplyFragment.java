@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobile.una.com.flowledge.model.AreaData;
+import mobile.una.com.flowledge.model.Persona;
 import mobile.una.com.flowledge.model.Question;
 import mobile.una.com.flowledge.model.Sesion;
 
@@ -39,6 +40,7 @@ public class ReplyFragment extends Fragment {
     Sesion s = new Sesion();
     Question q = new Question();
     private List<Question> listquestion = new ArrayList<Question>();
+    private List<Persona> listapersona = new ArrayList<Persona>();
     Question question;
     // Variables de la clase
     private ArrayList<TitularItems> Items;
@@ -47,7 +49,8 @@ public class ReplyFragment extends Fragment {
 
     private ArrayList<Question> pruebas;
     ImageView cora;
-     TextView titleforo;
+    ImageView trash;
+    TextView titleforo;
 
     public ReplyFragment() {
         // Required empty public constructor
@@ -78,6 +81,7 @@ public class ReplyFragment extends Fragment {
     public void onStart() {
         super.onStart();
         inicializarFirebase();
+        listaPersona();
         listaPreguntas();
 
     }
@@ -86,9 +90,13 @@ public class ReplyFragment extends Fragment {
         question = new Question();
         listaItems = (ListView) v.findViewById(R.id.listItems);
         cora = (ImageView) v.findViewById(R.id.imglike);
+        trash =(ImageView) v.findViewById(R.id.imgTrash);
         titleforo = (TextView) v.findViewById(R.id.txtTitulo);
 
+
        titleforo.setText("Preguntas relacionadas con "+q.getCategory());
+
+
 
 
     }
@@ -108,15 +116,31 @@ public class ReplyFragment extends Fragment {
                     if(question.getCategory().equals(q.getCategory())) {
                         listquestion.add(question);
                         //Toast.makeText(getContext(), listquestion.get(0).getDescription(), Toast.LENGTH_SHORT).show();
+
+
+
                     }
                 }
-                Adapter adapter = new Adapter(getContext(), listquestion);
+                Adapter adapter = new Adapter(getContext(), listquestion,getNicknameUser());
                 listaItems.setAdapter(adapter);
+
+
+           /*     for(int i =0 ; i < listquestion.size();i++){
+
+                    if(getNicknameUser().equals(listquestion.get(i).getUserNickname())){
+
+
+                    }
+
+                }*/
+
+
                 listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                         final ImageView imagen = (ImageView) view.findViewById(R.id.imglike);
                         final ImageView imagen2 = (ImageView) view.findViewById(R.id.imgcomenta);
+                        final ImageView imagen3 = (ImageView) view.findViewById(R.id.imgTrash);
                         // Toast.makeText(getApplicationContext(), "vamoo bien", Toast.LENGTH_SHORT).show();
                         imagen.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -137,6 +161,17 @@ public class ReplyFragment extends Fragment {
                             }
                         });
 
+                        imagen3.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                String aux =listquestion.get(position).getDescription();
+                                databaseReference.child("Pregunta2").child(listquestion.get(position).getDescription()).removeValue();
+                                Toast.makeText(v.getContext(), "Su pregunta ha sido eliminada", Toast.LENGTH_LONG).show();
+
+                            }
+                        });
+
                     }
                 });
             }
@@ -146,6 +181,58 @@ public class ReplyFragment extends Fragment {
             }
         });
     }
+
+
+    //-----------------------------------------------------------------------------------------
+
+
+
+
+    private void listaPersona() {
+        databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listapersona.clear();
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Persona p = objSnapshot.getValue(Persona.class);
+                    listapersona.add(p);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+    public String getNicknameUser() {
+        String nombre = "";
+        for (int i = 0; i < listapersona.size(); i++) {
+            if (listapersona.get(i).getPid().equals(s.getNombre())) {
+                nombre = listapersona.get(i).getNombre();
+                break;
+            } else {
+            }
+        }
+        return nombre;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //----------------------------------------------------------------------------------------
 
 
     public void fromateaPreguntas() {

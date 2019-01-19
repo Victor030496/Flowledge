@@ -20,12 +20,14 @@ public class Adapter extends BaseAdapter {
 
     Context contexto;
     List<Question> preguntas;
+    String userSesion;
 
 
 
-    public Adapter(Context contexto, List<Question> preguntas) {
+    public Adapter(Context contexto, List<Question> preguntas,String userSesion) {
         this.contexto = contexto;
         this.preguntas = preguntas;
+        this.userSesion = userSesion;
     }
 
     @Override
@@ -57,6 +59,12 @@ public class Adapter extends BaseAdapter {
         txt1.setText(preguntas.get(position).getUserNickname().toString());
         txt2.setText(preguntas.get(position).getDescription().toString());
         //imagen.setImageResource();
+
+        if(preguntas.get(position).getUserNickname().equals(userSesion)){
+
+            ImageView trash = (ImageView) vista.findViewById(R.id.imgTrash);
+            trash.setVisibility(View.VISIBLE);
+        }
 
         return vista;
     }
