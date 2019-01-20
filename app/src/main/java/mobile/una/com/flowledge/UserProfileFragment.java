@@ -80,7 +80,6 @@ public class UserProfileFragment extends Fragment {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private Button cerrarButton;
-    private Button guardarButton;
     private CircleImageView profileImage;
     private Uri mainImageURI = null;
     private StorageReference storageReference;
@@ -102,6 +101,7 @@ public class UserProfileFragment extends Fragment {
             s = (Sesion) bundle.getSerializable("sesion");
         }
         androidId = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        personaAct = new Persona();
         listapersona = new ArrayList<>();
         inicializarFirebase();
         return v;
@@ -125,7 +125,6 @@ public class UserProfileFragment extends Fragment {
         personaAct = getUser();
         pnombre.setText(personaAct.getNombre());
         cerrarButton = v.findViewById(R.id.cerrar_sesion);
-        guardarButton = v.findViewById(R.id.guardar_cambios);
         cerrarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,12 +135,6 @@ public class UserProfileFragment extends Fragment {
                 Intent intent2 = new Intent(getContext(), SplashActivity.class);
                 startActivity(intent2);
                 getActivity().finish();
-            }
-        });
-        guardarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
         profileImage = v.findViewById(R.id.profile_image);
