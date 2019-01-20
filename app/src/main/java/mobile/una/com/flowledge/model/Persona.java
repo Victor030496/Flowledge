@@ -1,13 +1,12 @@
 package mobile.una.com.flowledge.model;
 
-public class Persona{
-    private   String pid;
-    private   String nombre;
-    private   String correo;
-    private   String contra;
-    private String   rol;
-
-
+public class Persona {
+    private String pid;
+    private String nombre;
+    private String correo;
+    private String contra;
+    private String rol;
+    private String imageURL;
 
     public Persona() {
         this.pid = "";
@@ -15,6 +14,7 @@ public class Persona{
         this.correo = "";
         this.contra = "";
         this.rol = "";
+        this.imageURL = "default";
     }
 
     public Persona(String pid, String nombre, String correo, String contra) {
@@ -32,6 +32,16 @@ public class Persona{
         this.contra = contra;
         this.rol = rol;
     }
+
+    public Persona(String pid, String nombre, String correo, String contra, String rol, String imageURL) {
+        this.pid = pid;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.contra = contra;
+        this.rol = rol;
+        this.imageURL = imageURL;
+    }
+
     public String getPid() {
         return pid;
     }
@@ -71,7 +81,14 @@ public class Persona{
 
     public String getRol() {
         return rol;
+    }
 
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     @Override

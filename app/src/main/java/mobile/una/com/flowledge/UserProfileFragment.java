@@ -1,6 +1,8 @@
 package mobile.una.com.flowledge;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -22,6 +24,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -78,7 +81,7 @@ public class UserProfileFragment extends Fragment {
     private Button guardarButton;
     private CircleImageView profileImage;
     private Uri mainImageURI = null;
-    private boolean isChanged = false;
+    private static final int IMAGE_REQUEST = 1;
     private StorageReference storageReference;
     private String androidId;
     private StorageTask storageTask;
@@ -131,47 +134,12 @@ public class UserProfileFragment extends Fragment {
                 getActivity().finish();
             }
         });
-        /*guardarButton.setOnClickListener(new View.OnClickListener() {
+        guardarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mainImageURI != null) {
-                    final StorageReference image_path = storageReference.child("profile_images").child(androidId + ".jpg");
-                    storageTask = image_path.putFile(mainImageURI);
-                    storageTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                        @Override
-                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                            if(!task.isSuccessful()){
-                                throw task.getException();
-                            }
-                            return  image_path.getDownloadUrl();
-                        }
-                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            if(task.isSuccessful()){
-                                Uri downloadUri = task.getResult();
-                                myUri = downloadUri.toString();
-                                String imageId = databaseReference.push().getKey();
-                                HashMap<String, Object> hashMap = new HashMap<>();
-                                hashMap.put("imageId", imageId);
-                                hashMap.put("profileImage", myUri);
-                                hashMap.put("user", getUser().getPid());
-                                databaseReference.child(imageId).setValue(hashMap);
-                            }else{
-                                Toast.makeText(getContext(),"Failed!",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getContext(),""+e.getMessage(),Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }else{
-                    Toast.makeText(getContext(),"No image selected!",Toast.LENGTH_SHORT).show();
-                }
+
             }
-        });*/
+        });
         profileImage = v.findViewById(R.id.profile_image);
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,7 +166,7 @@ public class UserProfileFragment extends Fragment {
     private void inicializarFirebase() {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
-        storageReference = FirebaseStorage.getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference("uploads");
     }
 
     private void listarDatos() {
@@ -248,24 +216,66 @@ public class UserProfileFragment extends Fragment {
                 Exception error = result.getError();
 
             }
+            if(storageTask != null && storageTask.isInProgress()){
+                Toast.makeText(getContext(),"Upload in progress", Toast.LENGTH_SHORT).show();
+            }else{
+                uploadImage();
+            }
         }
     }
 
-    private Bitmap getImageBitmap(String url) {
-        Bitmap bm = null;
-        try {
-            URL aURL = new URL(url);
-            URLConnection conn = aURL.openConnection();
-            conn.connect();
-            InputStream is = conn.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(is);
-            bm = BitmapFactory.decodeStream(bis);
-            bis.close();
-            is.close();
-        } catch (IOException e) {
-            Log.e("image", "Error getting bitmap", e);
-        }
-        return bm;
+    private String getFileExtension(Uri uri){
+        ContentResolver contentResolver = getContext().getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
+
+    private void uploadImage(){
+        final ProgressDialog pd = new ProgressDialog(getContext());
+        pd.setMessage("Uploading");
+        pd.show();
+        if(mainImageURI != null){
+            final StorageReference fileReference = storageReference.child(System.currentTimeMillis() +
+                    "."+getFileExtension(mainImageURI));
+            storageTask = fileReference.putFile(mainImageURI);
+            storageTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if(!task.isSuccessful()){
+                        throw task.getException();
+                    }
+
+                    return  fileReference.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if(task.isSuccessful()){
+                        Uri downloadUri = task.getResult();
+                        String mUri = downloadUri.toString();
+                        Persona p1 = getUser();
+                        Persona p2 = new Persona(p1.getPid(),p1.getNombre(),p1.getCorreo(),p1.getContra(),p1.getRol(),mUri);
+
+                        databaseReference.child("Persona2").child(p2.getPid()).setValue(p2);
+
+                        pd.dismiss();
+                    }else{
+                        Toast.makeText(getContext(), "Failed!", Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getContext(), e.getMessage(),Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
+                }
+            });
+        }else{
+            Toast.makeText(getContext(),"No image selected", Toast.LENGTH_SHORT).show();
+            pd.dismiss();
+        }
+    }
+
 
 }
