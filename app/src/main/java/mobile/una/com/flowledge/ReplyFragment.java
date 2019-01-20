@@ -62,7 +62,7 @@ public class ReplyFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.activity_list, container, false);
         Bundle bundle = getArguments();
-        if(bundle != null){
+        if (bundle != null) {
             q = (Question) bundle.getSerializable("question");
             s = (Sesion) bundle.getSerializable("sesion");
 
@@ -83,22 +83,15 @@ public class ReplyFragment extends Fragment {
         inicializarFirebase();
         listaPersona();
         listaPreguntas();
-
     }
 
     private void init() {
         question = new Question();
         listaItems = (ListView) v.findViewById(R.id.listItems);
         cora = (ImageView) v.findViewById(R.id.imglike);
-        trash =(ImageView) v.findViewById(R.id.imgTrash);
+        trash = (ImageView) v.findViewById(R.id.imgTrash);
         titleforo = (TextView) v.findViewById(R.id.txtTitulo);
-
-
-       titleforo.setText("Preguntas relacionadas con "+q.getCategory());
-
-
-
-
+        titleforo.setText("Preguntas relacionadas con " + q.getCategory());
     }
 
     private void inicializarFirebase() {
@@ -113,17 +106,13 @@ public class ReplyFragment extends Fragment {
                 listquestion.clear();
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     question = objSnapshot.getValue(Question.class);
-                    if(question.getCategory().equals(q.getCategory())) {
+                    if (question.getCategory().equals(q.getCategory())) {
                         listquestion.add(question);
                         //Toast.makeText(getContext(), listquestion.get(0).getDescription(), Toast.LENGTH_SHORT).show();
-
-
-
                     }
                 }
-                Adapter adapter = new Adapter(getContext(), listquestion,getNicknameUser());
+                Adapter adapter = new Adapter(getContext(), listquestion, getNicknameUser());
                 listaItems.setAdapter(adapter);
-
 
            /*     for(int i =0 ; i < listquestion.size();i++){
 
@@ -133,7 +122,6 @@ public class ReplyFragment extends Fragment {
                     }
 
                 }*/
-
 
                 listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -153,10 +141,10 @@ public class ReplyFragment extends Fragment {
                         imagen2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                               // Toast.makeText(v.getContext(), s.getNombre(), Toast.LENGTH_SHORT).show();
+                                // Toast.makeText(v.getContext(), s.getNombre(), Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getContext(), AnswerActivity.class);
                                 intent.putExtra("question", listquestion.get(position));
-                                intent.putExtra("sesion",(Sesion) s);
+                                intent.putExtra("sesion", (Sesion) s);
                                 startActivity(intent);
                             }
                         });
@@ -165,7 +153,7 @@ public class ReplyFragment extends Fragment {
                             @Override
                             public void onClick(View view) {
 
-                                String aux =listquestion.get(position).getDescription();
+                                String aux = listquestion.get(position).getDescription();
                                 databaseReference.child("Pregunta2").child(listquestion.get(position).getDescription()).removeValue();
                                 Toast.makeText(v.getContext(), "Su pregunta ha sido eliminada", Toast.LENGTH_LONG).show();
 
@@ -185,11 +173,8 @@ public class ReplyFragment extends Fragment {
 
     //-----------------------------------------------------------------------------------------
 
-
-
-
     private void listaPersona() {
-        databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Persona2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listapersona.clear();
@@ -218,22 +203,7 @@ public class ReplyFragment extends Fragment {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //----------------------------------------------------------------------------------------
-
 
     public void fromateaPreguntas() {
         for (int i = 0; i < listquestion.size(); i++) {

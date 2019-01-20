@@ -25,12 +25,12 @@ import mobile.una.com.flowledge.model.Sesion;
  * Created by abdalla on 1/12/18.
  */
 
-public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder>{
+public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder> {
     private Context mContext;
     private List<AreaData> mDataList;
-    Question q = new Question("Barco03","Bases de Datos");
-    Sesion ses ;
-  //  String area="";
+    Question q = new Question("Barco03", "Bases de Datos");
+    Sesion ses;
+    //  String area="";
 
     MyAdapter(Context mContext, List<AreaData> mAreaList, Sesion s) {
         this.mContext = mContext;
@@ -48,7 +48,7 @@ public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder>{
     public void onBindViewHolder(final AreaViewHolder holder, int position) {
         holder.mImage.setImageResource(mDataList.get(position).getAreaImage());
         holder.mTitle.setText(mDataList.get(position).getAreaName());
-      //  area=mDataList.get(position).getAreaName();
+        //  area=mDataList.get(position).getAreaName();
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,23 +63,21 @@ public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder>{
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
 
                 // Intent mIntent = new Intent(mContext, ReplyFragment.class);
-              //  mIntent.putExtra("question", holder.mTitle.toString());
-              //  mIntent.putExtra("Title", mDataList.get(holder.getAdapterPosition()).getAreaName());
-               // mIntent.putExtra("Image", mDataList.get(holder.getAdapterPosition()).getAreaImage());
-             ///  mContext.startActivity(mIntent);
+                //  mIntent.putExtra("question", holder.mTitle.toString());
+                //  mIntent.putExtra("Title", mDataList.get(holder.getAdapterPosition()).getAreaName());
+                // mIntent.putExtra("Image", mDataList.get(holder.getAdapterPosition()).getAreaImage());
+                ///  mContext.startActivity(mIntent);
 
                 // Probando putadas
 
-             //   Fragment selectFragment = null;
-               // Bundle bundle = new Bundle();
-               // bundle.putSerializable("question", (Serializable) question);
-              //  selectFragment = new ReplyFragment();
-               // selectFragment.setArguments(bundle);
+                //   Fragment selectFragment = null;
+                // Bundle bundle = new Bundle();
+                // bundle.putSerializable("question", (Serializable) question);
+                //  selectFragment = new ReplyFragment();
+                // selectFragment.setArguments(bundle);
 
 
-             //   getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectFragment).commit();
-
-
+                //   getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectFragment).commit();
 
             }
         });
@@ -90,14 +88,12 @@ public class MyAdapter extends RecyclerView.Adapter<AreaViewHolder>{
         return mDataList.size();
     }
 
-    public void updateList(List<AreaData> lista)
-    {
+    public void updateList(List<AreaData> lista) {
         mDataList = new ArrayList<>();
         mDataList.addAll(lista);
         notifyDataSetChanged();
     }
 }
-
 
 class AreaViewHolder extends RecyclerView.ViewHolder {
 
@@ -107,7 +103,6 @@ class AreaViewHolder extends RecyclerView.ViewHolder {
 
     AreaViewHolder(View itemView) {
         super(itemView);
-
         mImage = itemView.findViewById(R.id.ivImage);
         mTitle = itemView.findViewById(R.id.tvTitle);
         mCardView = itemView.findViewById(R.id.cardview);

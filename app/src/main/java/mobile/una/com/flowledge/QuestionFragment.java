@@ -32,7 +32,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import android.support.v7.app.AppCompatActivity;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +47,7 @@ import mobile.una.com.flowledge.model.Sesion;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class QuestionFragment extends Fragment  {
+public class QuestionFragment extends Fragment {
     View v;
     private List<Persona> listapersona = new ArrayList<Persona>();
     ImageView camera;
@@ -76,7 +78,7 @@ public class QuestionFragment extends Fragment  {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
-        if(bundle != null){
+        if (bundle != null) {
             s = (Sesion) bundle.getSerializable("sesion");
         }
         this.v = view;
@@ -90,7 +92,7 @@ public class QuestionFragment extends Fragment  {
         listaPersona();
     }
 
-    private void init(){
+    private void init() {
         camera = (ImageView) v.findViewById(R.id.camara);
         //category = findViewById(R.id.categoria2);
         description = (EditText) v.findViewById(R.id.descripcion2);
@@ -140,7 +142,7 @@ public class QuestionFragment extends Fragment  {
     }
 
     private void listaPersona() {
-        databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Persona2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listapersona.clear();
@@ -170,7 +172,7 @@ public class QuestionFragment extends Fragment  {
 
     public void saveQuestion() {
         // String categoria ;
- //       Toast.makeText(v.getContext(), s.getNombre(), Toast.LENGTH_SHORT).show();
+        //       Toast.makeText(v.getContext(), s.getNombre(), Toast.LENGTH_SHORT).show();
         String nickname = getNicknameUser();
 
         // p= new Persona(pid.getText().toString(),pnombre.getText().toString(),correo.getText().toString(),pcontra.getText().toString());
@@ -187,24 +189,20 @@ public class QuestionFragment extends Fragment  {
         Toast.makeText(getContext(), "Haz enviado una pregunta al foro", Toast.LENGTH_SHORT).show();
         // Intent intent2 = new Intent(getActivity(), ReplyFragment.class);
         //intent.putExtra("wea", weather);
-       // startActivity(intent2);
+        // startActivity(intent2);
         // PROBANDO CAMBIAR DE FRAGMENTS
-
-
-
-
 
 
         Fragment selectFragment = null;
         Bundle bundle = new Bundle();
-       bundle.putSerializable("question", (Serializable) question);
+        bundle.putSerializable("question", (Serializable) question);
         bundle.putSerializable("sesion", (Serializable) s);
         selectFragment = new ReplyFragment();
         selectFragment.setArguments(bundle);
-       getFragmentManager().beginTransaction().replace(R.id.fragment_container,selectFragment).commit();
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, selectFragment).commit();
 
-       // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-         //       selectFragment).commit();
+        // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+        //       selectFragment).commit();
 
     }
 
@@ -213,7 +211,6 @@ public class QuestionFragment extends Fragment  {
         intent.setType("image/");
         startActivityForResult(intent.createChooser(intent, "Seleccione una app"), 10);
     }
-
 
 
 }

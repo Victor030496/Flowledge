@@ -28,8 +28,8 @@ import mobile.una.com.flowledge.model.Sesion;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements SearchView.OnQueryTextListener{
-   // private Toolbar toolbar;
+public class HomeFragment extends Fragment implements SearchView.OnQueryTextListener {
+    // private Toolbar toolbar;
     View v;
     RecyclerView mRecyclerView;
     List<AreaData> mFlowerList;
@@ -49,9 +49,9 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_home, container, false);
         Bundle bundle = getArguments();
-        if(bundle != null){
+        if (bundle != null) {
             s = (Sesion) bundle.getSerializable("sesion");
-           // Toast.makeText(v.getContext(), s.getNombre(), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(v.getContext(), s.getNombre(), Toast.LENGTH_SHORT).show();
         }
         return v;
     }
@@ -63,12 +63,12 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         init();
     }
 
-    private void init(){
+    private void init() {
         mRecyclerView = v.findViewById(R.id.recyclerview);
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         llenarAreas();
-        MyAdapter myAdapter = new MyAdapter(getContext(), mFlowerList,s);
+        MyAdapter myAdapter = new MyAdapter(getContext(), mFlowerList, s);
         mRecyclerView.setAdapter(myAdapter);
 
 
@@ -87,14 +87,14 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
 
     }
 
-   @Override
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_filtro_busqueda,menu);
+        inflater.inflate(R.menu.menu_filtro_busqueda, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setOnQueryTextListener(this);
         super.onCreateOptionsMenu(menu, inflater);
-   }
+    }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
@@ -105,9 +105,8 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
     public boolean onQueryTextChange(String newText) {
         String userInput = newText.toLowerCase();
         List<AreaData> newList = new ArrayList<>();
-        for(AreaData name: mFlowerList  ){
-            if(name.getAreaName().contains(userInput))
-            {
+        for (AreaData name : mFlowerList) {
+            if (name.getAreaName().contains(userInput)) {
                 newList.add(name);
             }
         }

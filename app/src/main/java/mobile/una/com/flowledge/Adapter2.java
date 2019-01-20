@@ -17,10 +17,6 @@ import java.util.List;
 import mobile.una.com.flowledge.model.Question;
 import mobile.una.com.flowledge.model.Respuesta;
 
-/**
- * Created by Luis Bogantes on 08/01/2019.
- */
-
 public class Adapter2 extends BaseAdapter {
 
     Context contexto;
@@ -28,8 +24,7 @@ public class Adapter2 extends BaseAdapter {
     String nickUser;
     String rol;
 
-
-    public Adapter2(Context contexto, List<Respuesta> preguntas,String nickUser,String rol) {
+    public Adapter2(Context contexto, List<Respuesta> preguntas, String nickUser, String rol) {
         this.contexto = contexto;
         this.respuestas = preguntas;
         this.nickUser = nickUser;
@@ -62,30 +57,25 @@ public class Adapter2 extends BaseAdapter {
         TextView txt2 = (TextView) vista.findViewById(R.id.txtDescription);
         TextView txt3 = (TextView) vista.findViewById(R.id.txtlikes);
 
-
         txt1.setText(respuestas.get(position).getNickRespuesta().toString());
         txt2.setText(respuestas.get(position).getRespuesta().toString());
         int aux = respuestas.get(position).getLikes();
-        String  aux2 = String.valueOf(aux);
+        String aux2 = String.valueOf(aux);
         txt3.setText(aux2);
 
         //imagen.setImageResource();
 
-        if(respuestas.get(position).getNickRespuesta().equals(nickUser)){
-
+        if (respuestas.get(position).getNickRespuesta().equals(nickUser)) {
             ImageView trash = (ImageView) vista.findViewById(R.id.imgTrash2);
             trash.setVisibility(View.VISIBLE);
         }
 
-        if(respuestas.get(position).getNickRespuesta().equals(rol)){
-
+        if (respuestas.get(position).getNickRespuesta().equals(rol)) {
             ImageView trash2 = (ImageView) vista.findViewById(R.id.imgOficial);
             trash2.setVisibility(View.VISIBLE);
         }
-
         return vista;
     }
-
 
 }
 

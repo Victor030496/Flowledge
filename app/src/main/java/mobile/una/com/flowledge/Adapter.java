@@ -22,9 +22,7 @@ public class Adapter extends BaseAdapter {
     List<Question> preguntas;
     String userSesion;
 
-
-
-    public Adapter(Context contexto, List<Question> preguntas,String userSesion) {
+    public Adapter(Context contexto, List<Question> preguntas, String userSesion) {
         this.contexto = contexto;
         this.preguntas = preguntas;
         this.userSesion = userSesion;
@@ -55,13 +53,11 @@ public class Adapter extends BaseAdapter {
         TextView txt1 = (TextView) vista.findViewById(R.id.txtTitle);
         TextView txt2 = (TextView) vista.findViewById(R.id.txtDescription);
 
-
         txt1.setText(preguntas.get(position).getUserNickname().toString());
         txt2.setText(preguntas.get(position).getDescription().toString());
         //imagen.setImageResource();
 
-        if(preguntas.get(position).getUserNickname().equals(userSesion)){
-
+        if (preguntas.get(position).getUserNickname().equals(userSesion)) {
             ImageView trash = (ImageView) vista.findViewById(R.id.imgTrash);
             trash.setVisibility(View.VISIBLE);
         }

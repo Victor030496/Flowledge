@@ -38,8 +38,8 @@ import java.util.List;
 import mobile.una.com.flowledge.model.AreaData;
 import mobile.una.com.flowledge.model.Sesion;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,SearchView.OnQueryTextListener {
-    private Toolbar  toolbar;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
+    private Toolbar toolbar;
     private BottomNavigationView bottomNavigationView;
     ViewPager viewPager;
     MenuItem prevMenuItem;
@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       toolbar = (Toolbar) findViewById(R.id.toolbar);
-       setSupportActionBar(toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navBottomListener);
@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = getIntent();
         s = (Sesion) intent.getSerializableExtra("S");
         androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-
 
 
         //-----------------------------------------------------------------------
@@ -90,12 +89,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //-----------------------------------------------------------------------
 
 
-
         userProfileFragment = new UserProfileFragment();
-       new Thread(new Runnable() {
+        new Thread(new Runnable() {
             public void run() {
-               // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-               // setSupportActionBar(toolbar);
+                // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+                // setSupportActionBar(toolbar);
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                         MainActivity.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -261,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 */
 
     private void cerrarSesion() {
-        runOnUiThread(new Runnable(){
+        runOnUiThread(new Runnable() {
             public void run() {
                 try {
                     databaseReference.child("Sesion").child(s.getPid()).removeValue();
@@ -269,21 +267,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(intent2);
                     MainActivity.this.finish();
                 } catch (final Exception ex) {
-                    Log.i("---","Exception in thread");
+                    Log.i("---", "Exception in thread");
                 }
             }
         });
     }
 
     private void iniciarFirebase() {
-        runOnUiThread(new Runnable(){
+        runOnUiThread(new Runnable() {
             public void run() {
                 try {
                     FirebaseApp.initializeApp(getApplicationContext());
                     firebaseDatabase = FirebaseDatabase.getInstance();
                     databaseReference = firebaseDatabase.getReference();
                 } catch (final Exception ex) {
-                    Log.i("---","Exception in thread");
+                    Log.i("---", "Exception in thread");
                 }
             }
         });

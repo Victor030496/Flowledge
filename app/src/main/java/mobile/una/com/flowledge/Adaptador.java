@@ -45,7 +45,6 @@ public class Adaptador extends BaseAdapter {
         return position;
     }
 
-
     /*
     Clase estática que contiene los elementos de la lista
      */

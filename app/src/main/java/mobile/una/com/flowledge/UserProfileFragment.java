@@ -98,7 +98,7 @@ public class UserProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_userprofile, container, false);
         Bundle bundle = getArguments();
-        if(bundle != null){
+        if (bundle != null) {
             s = (Sesion) bundle.getSerializable("sesion");
         }
         androidId = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -148,9 +148,9 @@ public class UserProfileFragment extends Fragment {
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-                    if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                    if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
                         Toast.makeText(getContext(), "Permission Denied", Toast.LENGTH_LONG).show();
                         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
@@ -171,9 +171,9 @@ public class UserProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Persona user = dataSnapshot.getValue(Persona.class);
-                if(user.getImageURL().equals("default")){
+                if (user.getImageURL().equals("default")) {
                     profileImage.setImageResource(R.mipmap.ic_launcher);
-                }else{
+                } else {
                     Glide.with(getContext()).load(user.getImageURL()).into(profileImage);
                 }
             }
@@ -227,7 +227,7 @@ public class UserProfileFragment extends Fragment {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 mainImageURI = result.getUri();
-               // mainImageURI = data.getData();
+                // mainImageURI = data.getData();
                 profileImage.setImageURI(mainImageURI);
 
                 //isChanged = true;
@@ -237,41 +237,41 @@ public class UserProfileFragment extends Fragment {
                 Exception error = result.getError();
 
             }
-            if(storageTask != null && storageTask.isInProgress()){
-                Toast.makeText(getContext(),"Upload in progress", Toast.LENGTH_SHORT).show();
-            }else{
+            if (storageTask != null && storageTask.isInProgress()) {
+                Toast.makeText(getContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
+            } else {
                 uploadImage();
             }
         }
     }
 
-    private String getFileExtension(Uri uri){
+    private String getFileExtension(Uri uri) {
         ContentResolver contentResolver = getContext().getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    private void uploadImage(){
+    private void uploadImage() {
         final ProgressDialog pd = new ProgressDialog(getContext());
         pd.setMessage("Uploading");
         pd.show();
-        if(mainImageURI != null){
+        if (mainImageURI != null) {
             final StorageReference fileReference = storageReference.child(System.currentTimeMillis() +
                     ".jpg");
             storageTask = fileReference.putFile(mainImageURI);
             storageTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if(!task.isSuccessful()){
+                    if (!task.isSuccessful()) {
                         throw task.getException();
                     }
 
-                    return  fileReference.getDownloadUrl();
+                    return fileReference.getDownloadUrl();
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
                         String mUri = downloadUri.toString();
 
@@ -280,7 +280,7 @@ public class UserProfileFragment extends Fragment {
                         databaseReference.child(id).child("imageURL").setValue(mUri);
 
                         pd.dismiss();
-                    }else{
+                    } else {
                         Toast.makeText(getContext(), "Failed!", Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     }
@@ -288,12 +288,12 @@ public class UserProfileFragment extends Fragment {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getContext(), e.getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     pd.dismiss();
                 }
             });
-        }else{
-            Toast.makeText(getContext(),"No image selected", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "No image selected", Toast.LENGTH_SHORT).show();
             pd.dismiss();
         }
     }

@@ -3,11 +3,11 @@ package mobile.una.com.flowledge.model;
 import java.io.Serializable;
 
 public class Respuesta implements Serializable {
-    String respuesta;
-    String nickRespuesta;
-    String pregunta;
-    int likes;
-    String imagen;
+    private String respuesta;
+    private String nickRespuesta;
+    private String pregunta;
+    private int likes;
+    private String imagen;
 
     public Respuesta(String respuesta, String nickRespuesta, String pregunta, int likes) {
         this.respuesta = respuesta;

@@ -109,7 +109,7 @@ public class LogInActivity extends AppCompatActivity {
                         contrasenaTextInput, contrasenaEditText, conContrasenaTextInput, conContrasenaEditText);
                 if (bandera) {
                     p = new Persona(cedulaFormEditText.getText().toString(), nombreEditText.getText().toString(),
-                            correoEditText.getText().toString(), contrasenaEditText.getText().toString(), rol,"default");
+                            correoEditText.getText().toString(), contrasenaEditText.getText().toString(), rol, "default");
                     databaseReference.child("Persona2").child(p.getPid()).setValue(p);
                     s.setPid(androidId);
                     s.setNombre(cedulaEditText.getText().toString());
@@ -205,7 +205,7 @@ public class LogInActivity extends AppCompatActivity {
         if (cedulaFormEditText.getText().toString().equals("")) {
             cedulaFormTextInput.setError("Campo obligatorio *");
             flag = false;
-        }else{
+        } else {
             for (Persona persona : listapersona) {
                 if (persona.getPid().equals(cedulaFormEditText.getText().toString())) {
                     cedulaFormTextInput.setError("Cédula existente");
@@ -242,9 +242,9 @@ public class LogInActivity extends AppCompatActivity {
                 if ((!part2.equals("est.una.ac.cr")) && (!part2.equals("una.ac.cr"))) {
                     correoTextInput.setError("Solo correos institucionales");
                     flag = false;
-                }else if(part2.equals("est.una.ac.cr")){
+                } else if (part2.equals("est.una.ac.cr")) {
                     rol = "Estudiante";
-                }else if(part2.equals("una.ac.cr")){
+                } else if (part2.equals("una.ac.cr")) {
                     rol = "Profesor";
                 }
             } else {

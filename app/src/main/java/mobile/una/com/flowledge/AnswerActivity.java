@@ -35,7 +35,7 @@ public class AnswerActivity extends AppCompatActivity {
 
     private ArrayList<Question> pruebas;
     private ListView listaItems;
-    Question q ;
+    Question q;
     Respuesta res;
     TextView nick;
     TextView pregu;
@@ -43,10 +43,10 @@ public class AnswerActivity extends AppCompatActivity {
     Button enviarRes;
     private List<Persona> listapersona = new ArrayList<Persona>();
     private List<Respuesta> listanswers = new ArrayList<Respuesta>();
-    Sesion s ;
+    Sesion s;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    int likesAux =0;
+    int likesAux = 0;
     int aux;
     String aux2;
     String rol = "";
@@ -62,19 +62,15 @@ public class AnswerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         q = (Question) intent.getSerializableExtra("question");
 
-         s =  (Sesion) intent.getSerializableExtra("sesion");
+        s = (Sesion) intent.getSerializableExtra("sesion");
 
-
-
-
-         res = new Respuesta();
+        res = new Respuesta();
 
         listaItems = (ListView) findViewById(R.id.listItems2);
         nick = (TextView) findViewById(R.id.txtNickkk);
         pregu = (TextView) findViewById(R.id.txtPreguuu);
         respuEdit = (EditText) findViewById(R.id.respuuuu);
         enviarRes = (Button) findViewById(R.id.btn_enviarRes);
-
 
         nick.setText(q.getUserNickname());
         pregu.setText(q.getDescription());
@@ -92,7 +88,6 @@ public class AnswerActivity extends AppCompatActivity {
         Adapter2 adapter = new Adapter2(getApplicationContext(), pruebas);
         listaItems.setAdapter(adapter);*/
 
-
         enviarRes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,32 +99,22 @@ public class AnswerActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-
-    public void enviarRespuesta(){
-
-      String respuesta =   respuEdit.getText().toString();
-      String nicknameResp = getNicknameUser();
-      String pregunt = pregu.getText().toString();
-      int likes = 0;
+    public void enviarRespuesta() {
+        String respuesta = respuEdit.getText().toString();
+        String nicknameResp = getNicknameUser();
+        String pregunt = pregu.getText().toString();
+        int likes = 0;
 
         res.setRespuesta(respuesta);
         res.setNickRespuesta(nicknameResp);
         res.setPregunta(pregunt);
         res.setLikes(likes);
-      databaseReference.child("Respuestas").child(res.getRespuesta()).setValue(res);
+        databaseReference.child("Respuestas").child(res.getRespuesta()).setValue(res);
 
-      respuEdit.setText("");
-
-
-
+        respuEdit.setText("");
     }
 
-
     // Recuperando respuestas
-
 
     private void listaRespuestas() {
         databaseReference.child("Respuestas").addValueEventListener(new ValueEventListener() {
@@ -138,41 +123,39 @@ public class AnswerActivity extends AppCompatActivity {
                 listanswers.clear();
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     res = objSnapshot.getValue(Respuesta.class);
-                    if(res.getPregunta().equals(q.getDescription())) {
+                    if (res.getPregunta().equals(q.getDescription())) {
                         listanswers.add(res);
                         //Toast.makeText(getContext(), listquestion.get(0).getDescription(), Toast.LENGTH_SHORT).show();
                     }
                 }
-               // Toast.makeText(getApplicationContext(), getNicknameUser(), Toast.LENGTH_SHORT).show();
-                Adapter2 adapter = new Adapter2(AnswerActivity.this, listanswers,getNicknameUser(),rol);
+                // Toast.makeText(getApplicationContext(), getNicknameUser(), Toast.LENGTH_SHORT).show();
+                Adapter2 adapter = new Adapter2(AnswerActivity.this, listanswers, getNicknameUser(), rol);
                 listaItems.setAdapter(adapter);
-               listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                         final ImageView imagen = (ImageView) view.findViewById(R.id.imglike2);
-                        final TextView txtLikes =(TextView) view.findViewById(R.id.txtlikes);
+                        final TextView txtLikes = (TextView) view.findViewById(R.id.txtlikes);
                         final ImageView imagen3 = (ImageView) view.findViewById(R.id.imgTrash2);
                         // Toast.makeText(getApplicationContext(), "vamoo bien", Toast.LENGTH_SHORT).show();
 
-                       // aux = listanswers.get(position).getLikes()+1;
+                        // aux = listanswers.get(position).getLikes()+1;
                         //aux2 = String.valueOf(aux);
 
-                       //Respuesta resAux = new Respuesta(listanswers.get(position).getRespuesta(),listanswers.get(position).getNickRespuesta(),listanswers.get(position).getPregunta(),aux);
+                        //Respuesta resAux = new Respuesta(listanswers.get(position).getRespuesta(),listanswers.get(position).getNickRespuesta(),listanswers.get(position).getPregunta(),aux);
                         //databaseReference.child("Respuestas").child(listanswers.get(position).getRespuesta()).setValue(resAux);
                         //imagen.setImageResource(R.drawable.cora2);
-
 
                         imagen.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                aux = listanswers.get(position).getLikes()+1;
-                               aux2 = String.valueOf(aux);
+                                aux = listanswers.get(position).getLikes() + 1;
+                                aux2 = String.valueOf(aux);
 
-                               Respuesta resAux = new Respuesta(listanswers.get(position).getRespuesta(),listanswers.get(position).getNickRespuesta(),listanswers.get(position).getPregunta(),aux);
+                                Respuesta resAux = new Respuesta(listanswers.get(position).getRespuesta(), listanswers.get(position).getNickRespuesta(), listanswers.get(position).getPregunta(), aux);
                                 databaseReference.child("Respuestas").child(listanswers.get(position).getRespuesta()).setValue(resAux);
 
-
-                               // txtLikes.setText(aux2);
+                                // txtLikes.setText(aux2);
                                 imagen.setImageResource(R.drawable.cora2);
                                 txtLikes.setText(aux2);
 
@@ -193,10 +176,7 @@ public class AnswerActivity extends AppCompatActivity {
                         });
 
 
-
-
                         //imagen.setImageResource(R.drawable.cora2);
-
 
 
                     }
@@ -210,30 +190,15 @@ public class AnswerActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void listaPersona() {
-        databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Persona2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listapersona.clear();
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     Persona p = objSnapshot.getValue(Persona.class);
                     listapersona.add(p);
-                    if(p.getRol().equals("profesor")){
+                    if (p.getRol().equals("profesor")) {
 
                         rol = p.getNombre();
                     }
@@ -250,6 +215,7 @@ public class AnswerActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
     }
+
     public String getNicknameUser() {
         String nombre = "";
         String rol = "";
@@ -263,7 +229,6 @@ public class AnswerActivity extends AppCompatActivity {
         }
         return nombre;
     }
-
 
 
 }

@@ -36,31 +36,32 @@ public class SplashActivity extends Activity {
     List<String> id;
     String androidId;
     FirebaseUser firebaseUser;
-/*
-    @Override
-    protected void onStart() {
-        super.onStart();
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            new Handler().postDelayed(new Runnable() {
-                public void run() {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    intent.putExtra("S", s);
-                    startActivity(intent);
-                    finish();
-                }
-            }, DURACION_SPLASH);
-        } else {
-            new Handler().postDelayed(new Runnable() {
-                public void run() {
-                    Intent intent = new Intent(SplashActivity.this, LogInActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }, DURACION_SPLASH);
+
+    /*
+        @Override
+        protected void onStart() {
+            super.onStart();
+            firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (firebaseUser != null) {
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        intent.putExtra("S", s);
+                        startActivity(intent);
+                        finish();
+                    }
+                }, DURACION_SPLASH);
+            } else {
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        Intent intent = new Intent(SplashActivity.this, LogInActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }, DURACION_SPLASH);
+            }
         }
-    }
-*/
+    */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

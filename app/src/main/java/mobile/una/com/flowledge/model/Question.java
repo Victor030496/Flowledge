@@ -8,20 +8,18 @@ import java.util.List;
  */
 
 public class Question implements Serializable {
-    String userNickname;
-    String category;
-    String description;
-  //  List<Respuesta> respuesta;
-
+    private String userNickname;
+    private String category;
+    private String description;
+    //  List<Respuesta> respuesta;
 
     //------------------------------------------------------------------------
-
 
     public Question(String userNickname, String category, String description) {
         this.userNickname = userNickname;
         this.category = category;
         this.description = description;
-       // this.respuesta = respuesta;
+        // this.respuesta = respuesta;
     }
 
     public Question(String userNickname, String description) {
@@ -36,7 +34,6 @@ public class Question implements Serializable {
         this.description = "";
 
     }
-
 
     public String getUserNickname() {
         return userNickname;
