@@ -267,9 +267,12 @@ public class UserProfileFragment extends Fragment {
                         Uri downloadUri = task.getResult();
                         String mUri = downloadUri.toString();
 
-                        String id = personaAct.getPid();
+                       // String id = personaAct.getPid();
+                        Persona p=new Persona();
+                        p=personaAct;
+                        p.setImageURL(mUri);
                         databaseReference = FirebaseDatabase.getInstance().getReference("Persona2");
-                        databaseReference.child(id).child("imageURL").setValue(mUri);
+                        databaseReference.child(personaAct.getPid()).setValue(p);
 
                         pd.dismiss();
                     } else {
