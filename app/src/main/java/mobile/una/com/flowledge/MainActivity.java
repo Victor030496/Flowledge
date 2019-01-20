@@ -188,18 +188,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             //viewPager.setCurrentItem(1);
                             selectFragment = new QuestionFragment();
                             break;
-                        case R.id.bottombaritem_reply:
+                        /*case R.id.bottombaritem_reply:
                             //viewPager.setCurrentItem(2);
                             selectFragment = new ReplyFragment();
-                            break;
+                            break;*/
                         case R.id.bottombaritem_profile:
                             //viewPager.setCurrentItem(3);
                             selectFragment = userProfileFragment;
                             break;
+                        default:
+                            Toast.makeText(getApplicationContext(), "Opción innecesario", Toast.LENGTH_SHORT).show();
                     }
-                    selectFragment.setArguments(bundle);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            selectFragment).commit();
+                    if(selectFragment != null) {
+                        selectFragment.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                selectFragment).commit();
+                    }
                     return true;
                 }
             };

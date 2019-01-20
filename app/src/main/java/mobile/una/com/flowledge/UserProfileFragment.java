@@ -130,7 +130,6 @@ public class UserProfileFragment extends Fragment {
             public void onClick(View v) {
                 databaseReference = FirebaseDatabase.getInstance().getReference("Sesion");
                 databaseReference.child(s.getPid()).removeValue();
-
                 FirebaseAuth.getInstance().signOut();
                 Intent intent2 = new Intent(getContext(), SplashActivity.class);
                 startActivity(intent2);
