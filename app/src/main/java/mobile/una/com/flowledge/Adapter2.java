@@ -26,12 +26,14 @@ public class Adapter2 extends BaseAdapter {
     Context contexto;
     List<Respuesta> respuestas;
     String nickUser;
+    String rol;
 
 
-    public Adapter2(Context contexto, List<Respuesta> preguntas,String nickUser) {
+    public Adapter2(Context contexto, List<Respuesta> preguntas,String nickUser,String rol) {
         this.contexto = contexto;
         this.respuestas = preguntas;
         this.nickUser = nickUser;
+        this.rol = rol;
     }
 
     @Override
@@ -73,6 +75,12 @@ public class Adapter2 extends BaseAdapter {
 
             ImageView trash = (ImageView) vista.findViewById(R.id.imgTrash2);
             trash.setVisibility(View.VISIBLE);
+        }
+
+        if(respuestas.get(position).getNickRespuesta().equals(rol)){
+
+            ImageView trash2 = (ImageView) vista.findViewById(R.id.imgOficial);
+            trash2.setVisibility(View.VISIBLE);
         }
 
         return vista;

@@ -5,10 +5,16 @@ public class Persona{
     private   String nombre;
     private   String correo;
     private   String contra;
+    private String   rol;
 
 
 
     public Persona() {
+        this.pid = "";
+        this.nombre = "";
+        this.correo = "";
+        this.contra = "";
+        this.rol = "";
     }
 
     public Persona(String pid, String nombre, String correo, String contra) {
@@ -18,6 +24,14 @@ public class Persona{
         this.contra = contra;
     }
 
+
+    public Persona(String pid, String nombre, String correo, String contra, String rol) {
+        this.pid = pid;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.contra = contra;
+        this.rol = rol;
+    }
     public String getPid() {
         return pid;
     }
@@ -50,6 +64,15 @@ public class Persona{
         this.contra = contra;
     }
 
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public String getRol() {
+        return rol;
+
+    }
 
     @Override
     public String toString() {

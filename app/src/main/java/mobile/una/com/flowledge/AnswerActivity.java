@@ -49,6 +49,7 @@ public class AnswerActivity extends AppCompatActivity {
     int likesAux =0;
     int aux;
     String aux2;
+    String rol = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class AnswerActivity extends AppCompatActivity {
         q = (Question) intent.getSerializableExtra("question");
 
          s =  (Sesion) intent.getSerializableExtra("sesion");
+
 
 
 
@@ -141,8 +143,8 @@ public class AnswerActivity extends AppCompatActivity {
                         //Toast.makeText(getContext(), listquestion.get(0).getDescription(), Toast.LENGTH_SHORT).show();
                     }
                 }
-                Toast.makeText(getApplicationContext(), getNicknameUser(), Toast.LENGTH_SHORT).show();
-                Adapter2 adapter = new Adapter2(AnswerActivity.this, listanswers,getNicknameUser());
+               // Toast.makeText(getApplicationContext(), getNicknameUser(), Toast.LENGTH_SHORT).show();
+                Adapter2 adapter = new Adapter2(AnswerActivity.this, listanswers,getNicknameUser(),rol);
                 listaItems.setAdapter(adapter);
                listaItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -231,6 +233,10 @@ public class AnswerActivity extends AppCompatActivity {
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     Persona p = objSnapshot.getValue(Persona.class);
                     listapersona.add(p);
+                    if(p.getRol().equals("profesor")){
+
+                        rol = p.getNombre();
+                    }
                 }
             }
 
@@ -246,14 +252,18 @@ public class AnswerActivity extends AppCompatActivity {
     }
     public String getNicknameUser() {
         String nombre = "";
+        String rol = "";
         for (int i = 0; i < listapersona.size(); i++) {
             if (listapersona.get(i).getPid().equals(s.getNombre())) {
                 nombre = listapersona.get(i).getNombre();
+                rol = listapersona.get(i).getRol();
                 break;
             } else {
             }
         }
         return nombre;
     }
+
+
 
 }

@@ -39,6 +39,16 @@
         android:textSize="22dip"
         android:textStyle="normal" />
 
+
+    <ImageView
+        android:id="@+id/imgOficial"
+        android:layout_width="45dip"
+        android:layout_height="45dip"
+        android:paddingLeft="16dp"
+        android:src="@drawable/oficial2"
+        android:layout_alignRight="@id/txtTitle"
+        android:visibility="invisible"/>
+
     <TextView
         android:id="@+id/txtDescription"
         android:layout_width="fill_parent"
