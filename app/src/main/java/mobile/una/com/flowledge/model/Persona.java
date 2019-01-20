@@ -17,7 +17,7 @@ public class Persona {
         this.imageURL = "default";
     }
 
-    public Persona(String pid, String nombre, String correo, String contra) {
+   /* public Persona(String pid, String nombre, String correo, String contra) {
         this.pid = pid;
         this.nombre = nombre;
         this.correo = correo;
@@ -31,7 +31,7 @@ public class Persona {
         this.correo = correo;
         this.contra = contra;
         this.rol = rol;
-    }
+    }*/
 
     public Persona(String pid, String nombre, String correo, String contra, String rol, String imageURL) {
         this.pid = pid;

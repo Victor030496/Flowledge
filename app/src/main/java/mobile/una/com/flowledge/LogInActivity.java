@@ -38,6 +38,7 @@ public class LogInActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private String androidId;
+    private String rol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class LogInActivity extends AppCompatActivity {
         androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         inicializarFirebase();
         listaPersona();
+        rol = "";
 
         final TextInputLayout passwordTextInput = findViewById(R.id.password_text_input);
         final TextInputEditText passwordEditText = findViewById(R.id.passwordin);
@@ -107,8 +109,8 @@ public class LogInActivity extends AppCompatActivity {
                         contrasenaTextInput, contrasenaEditText, conContrasenaTextInput, conContrasenaEditText);
                 if (bandera) {
                     p = new Persona(cedulaFormEditText.getText().toString(), nombreEditText.getText().toString(),
-                            correoEditText.getText().toString(), contrasenaEditText.getText().toString());
-                    databaseReference.child("Persona").child(p.getPid()).setValue(p);
+                            correoEditText.getText().toString(), contrasenaEditText.getText().toString(), rol,"default");
+                    databaseReference.child("Persona2").child(p.getPid()).setValue(p);
                     s.setPid(androidId);
                     s.setNombre(cedulaEditText.getText().toString());
                     s.setEstado("1");
@@ -169,7 +171,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void listaPersona() {
-        databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Persona2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listapersona.clear();
@@ -237,9 +239,13 @@ public class LogInActivity extends AppCompatActivity {
                 String[] parts = correoEditText.getText().toString().split("@");
                 String part1 = parts[0];
                 String part2 = parts[1];
-                if ((!part2.equals("est.una.ac.cr")) && (!part2.equals("una.cr"))) {
+                if ((!part2.equals("est.una.ac.cr")) && (!part2.equals("una.ac.cr"))) {
                     correoTextInput.setError("Solo correos institucionales");
                     flag = false;
+                }else if(part2.equals("est.una.ac.cr")){
+                    rol = "Estudiante";
+                }else if(part2.equals("una.ac.cr")){
+                    rol = "Profesor";
                 }
             } else {
                 correoTextInput.setError("Correo no válido");

@@ -12,6 +12,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,10 +32,35 @@ public class SplashActivity extends Activity {
     DatabaseReference databaseReference;
     List<Sesion> listasesion = new ArrayList<Sesion>();
     Sesion s = new Sesion();
-    boolean bandera = false;
+    boolean bandera;
     List<String> id;
     String androidId;
-
+    FirebaseUser firebaseUser;
+/*
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    intent.putExtra("S", s);
+                    startActivity(intent);
+                    finish();
+                }
+            }, DURACION_SPLASH);
+        } else {
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    Intent intent = new Intent(SplashActivity.this, LogInActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }, DURACION_SPLASH);
+        }
+    }
+*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +71,7 @@ public class SplashActivity extends Activity {
         androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         //Inicializar firebase
         FirebaseApp.initializeApp(this);
+        bandera = false;
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
@@ -74,8 +102,6 @@ public class SplashActivity extends Activity {
                             startActivity(intent);
                             SplashActivity.this.finish();
                         }
-
-                        ;
                     }, DURACION_SPLASH);
                 } else {
                     new Handler().postDelayed(new Runnable() {

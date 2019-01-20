@@ -33,11 +33,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -71,17 +73,16 @@ import static android.app.Activity.RESULT_OK;
  */
 public class UserProfileFragment extends Fragment {
     View v;
-    private List<Persona> listapersona = new ArrayList<Persona>();
+    private List<Persona> listapersona;
     private Sesion s = new Sesion();
     private TextView pid, pnombre, correo;
-    private Persona p = new Persona();
+    private Persona personaAct;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private Button cerrarButton;
     private Button guardarButton;
     private CircleImageView profileImage;
     private Uri mainImageURI = null;
-    private static final int IMAGE_REQUEST = 1;
     private StorageReference storageReference;
     private String androidId;
     private StorageTask storageTask;
@@ -101,6 +102,7 @@ public class UserProfileFragment extends Fragment {
             s = (Sesion) bundle.getSerializable("sesion");
         }
         androidId = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        listapersona = new ArrayList<>();
         inicializarFirebase();
         return v;
     }
@@ -109,7 +111,6 @@ public class UserProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.v = view;
-        init();
     }
 
     @Override
@@ -121,14 +122,17 @@ public class UserProfileFragment extends Fragment {
     private void init() {
         myUri = "";
         pnombre = v.findViewById(R.id.profile_name);
-        Persona p = getUser();
-        pnombre.setText(p.getNombre());
+        personaAct = getUser();
+        pnombre.setText(personaAct.getNombre());
         cerrarButton = v.findViewById(R.id.cerrar_sesion);
         guardarButton = v.findViewById(R.id.guardar_cambios);
         cerrarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseReference.child("Sesion").child(s.getPid()).removeValue();
+                databaseReference = FirebaseDatabase.getInstance().getReference("Sesion");
+                databaseReference.child(s.getPid()).removeValue();
+
+                FirebaseAuth.getInstance().signOut();
                 Intent intent2 = new Intent(getContext(), SplashActivity.class);
                 startActivity(intent2);
                 getActivity().finish();
@@ -161,6 +165,24 @@ public class UserProfileFragment extends Fragment {
                 }
             }
         });
+        databaseReference = FirebaseDatabase.getInstance().getReference("Persona2").child(getUser().getPid());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Persona user = dataSnapshot.getValue(Persona.class);
+                if(user.getImageURL().equals("default")){
+                    profileImage.setImageResource(R.mipmap.ic_launcher);
+                }else{
+                    Glide.with(getContext()).load(user.getImageURL()).into(profileImage);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void inicializarFirebase() {
@@ -170,7 +192,7 @@ public class UserProfileFragment extends Fragment {
     }
 
     private void listarDatos() {
-        databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Persona2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listapersona.clear();
@@ -189,14 +211,13 @@ public class UserProfileFragment extends Fragment {
     }
 
     public Persona getUser() {
-        Persona p = new Persona();
         for (Persona persona : listapersona) {
             if (persona.getPid().equals(s.getNombre())) {
-                p = persona;
+                personaAct = persona;
                 break;
             }
         }
-        return p;
+        return personaAct;
     }
 
     @Override
@@ -236,7 +257,7 @@ public class UserProfileFragment extends Fragment {
         pd.show();
         if(mainImageURI != null){
             final StorageReference fileReference = storageReference.child(System.currentTimeMillis() +
-                    "."+getFileExtension(mainImageURI));
+                    ".jpg");
             storageTask = fileReference.putFile(mainImageURI);
             storageTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
@@ -253,10 +274,10 @@ public class UserProfileFragment extends Fragment {
                     if(task.isSuccessful()){
                         Uri downloadUri = task.getResult();
                         String mUri = downloadUri.toString();
-                        Persona p1 = getUser();
-                        Persona p2 = new Persona(p1.getPid(),p1.getNombre(),p1.getCorreo(),p1.getContra(),p1.getRol(),mUri);
 
-                        databaseReference.child("Persona2").child(p2.getPid()).setValue(p2);
+                        String id = personaAct.getPid();
+                        databaseReference = FirebaseDatabase.getInstance().getReference("Persona2");
+                        databaseReference.child(id).child("imageURL").setValue(mUri);
 
                         pd.dismiss();
                     }else{
